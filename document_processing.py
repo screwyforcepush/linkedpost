@@ -1,7 +1,7 @@
 namespace = "ai-research"
 newerthan = 20230000
-filename = 'metadata.json'
-doc_queries_filename = 'titles.json'
+filename = './json/metadata.json'
+doc_queries_filename = './json/titles.json'
 from embeddingsFromResource import (
     get_docs_from_resource,
     is_content_related_to_topic_from_resource,
@@ -12,6 +12,7 @@ from embeddingsFromResource import (
     add_metadata_from_resource,
     get_doc_queries_from_resource,
     remove_doc_query_from_resource,
+    published_to_int
 )
 
 doc_queries = get_doc_queries_from_resource(doc_queries_filename)

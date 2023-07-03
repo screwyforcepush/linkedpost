@@ -1,0 +1,93 @@
+
+# 2023-07-03 14:21:29.654644
++create function in ./embeddingsFromResource.py that loads data from git. function takes URL as parameter 
+
+# 2023-07-03 14:23:33.507865
++add cuntion to `embeddingsFromResource.py` from langchain.document_loaders import GitLoader
++loader = GitLoader(
++    clone_url="https://github.com/hwchase17/langchain",
++    repo_path="./example_data/test_repo2/",
++    branch="master",
++)
++data = loader.load()
++len(data)
++## Filtering files to load
++from langchain.document_loaders import GitLoader
++
++# eg. loading only python files
++loader = GitLoader(repo_path="./example_data/test_repo1/", file_filter=lambda file_path: file_path.endswith(".py"))
+
+# 2023-07-03 14:30:00.993492
++aider /add loadGitReource.py
+
+# 2023-07-03 14:31:42.858325
++create function that can be called by other files
+
+# 2023-07-03 14:31:56.394171
++aider /add loadGitReource.py
+
+# 2023-07-03 14:32:33.714603
++new function in ./loadGitResource.py
+
+# 2023-07-03 14:32:46.689615
++from langchain.document_loaders import GitLoader
++loader = GitLoader(
++    clone_url="https://github.com/hwchase17/langchain",
++    repo_path="./example_data/test_repo2/",
++    branch="master",
++)
++data = loader.load()
++len(data)
++## Filtering files to load
++from langchain.document_loaders import GitLoader
++
++# eg. loading only python files
++loader = GitLoader(repo_path="./example_data/test_repo1/", file_filter=lambda file_path: file_path.endswith(".py"))
+
+# 2023-07-03 14:33:27.991754
++take url as a parameter, repo path should be temporary
+
+# 2023-07-03 14:34:34.178293
++filter files to .md
+
+# 2023-07-03 14:37:29.305806
++expose functions to be used by other files
+
+# 2023-07-03 14:41:45.200744
++refactor to a single filter loader which loads with filter, loads data, deletes the local files, and returns the data
+
+# 2023-07-03 14:42:36.383685
++create default repo path and file filter 
+
+# 2023-07-03 14:43:25.453220
++test the function with a https://github.com/hwchase17/langchain and print the output
+
+# 2023-07-03 14:49:08.298735
++check if `repo_path` exists before loading, and remove if it does
+
+# 2023-07-03 14:57:03.359637
++/drop test_load_git_resource.py
+
+# 2023-07-03 14:57:37.061747
++drop `loadGitResource.py'
+
+# 2023-07-03 14:58:10.781606
++/add embeddingsFromResource.py
+
+# 2023-07-03 14:58:17.789510
++/drop loadGitResource.py
+
+# 2023-07-03 14:59:06.527701
++refactor move document processing functions to another file
+
+# 2023-07-03 15:00:52.293127
++refactor `embeddingsFromResource.py` move document processing functions to `document_processing`
+
+# 2023-07-03 15:01:55.517669
++refactor `embeddingsFromResource.py` move document processing functions to `document_processing.py`
+
+# 2023-07-03 15:05:32.293340
++revert change
+
+# 2023-07-03 15:12:36.078882
++expose functions from `embeddingsFromResource.py` so they can be called via `document_processing.py`
