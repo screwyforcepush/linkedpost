@@ -1,5 +1,7 @@
 from langchain.document_loaders import GitLoader
 
+__all__ = ['load_git_resource', 'filter_files_to_load']
+
 def load_git_resource(clone_url, repo_path):
     loader = GitLoader(
         clone_url=clone_url,
