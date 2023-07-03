@@ -10,7 +10,7 @@ def load_git_resource(clone_url, repo_path):
     return len(data)
 
 def filter_files_to_load(repo_path):
-    loader = GitLoader(repo_path=repo_path, file_filter=lambda file_path: file_path.endswith(".py"))
+    loader = GitLoader(repo_path=repo_path, file_filter=lambda file_path: file_path.endswith(".md"))
 
 # Add any other existing code here
 
