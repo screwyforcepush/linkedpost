@@ -13,7 +13,7 @@ def load_git_resource(clone_url, repo_path):
 
 def filter_files_to_load(repo_path):
     loader = GitLoader(repo_path=repo_path, file_filter=lambda file_path: file_path.endswith(".md"))
-
+    loader.load()
 # Add any other existing code here
 
 # Add the new function calls here
