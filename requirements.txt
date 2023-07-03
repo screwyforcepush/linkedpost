@@ -1,0 +1,11 @@
+jupyterlab
+langchain
+pinecone-client
+pinecone-client[grpc]
+openai
+python-dotenv
+unstructured
+arxiv
+pymupdf
+youtube_transcript_api
+aider-chat

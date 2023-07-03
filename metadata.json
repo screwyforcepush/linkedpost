@@ -1,0 +1,263 @@
+[
+    {
+        "Published": "2023-04-14",
+        "Title": "Prompt Engineering and Calibration for Zero-Shot Commonsense Reasoning",
+        "Authors": "Chenkai Ma",
+        "published_first_time": "2023-04-14",
+        "comment": "To be published in the ICLR TinyPaper track",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2304.06962v1",
+            "http://arxiv.org/pdf/2304.06962v1"
+        ],
+        "source": "http://arxiv.org/abs/2304.06962v1",
+        "date": 20230414
+    },
+    {
+        "Published": "2023-02-21",
+        "Title": "A Prompt Pattern Catalog to Enhance Prompt Engineering with ChatGPT",
+        "Authors": "Jules White, Quchen Fu, Sam Hays, Michael Sandborn, Carlos Olea, Henry Gilbert, Ashraf Elnashar, Jesse Spencer-Smith, Douglas C. Schmidt",
+        "published_first_time": "2023-02-21",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.SE",
+        "categories": [
+            "cs.SE",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2302.11382v1",
+            "http://arxiv.org/pdf/2302.11382v1"
+        ],
+        "source": "http://arxiv.org/abs/2302.11382v1",
+        "date": 20230221
+    },
+    {
+        "Published": "2023-03-10",
+        "Title": "Large Language Models Are Human-Level Prompt Engineers",
+        "Authors": "Yongchao Zhou, Andrei Ioan Muresanu, Ziwen Han, Keiran Paster, Silviu Pitis, Harris Chan, Jimmy Ba",
+        "published_first_time": "2022-11-03",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2211.01910v2",
+            "http://arxiv.org/pdf/2211.01910v2"
+        ],
+        "source": "http://arxiv.org/abs/2211.01910v2",
+        "date": 20230310
+    },
+    {
+        "Published": "2023-05-19",
+        "Title": "RCOT: Detecting and Rectifying Factual Inconsistency in Reasoning by Reversing Chain-of-Thought",
+        "Authors": "Tianci Xue, Ziqi Wang, Zhenhailong Wang, Chi Han, Pengfei Yu, Heng Ji",
+        "published_first_time": "2023-05-19",
+        "comment": "24 pages, 21 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2305.11499v1",
+            "http://arxiv.org/pdf/2305.11499v1"
+        ],
+        "source": "http://arxiv.org/abs/2305.11499v1",
+        "date": 20230519
+    },
+    {
+        "Published": "2023-01-23",
+        "Title": "Large Language Models are few(1)-shot Table Reasoners",
+        "Authors": "Wenhu Chen",
+        "published_first_time": "2022-10-13",
+        "comment": "Accepted to Findings of EACL 2023",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2210.06710v2",
+            "http://arxiv.org/pdf/2210.06710v2"
+        ],
+        "source": "http://arxiv.org/abs/2210.06710v2",
+        "date": 20230123
+    },
+    {
+        "Published": "2023-05-24",
+        "Title": "Large Language Models are Effective Table-to-Text Generators, Evaluators, and Feedback Providers",
+        "Authors": "Yilun Zhao, Haowei Zhang, Shengyun Si, Linyong Nan, Xiangru Tang, Arman Cohan",
+        "published_first_time": "2023-05-24",
+        "comment": "work in progress",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2305.14987v1",
+            "http://arxiv.org/pdf/2305.14987v1"
+        ],
+        "source": "http://arxiv.org/abs/2305.14987v1",
+        "date": 20230524
+    },
+    {
+        "Published": "2023-04-23",
+        "Title": "Enhancing Chain-of-Thoughts Prompting with Iterative Bootstrapping in Large Language Models",
+        "Authors": "Jiashuo Sun, Yi Luo, Yeyun Gong, Chen Lin, Yelong Shen, Jian Guo, Nan Duan",
+        "published_first_time": "2023-04-23",
+        "comment": "32 pages, 13 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2304.11657v1",
+            "http://arxiv.org/pdf/2304.11657v1"
+        ],
+        "source": "http://arxiv.org/abs/2304.11657v1",
+        "date": 20230423
+    },
+    {
+        "Published": "2023-06-01",
+        "Title": "Chain-Of-Thought Prompting Under Streaming Batch: A Case Study",
+        "Authors": "Yuxin Tang",
+        "published_first_time": "2023-06-01",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.00550v1",
+            "http://arxiv.org/pdf/2306.00550v1"
+        ],
+        "source": "http://arxiv.org/abs/2306.00550v1",
+        "date": 20230601
+    },
+    {
+        "Published": "2023-03-13",
+        "Title": "Prompting AI Art: An Investigation into the Creative Skill of Prompt Engineering",
+        "Authors": "Jonas Oppenlaender, Rhema Linder, Johanna Silvennoinen",
+        "published_first_time": "2023-03-13",
+        "comment": "29 pages, 10 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.HC",
+        "categories": [
+            "cs.HC",
+            "H.m"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2303.13534v1",
+            "http://arxiv.org/pdf/2303.13534v1"
+        ],
+        "source": "http://arxiv.org/abs/2303.13534v1",
+        "date": 20230313
+    },
+    {
+        "Published": "2023-06-01",
+        "Title": "Exploring EFL students' prompt engineering in human-AI story writing: an Activity Theory perspective",
+        "Authors": "David James Woo, Kai Guo, Hengky Susanto",
+        "published_first_time": "2023-06-01",
+        "comment": "38 pages, 9 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CY",
+        "categories": [
+            "cs.CY",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.01798v1",
+            "http://arxiv.org/pdf/2306.01798v1"
+        ],
+        "source": "http://arxiv.org/abs/2306.01798v1",
+        "date": 20230601
+    },
+    {
+        "Published": "2023-06-14",
+        "Title": "A Taxonomy of Prompt Modifiers for Text-To-Image Generation",
+        "Authors": "Jonas Oppenlaender",
+        "published_first_time": "2022-04-20",
+        "comment": "15 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.MM",
+        "categories": [
+            "cs.MM",
+            "cs.CL",
+            "cs.HC",
+            "H.5; H.m; J.5"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2204.13988v3",
+            "http://arxiv.org/pdf/2204.13988v3"
+        ],
+        "source": "http://arxiv.org/abs/2204.13988v3",
+        "date": 20230614
+    },
+    {
+        "Published": "2023-06-04",
+        "Title": "Prompt Sapper: LLM-Empowered Software Engineering Infrastructure for AI-Native Services",
+        "Authors": "Zhenchang Xing, Qing Huang, Yu Cheng, Liming Zhu, Qinghua Lu, Xiwei Xu",
+        "published_first_time": "2023-06-04",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.SE",
+        "categories": [
+            "cs.SE"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.02230v1",
+            "http://arxiv.org/pdf/2306.02230v1"
+        ],
+        "source": "http://arxiv.org/abs/2306.02230v1",
+        "date": 20230604
+    },
+    {
+        "Published": "2023-05-19",
+        "Title": "Constructing Dreams using Generative AI",
+        "Authors": "Safinah Ali, Daniella DiPaola, Randi Williams, Prerna Ravi, Cynthia Breazeal",
+        "published_first_time": "2023-05-19",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.HC",
+        "categories": [
+            "cs.HC",
+            "cs.AI",
+            "cs.CY"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2305.12013v1",
+            "http://arxiv.org/pdf/2305.12013v1"
+        ],
+        "source": "http://arxiv.org/abs/2305.12013v1",
+        "date": 20230519
+    }
+]
