@@ -226,33 +226,31 @@ def remove_doc_query(filename, query):
     # Write the data back to the file
     with open(filename, 'w') as f:
         json.dump(titles, f, indent=4)
-# %%
-# namespace = "ai-research"
-# newerthan = 20230000
-# filename = 'metadata.json'
-# doc_queries_filename = 'titles.json'
-# doc_queries = get_doc_queries(doc_queries_filename)
-# # %%
-# for query in doc_queries:
-#     print("getting research for ", query)
-#     docs = get_docs(query="generative ai prompt engineering")
-#     kept_docs = []
-#     for doc in docs:
-#         if published_to_int(doc.metadata["Published"])>newerthan and not check_if_exists(doc.metadata, filename):
-#             keep = is_content_related_to_topic(doc.metadata["Summary"], namespace)
-#             print(keep, namespace, doc.metadata["Title"])
-#             if keep:
-#                 kept_docs.append(doc)
 
-#     print("kept",len(kept_docs),"out of",len(docs))
-#     for doc in kept_docs:
-#         pdfLink, docMetadata = process_document_metadata(doc.metadata)
-#         if not not pdfLink:
-#             chunks = get_chunks_from_pdf_url(pdfLink, docMetadata)
-#             docsearch = upsert_chunks(chunks, namespace)
-#             add_metadata(doc.metadata, filename)
-#     remove_doc_query(doc_queries_filename, query)
-# %%
+# Expose the functions as module-level functions
+def get_docs_from_resource(query):
+    return get_docs(query)
 
+def is_content_related_to_topic_from_resource(content, topic):
+    return is_content_related_to_topic(content, topic)
 
-# %%
+def process_document_metadata_from_resource(metadata):
+    return process_document_metadata(metadata)
+
+def get_chunks_from_pdf_url_from_resource(pdfLink, docMetadata):
+    return get_chunks_from_pdf_url(pdfLink, docMetadata)
+
+def upsert_chunks_from_resource(chunks, namespace):
+    return upsert_chunks(chunks, namespace)
+
+def check_if_exists_from_resource(metadata, filename):
+    return check_if_exists(metadata, filename)
+
+def add_metadata_from_resource(metadata, filename):
+    return add_metadata(metadata, filename)
+
+def get_doc_queries_from_resource(filename):
+    return get_doc_queries(filename)
+
+def remove_doc_query_from_resource(filename, query):
+    return remove_doc_query(filename, query)
