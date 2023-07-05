@@ -1,4 +1,3 @@
-
 filename = './json/metadata.json'
 
 from embeddingsFromResource import (
@@ -90,13 +89,16 @@ def process_scrape_urls():
 
 def process_local_pdfs():
     pdfs_folder_path = './pdfs/'
-    pdf_name="Audience_Clustering_in_Video_Services_201801009_v_1.2.pdf"
-    loader = UnstructuredPDFLoader(f"{pdfs_folder_path}{pdf_name}")
-    data = loader.load()
+    for file in os.listdir(pdfs_folder_path):
+        if file.endswith(".pdf"):
+            loader = UnstructuredPDFLoader(f"{pdfs_folder_path}{file}")
+            data = loader.load()
+            # ... process the data ...
 # %%
 process_arxv()
 process_git()
 process_scrape_urls()
+process_local_pdfs()
 
 
 # %%
