@@ -91,3 +91,6 @@
 
 # 2023-07-03 15:12:36.078882
 +expose functions from `embeddingsFromResource.py` so they can be called via `document_processing.py`
+
+# 2023-07-05 15:52:40.555313
++/add doc
