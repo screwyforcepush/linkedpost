@@ -9,3 +9,4 @@ arxiv
 pymupdf
 youtube_transcript_api
 aider-chat
+nest_asyncio

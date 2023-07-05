@@ -259,5 +259,320 @@
         ],
         "source": "http://arxiv.org/abs/2305.12013v1",
         "date": 20230519
+    },
+    {
+        "source": "https://github.com/hwchase17/langchain"
+    },
+    {
+        "Published": "2023-06-05",
+        "Title": "Beyond Generating Code: Evaluating GPT on a Data Visualization Course",
+        "Authors": "Zhutian Chen, Chenyang Zhang, Qianwen Wang, Jakob Troidl, Simon Warchol, Johanna Beyer, Nils Gehlenborg, Hanspeter Pfister",
+        "published_first_time": "2023-06-05",
+        "comment": "vis short papge",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.HC",
+        "categories": [
+            "cs.HC",
+            "cs.GR"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.02914v1",
+            "http://arxiv.org/pdf/2306.02914v1"
+        ],
+        "source": "http://arxiv.org/abs/2306.02914v1",
+        "date": 20230605
+    },
+    {
+        "Published": "2023-06-13",
+        "Title": "MultiModal-GPT: A Vision and Language Model for Dialogue with Humans",
+        "Authors": "Tao Gong, Chengqi Lyu, Shilong Zhang, Yudong Wang, Miao Zheng, Qian Zhao, Kuikun Liu, Wenwei Zhang, Ping Luo, Kai Chen",
+        "published_first_time": "2023-05-08",
+        "comment": "10 pages, 8 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2305.04790v3",
+            "http://arxiv.org/pdf/2305.04790v3"
+        ],
+        "source": "http://arxiv.org/abs/2305.04790v3",
+        "date": 20230613
+    },
+    {
+        "Published": "2023-03-09",
+        "Title": "Large Language Models (GPT) Struggle to Answer Multiple-Choice Questions about Code",
+        "Authors": "Jaromir Savelka, Arav Agarwal, Christopher Bogart, Majd Sakr",
+        "published_first_time": "2023-03-09",
+        "comment": "12 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2303.08033v1",
+            "http://arxiv.org/pdf/2303.08033v1"
+        ],
+        "source": "http://arxiv.org/abs/2303.08033v1",
+        "date": 20230309
+    },
+    {
+        "Published": "2023-03-16",
+        "Title": "Can Generative Pre-trained Transformers (GPT) Pass Assessments in Higher Education Programming Courses?",
+        "Authors": "Jaromir Savelka, Arav Agarwal, Christopher Bogart, Yifan Song, Majd Sakr",
+        "published_first_time": "2023-03-16",
+        "comment": "7 pages. arXiv admin note: text overlap with arXiv:2303.08033",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2303.09325v1",
+            "http://arxiv.org/pdf/2303.09325v1"
+        ],
+        "source": "http://arxiv.org/abs/2303.09325v1",
+        "date": 20230316
+    },
+    {
+        "Published": "2023-02-28",
+        "Title": "T2M-GPT: Generating Human Motion from Textual Descriptions with Discrete Representations",
+        "Authors": "Jianrong Zhang, Yangsong Zhang, Xiaodong Cun, Shaoli Huang, Yong Zhang, Hongwei Zhao, Hongtao Lu, Xi Shen",
+        "published_first_time": "2023-01-15",
+        "comment": "Accepted to CVPR 2023. Project page:\n  https://mael-zys.github.io/T2M-GPT/",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2301.06052v3",
+            "http://arxiv.org/pdf/2301.06052v3"
+        ],
+        "source": "http://arxiv.org/abs/2301.06052v3",
+        "date": 20230228
+    },
+    {
+        "Published": "2023-05-25",
+        "Title": "Towards a Capability Assessment Model for the Comprehension and Adoption of AI in Organisations",
+        "Authors": "Butler, Tom, Espinoza-Lim\u00f3n, Angelina, Sepp\u00e4l\u00e4, Selja",
+        "published_first_time": "2023-05-25",
+        "comment": null,
+        "journal_ref": "Journal of AI, Robotics & Workplace Automation, 1 (1), 18-33\n  (2021)",
+        "doi": null,
+        "primary_category": "cs.CY",
+        "categories": [
+            "cs.CY",
+            "cs.AI",
+            "cs.SE",
+            "K.1; D.2.9; K.6.1; K.6.0; K.7.2; I.2"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2305.15922v1",
+            "http://arxiv.org/pdf/2305.15922v1"
+        ],
+        "source": "http://arxiv.org/abs/2305.15922v1",
+        "date": 20230525
+    },
+    {
+        "Published": "2023-04-17",
+        "Title": "Everyone Can Be Picasso? A Computational Framework into the Myth of Human versus AI Painting",
+        "Authors": "Yilin Ye, Rong Huang, Kang Zhang, Wei Zeng",
+        "published_first_time": "2023-04-17",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.HC",
+        "categories": [
+            "cs.HC",
+            "cs.AI",
+            "cs.CV",
+            "I.2.0; J.5; H.5.2"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2304.07999v1",
+            "http://arxiv.org/pdf/2304.07999v1"
+        ],
+        "source": "http://arxiv.org/abs/2304.07999v1",
+        "date": 20230417
+    },
+    {
+        "Published": "2023-06-21",
+        "Title": "Geotechnical Parrot Tales (GPT): Harnessing Large Language Models in geotechnical engineering",
+        "Authors": "Krishna Kumar",
+        "published_first_time": "2023-04-04",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "physics.geo-ph",
+            "I.2.7; J.2.6"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2304.02138v3",
+            "http://arxiv.org/pdf/2304.02138v3"
+        ],
+        "source": "http://arxiv.org/abs/2304.02138v3",
+        "date": 20230621
+    },
+    {
+        "Published": "2023-04-14",
+        "Title": "DroidBot-GPT: GPT-powered UI Automation for Android",
+        "Authors": "Hao Wen, Hongming Wang, Jiaxuan Liu, Yuanchun Li",
+        "published_first_time": "2023-04-14",
+        "comment": "8 pages, 5 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.SE",
+        "categories": [
+            "cs.SE",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2304.07061v1",
+            "http://arxiv.org/pdf/2304.07061v1"
+        ],
+        "source": "http://arxiv.org/abs/2304.07061v1",
+        "date": 20230414
+    },
+    {
+        "Published": "2023-04-18",
+        "Title": "BIM-GPT: a Prompt-Based Virtual Assistant Framework for BIM Information Retrieval",
+        "Authors": "Junwen Zheng, Martin Fischer",
+        "published_first_time": "2023-04-18",
+        "comment": "35 pages, 15 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.HC"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2304.09333v1",
+            "http://arxiv.org/pdf/2304.09333v1"
+        ],
+        "source": "http://arxiv.org/abs/2304.09333v1",
+        "date": 20230418
+    },
+    {
+        "Published": "2023-05-22",
+        "Title": "Automatic Code Summarization via ChatGPT: How Far Are We?",
+        "Authors": "Weisong Sun, Chunrong Fang, Yudu You, Yun Miao, Yi Liu, Yuekang Li, Gelei Deng, Shenghan Huang, Yuchen Chen, Quanjun Zhang, Hanwei Qian, Yang Liu, Zhenyu Chen",
+        "published_first_time": "2023-05-22",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.SE",
+        "categories": [
+            "cs.SE",
+            "cs.AI",
+            "68T50",
+            "D.2.3"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2305.12865v1",
+            "http://arxiv.org/pdf/2305.12865v1"
+        ],
+        "source": "http://arxiv.org/abs/2305.12865v1",
+        "date": 20230522
+    },
+    {
+        "Published": "2023-04-17",
+        "Title": "A study on Prompt Design, Advantages and Limitations of ChatGPT for Deep Learning Program Repair",
+        "Authors": "Jialun Cao, Meiziniu Li, Ming Wen, Shing-chi Cheung",
+        "published_first_time": "2023-04-17",
+        "comment": "10 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.SE",
+        "categories": [
+            "cs.SE"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2304.08191v1",
+            "http://arxiv.org/pdf/2304.08191v1"
+        ],
+        "source": "http://arxiv.org/abs/2304.08191v1",
+        "date": 20230417
+    },
+    {
+        "Published": "2023-02-28",
+        "Title": "A Multitask, Multilingual, Multimodal Evaluation of ChatGPT on Reasoning, Hallucination, and Interactivity",
+        "Authors": "Yejin Bang, Samuel Cahyawijaya, Nayeon Lee, Wenliang Dai, Dan Su, Bryan Wilie, Holy Lovenia, Ziwei Ji, Tiezheng Yu, Willy Chung, Quyet V. Do, Yan Xu, Pascale Fung",
+        "published_first_time": "2023-02-08",
+        "comment": "52 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2302.04023v2",
+            "http://arxiv.org/pdf/2302.04023v2"
+        ],
+        "source": "http://arxiv.org/abs/2302.04023v2",
+        "date": 20230228
+    },
+    {
+        "Published": "2023-04-25",
+        "Title": "Is ChatGPT a Good NLG Evaluator? A Preliminary Study",
+        "Authors": "Jiaan Wang, Yunlong Liang, Fandong Meng, Zengkui Sun, Haoxiang Shi, Zhixu Li, Jinan Xu, Jianfeng Qu, Jie Zhou",
+        "published_first_time": "2023-03-07",
+        "comment": "Technical Report, 11 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2303.04048v2",
+            "http://arxiv.org/pdf/2303.04048v2"
+        ],
+        "source": "http://arxiv.org/abs/2303.04048v2",
+        "date": 20230425
+    },
+    {
+        "Published": "2023-05-26",
+        "Title": "ChatGPT: A Study on its Utility for Ubiquitous Software Engineering Tasks",
+        "Authors": "Giriprasad Sridhara, Ranjani H. G., Sourav Mazumdar",
+        "published_first_time": "2023-05-26",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.SE",
+        "categories": [
+            "cs.SE",
+            "cs.AI",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2305.16837v1",
+            "http://arxiv.org/pdf/2305.16837v1"
+        ],
+        "source": "http://arxiv.org/abs/2305.16837v1",
+        "date": 20230526
+    },
+    {
+        "source": "https://www.brightcove.com/en/resources/blog/qoe-actionable-video-streaming/"
+    },
+    {
+        "source": "https://www.brightcove.com/en/resources/blog/qoe-actionable-video-streaming/"
     }
 ]

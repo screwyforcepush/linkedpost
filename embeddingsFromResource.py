@@ -122,11 +122,17 @@ text_splitter = RecursiveCharacterTextSplitter(
 def get_chunks_from_pdf_url(pdfLink, docMetadata):
     loader = OnlinePDFLoader(pdfLink)
     data = loader.load()
+    return get_chunks_from_loader_data(data, docMetadata)
+ 
+def get_chunks_from_loader_data(data, metadata=False, source_merge=False): 
     chunks = text_splitter.split_documents(data)
-    for chunk in chunks:
-        chunk.metadata = docMetadata
+    if metadata:
+        for chunk in chunks:
+            if(source_merge):
+                chunk.metadata['source'] = metadata['source']
+            else:
+                chunk.metadata = metadata
     return chunks
-
 
 # %%
 embeddings = OpenAIEmbeddings()
@@ -163,12 +169,17 @@ index.describe_index_stats()
 
 # %%
 def upsert_chunks(chunks, namespace):
-    docsearch = Pinecone.from_documents(
-        chunks, embeddings, index_name=index_name, namespace=namespace
-    )
-    time.sleep(1)
-    print(index.describe_index_stats())
-    return docsearch
+    try:
+        docsearch = Pinecone.from_documents(
+            chunks, embeddings, index_name=index_name, namespace=namespace
+        )
+        time.sleep(1)
+        print(index.describe_index_stats())
+        return docsearch
+    except ValueError as e: 
+        print(repr(e))
+
+    
 
 def check_if_exists(metadata, filename):
     # If file doesn't exist, document hasn't been added yet
@@ -180,7 +191,7 @@ def check_if_exists(metadata, filename):
 
     # Check if the metadata is in the file
     for item in data:
-        if item['Published'] == metadata['Published'] and item['Title'] == metadata['Title']:
+        if item['source'] == metadata['source']:
             return True
 
     return False
@@ -236,6 +247,9 @@ def is_content_related_to_topic_from_resource(content, topic):
 
 def process_document_metadata_from_resource(metadata):
     return process_document_metadata(metadata)
+
+def get_chunks_from_loader_data_from_resource(data, metadata=False, source_merge=False):
+    return get_chunks_from_loader_data(data, metadata, source_merge)
 
 def get_chunks_from_pdf_url_from_resource(pdfLink, docMetadata):
     return get_chunks_from_pdf_url(pdfLink, docMetadata)

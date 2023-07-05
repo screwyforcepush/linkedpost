@@ -39,9 +39,9 @@ load_dotenv()
 # Regular expression pattern to match paper titles
 PAPER_PATTERN = r'paper "(.*?)"'
 OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
-TITLES_FILENAME = 'titles.json'
-RESEARCH_FILENAME = 'research_summaries.json'
-NAMESPACE_AI='ai-research'
+TITLES_FILENAME = './json/titles.json'
+RESEARCH_FILENAME = './json/research_summaries.json'
+NAMESPACE_AI=PineconeNamespaceEnum.AI_RESEARCH.value
 SEED_QUERY="What are some unique ways various prompting techniques can be combined? Share a detailed example."
 entity_memory_long_cache=[]
 
@@ -299,7 +299,7 @@ tools = [
     StructuredTool.from_function(
         func=dig_deeper_research_wrapper,
         name = "Get tangental learnings",
-        description=f"useful for when you need to explore and learn about connected subject matter about {list(PineconeNamespaceEnum.__members__.values())}",
+        description=f"useful for when you need to explore and learn about connected subject matter about {list(PineconeNamespaceEnum.__members__.values())}. Will not answer your direct question.",
         args_schema= UpdateResearchMemoryDeeperInput
     )
 ]
@@ -307,43 +307,6 @@ tools = [
 
 agent_executor = initialize_agent(tools, chat, agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose=True, max_iterations=5)
 # %%
-
-# %%
-query=SEED_QUERY
-# summery=""
-summery = update_research_memory(query,NAMESPACE_AI)
-# query, summery = update_research_memory(query,NAMESPACE_AI,dig_deeper=True)
-# query, summery = update_research_memory(query,NAMESPACE_AI,dig_deeper=True)
-# %%
-_input = {"input": """The tree-of-thought prompting technique and Chain of Thought prompting technique is a method used to guide reasoning and problem-solving processes. It involves breaking down a complex problem into smaller, more manageable steps, represented as a tree structure. Each step in the tree represents a specific line of reasoning or thought process.\n\nIn the given examples, the tree-of-thought prompting technique is used to solve various problems. For instance, in the first example, the problem is to find the speed of a boat in still water. The tree of thought starts with assuming the speed of the boat in still water as x km/hr. It then considers the current of the stream (4 km/hr) and calculates the time taken to travel downcurrent and against the current. By adding these two times, the total time spent traveling is found to be 2 hours. Solving for x, the speed of the boat in still water is determined to be 8 km/hr.\n\nIn the second example, the problem is to find the distance covered by a car in 14 seconds. The tree of thought involves converting the given speed of the car (96 km/hr) to meters per second and then multiplying it by the time (14 seconds) to find the distance. The final answer is determined to be 378.89 meters.\n\nIn the third example, the problem is to determine where peanut butter can be stored. The tree of thought considers that peanut butter is a food item and is usually stored in a place where it can stay fresh, such as a refrigerator or a pantry. The final answer is determined to be a pantry.\n\nIn the fourth example, the problem is to figure out where the person's friend might be waiting. The tree of thought considers that the person is waiting at a squash court, which suggests they are likely at a sports facility or gym. The only option that seems plausible as being at the other end of a public place is a park. Therefore, the final answer is determined to be a park.\n\nIn the fifth example, the problem is to identify what people want to do when they love a place they are going on vacation to. The tree of thought considers the given options and concludes that the only option that makes sense is staying there. Therefore, the final answer is determined to be staying there.\n\nOverall, the tree-of-thought prompting technique helps break down complex problems into smaller steps, guiding the reasoning process and facilitating problem-solving. It allows for a systematic approach to analyzing and solving problems by considering different lines of thought and reasoning."""}
-# ENTITY_MEMORY.save_context(
-#     _input,
-#     {"output": ""}
-# )
-
-ENTITY_MEMORY.load_memory_variables(_input)
-# ENTITY_MEMORY.entity_store.get("Chain of Thought", "Prompt logs")
-# ENTITY_MEMORY.load_memory_variables("Chain of Thought")
-# ent = ENTITY_MEMORY.entity_store.get("Chain of Thought")
-# print(ent)
-
-
-# len(tokenizer.encode(json.dumps(memory), disallowed_special=()))
-# memory.load_memory_variables({})
-# messages = memory.chat_memory.messages
-# previous_summary = ""
-# memory.predict_new_summary(messages, previous_summary)
-# %%
-update_research_memory("explain the tree-of-thought prompting technique",NAMESPACE_AI)
-ENTITY_MEMORY.entity_cache
-get_entities()
-# %%
 agent_executor.run(SEED_QUERY)
-
-# %%
-entity_summaries={}
-for entity in entity_memory_long_cache:
-    entity_summaries[entity] = ENTITY_MEMORY.entity_store.get(entity, "")
-entity_summaries
 
 # %%
