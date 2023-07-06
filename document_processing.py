@@ -49,6 +49,8 @@ def process_arxv():
                 upsert_chunks_from_resource(chunks, namespace)
                 add_metadata_from_resource(doc.metadata, filename)
         remove_doc_query_from_resource(doc_queries_filename, query)
+    print("process_arxv complete")
+
 # %%
 def process_git():
     git_queries_filename = './json/git_urls.json'
@@ -66,6 +68,8 @@ def process_git():
             upsert_chunks_from_resource(chunks, namespace)
             add_metadata_from_resource(metadata, filename)
         remove_doc_query_from_resource(git_queries_filename, query)
+    print("process_git complete")
+
 # %%
 def process_scrape_urls():
     url_queries_filename = './json/scrape_urls.json'
@@ -88,6 +92,7 @@ def process_scrape_urls():
         metadata['source']=query
         add_metadata_from_resource(metadata, filename)
         remove_doc_query_from_resource(url_queries_filename, query)
+    print("process_scrape_urls complete")
 
 def process_local_pdfs():
     pdfs_folder_path = './pdfs/'
@@ -106,6 +111,7 @@ def process_local_pdfs():
                 upsert_chunks_from_resource(chunks, namespace)
                 add_metadata_from_resource(metadata, filename)
                 os.rename(f"{pdfs_folder_path}{file}", f"{processed_pdfs_folder_path}{file}")
+    print("process_local_pdfs complete")
 
 # %%
 process_arxv()
