@@ -105,8 +105,7 @@ def process_local_pdfs():
                 chunks = get_chunks_from_loader_data_from_resource(data)
                 upsert_chunks_from_resource(chunks, namespace)
                 add_metadata_from_resource(metadata, filename)
-                #TODO move file to processed_pdfs_folder_path
-
+                os.rename(f"{pdfs_folder_path}{file}", f"{processed_pdfs_folder_path}{file}")
 
 # %%
 process_arxv()
