@@ -84,16 +84,30 @@ def process_scrape_urls():
     chunks = get_chunks_from_loader_data_from_resource(data)
     upsert_chunks_from_resource(chunks, namespace)
     for query in keep_queries:
+        metadata={}
+        metadata['source']=query
         add_metadata_from_resource(metadata, filename)
         remove_doc_query_from_resource(url_queries_filename, query)
 
 def process_local_pdfs():
     pdfs_folder_path = './pdfs/'
+    namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value
+    processed_pdfs_folder_path = './pdfs_processed/'
     for file in os.listdir(pdfs_folder_path):
         if file.endswith(".pdf"):
-            loader = UnstructuredPDFLoader(f"{pdfs_folder_path}{file}")
-            data = loader.load()
-            # ... process the data ...
+            metadata={}
+            metadata['source']=file
+            if check_if_exists_from_resource(metadata, filename):
+                print("PDF docs exist ", file)
+            else:
+                loader = UnstructuredPDFLoader(f"{pdfs_folder_path}{file}")
+                data = loader.load()
+                chunks = get_chunks_from_loader_data_from_resource(data)
+                upsert_chunks_from_resource(chunks, namespace)
+                add_metadata_from_resource(metadata, filename)
+                #TODO move file to processed_pdfs_folder_path
+
+
 # %%
 process_arxv()
 process_git()
