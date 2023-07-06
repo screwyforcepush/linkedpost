@@ -42,12 +42,15 @@ SEED_QUERY="SEED QUERY PLACEHOLDER"
 entity_memory_long_cache=[]
 
 def set_seed_query(query):
+    global SEED_QUERY
     SEED_QUERY=query
 
 def get_seed_query():
+    global SEED_QUERY
     return SEED_QUERY
     
 def set_entity_memory_long_cache(cache):
+    global entity_memory_long_cache
     entity_memory_long_cache=cache
 
 openai = OpenAI(
