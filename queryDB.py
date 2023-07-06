@@ -5,27 +5,23 @@ import pinecone
 from langchain.vectorstores import Pinecone
 from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
-from langchain.tools import BaseTool, StructuredTool, Tool, tool
+from langchain.tools import BaseTool, StructuredTool
 from pydantic import BaseModel, Field, validator
 from dotenv import load_dotenv
 from typing import Optional, Type
 from langchain.callbacks.manager import AsyncCallbackManagerForToolRun, CallbackManagerForToolRun
 from typing import Literal
 from namespaceEnum import PineconeNamespaceEnum
-from enum import Enum
 from langchain import LLMMathChain, PromptTemplate, SerpAPIWrapper
 from langchain.agents import AgentType, initialize_agent
 from langchain.chat_models import ChatOpenAI
-from langchain.tools import BaseTool, StructuredTool, Tool, tool
+from langchain.tools import BaseTool, Tool, tool
 from langchain.chains.summarize import load_summarize_chain, map_reduce_prompt, refine_prompts, stuff_prompt
 from langchain.memory import ConversationSummaryBufferMemory
 from langchain.memory import ConversationEntityMemory
 from langchain.memory import ConversationBufferMemory, CombinedMemory, ConversationSummaryMemory
-from customClasses import (SQLiteEntityStore, 
-                           ResearchInput, 
-                           UpdateResearchMemoryInput, 
-                           UpdateResearchMemoryDeeperInput,
-                           CUSTOM_ENTITY_EXTRACTION_PROMPT)
+from customClasses import (ResearchInput, SQLiteEntityStore, 
+                           CUSTOM_ENTITY_EXTRACTION_PROMPT, UpdateResearchMemoryDeeperInput, UpdateResearchMemoryInput)
 from langchain.memory import ConversationBufferMemory, ReadOnlySharedMemory
 import re
 import json
@@ -42,23 +38,33 @@ OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
 TITLES_FILENAME = './json/titles.json'
 RESEARCH_FILENAME = './json/research_summaries.json'
 NAMESPACE_AI=PineconeNamespaceEnum.AI_RESEARCH.value
-SEED_QUERY="What are some unique ways various prompting techniques can be combined? Share a detailed example."
+SEED_QUERY="SEED QUERY PLACEHOLDER"
 entity_memory_long_cache=[]
+
+def set_seed_query(query):
+    SEED_QUERY=query
+
+def get_seed_query():
+    return SEED_QUERY
+    
+def set_entity_memory_long_cache(cache):
+    entity_memory_long_cache=cache
 
 openai = OpenAI(
     model_name="text-davinci-003",
     openai_api_key=OPENAI_API_KEY
 )
 
-llm = ChatOpenAI(
+LLM_FACT = ChatOpenAI(
     model_name='gpt-3.5-turbo',
     temperature=0.0
 )
+LLM_CHAT = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.2)
 
 entity_store=SQLiteEntityStore()
 print(entity_store.conn)
 # %%
-ENTITY_MEMORY = ConversationEntityMemory(llm=llm, entity_store=entity_store, entity_extraction_prompt=CUSTOM_ENTITY_EXTRACTION_PROMPT, k=0)
+ENTITY_MEMORY = ConversationEntityMemory(llm=LLM_FACT, entity_store=entity_store, entity_extraction_prompt=CUSTOM_ENTITY_EXTRACTION_PROMPT, k=0)
 READ_ONLY_ENTITY_MEMORY = ReadOnlySharedMemory(memory=ENTITY_MEMORY)
 
 
@@ -84,7 +90,6 @@ from langchain.prompts.chat import (
 )
 from langchain.chains import LLMChain
 
-chat = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.2)
 
 template = """
         Act as a research assistant in {topic}.
@@ -104,7 +109,7 @@ chat_prompt = ChatPromptTemplate.from_messages(
     [system_message_prompt, human_message_prompt]
 )
 
-dig_deeper_chain = LLMChain(llm=chat, prompt=chat_prompt)
+dig_deeper_chain = LLMChain(llm=LLM_CHAT, prompt=chat_prompt)
 # %%
 
 
@@ -143,7 +148,7 @@ def answer_from_resource(ai_query, research_field):
         [system_message_prompt, human_message_prompt]
     )
 
-    chain = ConversationChain(llm=chat, prompt=chat_prompt)
+    chain = ConversationChain(llm=LLM_CHAT, prompt=chat_prompt)
 
     response = chain.run(question=ai_query, content=content, topic=research_field, entities=get_entities(cache=entity_memory_long_cache))
     response = response.replace("\n", "")
@@ -174,7 +179,7 @@ def summarise(content,question):
 
     summary_chain = LLMChain(
         prompt=prompt,
-        llm=llm
+        llm=LLM_FACT
     )
     return(summary_chain.run(content=content,question=question, entities=get_entities())) 
 
@@ -283,6 +288,7 @@ def save_entities_to_long_cach():
         if entity not in entity_memory_long_cache:
             entity_memory_long_cache.append(entity)
 
+
 tools = [
     StructuredTool.from_function(
         func=answer_from_resource,
@@ -304,9 +310,5 @@ tools = [
     )
 ]
 
-
-agent_executor = initialize_agent(tools, chat, agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose=True, max_iterations=5)
-# %%
-agent_executor.run(SEED_QUERY)
 
 # %%
