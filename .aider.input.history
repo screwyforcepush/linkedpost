@@ -100,3 +100,6 @@
 
 # 2023-07-05 16:00:06.070381
 +update process_local_pdfs() from file `document_processing.py` so that it itterates over all files in pdfs_folder_path
+
+# 2023-07-06 13:45:31.501689
++/add document_processing.py
