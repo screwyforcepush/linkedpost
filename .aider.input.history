@@ -106,3 +106,6 @@
 
 # 2023-07-06 13:46:31.595543
 +update `processed_pdfs_folder_path`
+
+# 2023-07-06 13:47:42.865298
++update `process_local_pdfs` implement the #TODO move file after processing to the processed_pdfs_folder_path
