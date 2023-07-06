@@ -191,7 +191,9 @@ def check_if_exists(metadata, filename):
 
     # Check if the metadata is in the file
     for item in data:
-        if item['source'] == metadata['source']:
+        if 'source' in metadata and 'source' in item and metadata['source'] == item['source']:
+            return True
+        elif 'Title' in metadata and 'Title' in item and metadata['Title'] == item['Title']:
             return True
 
     return False
