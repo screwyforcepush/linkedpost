@@ -152,8 +152,8 @@ def answer_from_resource(ai_query, research_field):
     )
 
     chain = ConversationChain(llm=LLM_CHAT, prompt=chat_prompt)
-
-    response = chain.run(question=ai_query, content=content, topic=research_field, entities=get_entities(cache=entity_memory_long_cache))
+    chain = ConversationChain(llm=LLM_CHAT, prompt=chat_prompt)
+    response = chain.run(content=content, question=ai_query, topic=research_field, entities=get_entities(cache=entity_memory_long_cache))
     response = response.replace("\n", "")
     return response
 
