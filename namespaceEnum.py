@@ -17,5 +17,6 @@ class PineconeNamespaceEnum(Enum):
     def get_all_namespaces(cls):
         return {member.value: member.description for member in cls}
     
+    @classmethod
     def get_all_namespace_names(cls):
         return [member.value for member in cls]
