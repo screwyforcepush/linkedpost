@@ -7,12 +7,15 @@ class PineconeNamespaceEnum(Enum):
 
     @property
     def value(self):
-        return self.value[0]
+        return self._value_[0]
 
     @property
     def description(self):
-        return self.value[1]
+        return self._value_[1]
 
     @classmethod
     def get_all_namespaces(cls):
-        return {member.name: member.description for member in cls}
+        return {member.value: member.description for member in cls}
+    
+    def get_all_namespace_names(cls):
+        return [member.value for member in cls]

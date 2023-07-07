@@ -38,8 +38,8 @@ agent_executor = initialize_agent(tools, LLM_CHAT, agent=AgentType.STRUCTURED_CH
 # agent_executor.run(get_seed_query())
 # %%
 
-planner = load_chat_planner(LLM_FACT)
-executor = load_agent_executor(LLM_FACT, tools, verbose=True)
+planner = load_chat_planner(LLM_PLAN)
+executor = load_agent_executor(LLM_PLAN, tools, verbose=True)
 agent = PlanAndExecute(planner=planner, executor=executor, verbose=True)
 agent.run(PLANNER_QUERY)
 # %%

@@ -302,13 +302,13 @@ tools = [
     StructuredTool.from_function(
         func=update_research_memory,
         name = "Get new learnings",
-        description=f"useful for when you need to learn more about {list(PineconeNamespaceEnum.get_all_namespaces())}",
+        description=f"useful for when you need to learn more from one of {list(PineconeNamespaceEnum.get_all_namespaces())}",
         args_schema= UpdateResearchMemoryInput
     ),
     StructuredTool.from_function(
         func=dig_deeper_research_wrapper,
         name = "Get tangental learnings",
-        description=f"useful for when you need to explore and learn about connected subject matter about {list(PineconeNamespaceEnum.__members__.values())}. Will not answer your direct question.",
+        description=f"useful for when you need to explore and learn about connected subject matter from one of {list(PineconeNamespaceEnum.get_all_namespaces())}. Will not answer your direct question.",
         args_schema= UpdateResearchMemoryDeeperInput
     )
 ]

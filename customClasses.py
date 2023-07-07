@@ -99,30 +99,30 @@ from pydantic import BaseModel, Field, validator
 
 class ResearchInput(BaseModel):
     ai_query: str = Field(description="should be the question to be answered by research assistant")
-    research_field: str = Field(description=f"must be one of{list(PineconeNamespaceEnum.__members__.values())}")
+    research_field: str = Field(description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
     @validator('research_field')
     def validate_research_field(cls, v):
-        if v not in PineconeNamespaceEnum.__members__.values():
-            raise ValueError(f'research_field must be one of {list(PineconeNamespaceEnum.__members__.values())}')
+        if v not in PineconeNamespaceEnum.get_all_namespace_names():
+            raise ValueError(f'research_field must be one of {list(PineconeNamespaceEnum.get_all_namespace_names())}')
         return v    
     
 class UpdateResearchMemoryInput(BaseModel):
     query: str = Field(description="should be the question the research will provide learnings about")
-    namespace: str = Field(description=f"must be one of{list(PineconeNamespaceEnum.__members__.values())}")
+    namespace: str = Field(description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
     # dig_deeper: bool = Field(description="set to 'True' to get interesting tangental learnings")
     @validator('namespace')
     def validate_research_field(cls, v):
-        if v not in PineconeNamespaceEnum.__members__.values():
-            raise ValueError(f'namespace must be one of {list(PineconeNamespaceEnum.__members__.values())}')
+        if v not in PineconeNamespaceEnum.get_all_namespace_names():
+            raise ValueError(f'namespace must be one of {list(PineconeNamespaceEnum.get_all_namespace_names())}')
         return v    
     
 class UpdateResearchMemoryDeeperInput(BaseModel):
     query: str = Field(description="should be the question used inspire research assistant to provide tangental learnings")
-    namespace: str = Field(description=f"must be one of{list(PineconeNamespaceEnum.__members__.values())}")
+    namespace: str = Field(description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
     @validator('namespace')
     def validate_research_field(cls, v):
-        if v not in PineconeNamespaceEnum.__members__.values():
-            raise ValueError(f'namespace must be one of {list(PineconeNamespaceEnum.__members__.values())}')
+        if v not in PineconeNamespaceEnum.get_all_namespace_names():
+            raise ValueError(f'namespace must be one of {list(PineconeNamespaceEnum.get_all_namespace_names())}')
         return v    
 
 #TODO use this to extract entity keys.
@@ -169,3 +169,7 @@ CUSTOM_ENTITY_EXTRACTION_PROMPT = PromptTemplate(
     input_variables=["input"], template=_CUSTOM_ENTITY_EXTRACTION_TEMPLATE
 )
 
+#%%
+PineconeNamespaceEnum.__members__.values
+
+# %%
