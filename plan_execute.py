@@ -43,3 +43,4 @@ executor = load_agent_executor(LLM_PLAN, tools, verbose=True)
 agent = PlanAndExecute(planner=planner, executor=executor, verbose=True)
 agent.run(PLANNER_QUERY)
 # %%
+#TODO need to provide some entity context to the planner and executor

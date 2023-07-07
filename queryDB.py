@@ -284,13 +284,49 @@ def dig_deeper_research_wrapper(query, namespace):
 def get_entities(cache = ENTITY_MEMORY.entity_cache):
     entity_summaries = {}
     for entity in cache:
-        entity_summaries[entity] = ENTITY_MEMORY.entity_store.get(entity, "")
+        if ENTITY_MEMORY.entity_store.get(entity):
+            entity_summaries[entity] = ENTITY_MEMORY.entity_store.get(entity, "")
     return entity_summaries
 def save_entities_to_long_cach():
     for entity in ENTITY_MEMORY.entity_cache:
         if entity not in entity_memory_long_cache:
             entity_memory_long_cache.append(entity)
+def key_words(query):
+    prompt_template = """Act as a an SEO expert. 
+    Your task is to extract key words from the given text. Output a capitalised array.
+    
+    # EXAMPLE
+    ## Text
+    What is a unique AI prompting strategy? How can it be applied to video streaming analytics?
+    ## Output
+    ["AI Prompting", "AI Prompting Strategy", "Video Streaming", Video Streaming Analytics"]
+    END OF EXAMPLE
 
+    # EXAMPLE
+    ## Text
+    How can chain of thought prompting be used to increase video ad revenue?
+    ## Output
+    ["Chain of Thought", "Chain of Thought Prompting", "Video Ads", "Video Ad Revenue", "Ad Revenue"]
+    END OF EXAMPLE
+
+    ## Text
+    {query}
+    ## Output
+    """
+    prompt = PromptTemplate(template=prompt_template, input_variables=["query"])
+
+    key_words_chain = LLMChain(
+        prompt=prompt,
+        llm=LLM_FACT
+    )
+    return(key_words_chain.run(query=query)) 
+
+
+def warm_cache(query):
+    entities = json.loads(key_words(query))
+    ENTITY_MEMORY.entity_cache = entities
+    save_entities_to_long_cach()
+    return get_entities(entities)
 
 tools = [
     StructuredTool.from_function(
@@ -312,6 +348,17 @@ tools = [
         args_schema= UpdateResearchMemoryDeeperInput
     )
 ]
+
+
+# %%
+_input = {"input": "what is a unique AI prompting technique? How can it be applied to video streaming analytics?"}
+ENTITY_MEMORY.load_memory_variables(_input)
+ENTITY_MEMORY.save_context(
+    _input,
+    {"output": ""}
+)
+# %%
+ENTITY_MEMORY.entity_cache
 
 
 # %%

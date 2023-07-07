@@ -125,8 +125,6 @@ class UpdateResearchMemoryDeeperInput(BaseModel):
             raise ValueError(f'namespace must be one of {list(PineconeNamespaceEnum.get_all_namespace_names())}')
         return v    
 
-#TODO use this to extract entity keys.
-# need to update examples
 #     
 _CUSTOM_ENTITY_EXTRACTION_TEMPLATE = """You are an AI assistant reading the Abstract of a research paper. 
 

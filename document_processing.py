@@ -71,9 +71,9 @@ def process_git():
     print("process_git complete")
 
 # %%
-def process_scrape_urls():
+def process_scrape_urls(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value):
     url_queries_filename = './json/scrape_urls.json'
-    namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value
+    
     url_queries = get_doc_queries_from_resource(url_queries_filename)
     keep_queries = []
     for query in url_queries:

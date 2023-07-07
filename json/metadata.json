@@ -706,5 +706,71 @@
     },
     {
         "source": "https://www.brightcove.com/en/resources/blog/how-increase-video-views/"
+    },
+    {
+        "Published": "2023-07-05",
+        "Title": "LongNet: Scaling Transformers to 1,000,000,000 Tokens",
+        "Authors": "Jiayu Ding, Shuming Ma, Li Dong, Xingxing Zhang, Shaohan Huang, Wenhui Wang, Furu Wei",
+        "published_first_time": "2023-07-05",
+        "comment": "Work in progress",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.02486v1",
+            "http://arxiv.org/pdf/2307.02486v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.02486v1",
+        "date": 20230705
+    },
+    {
+        "Published": "2023-06-30",
+        "Title": "DisPlacing Objects: Improving Dynamic Vehicle Detection via Visual Place Recognition under Adverse Conditions",
+        "Authors": "Stephen Hausler, Sourav Garg, Punarjay Chakravarty, Shubham Shrivastava, Ankit Vora, Michael Milford",
+        "published_first_time": "2023-06-30",
+        "comment": "Accepted to IROS 2023",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.LG",
+            "cs.RO"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.17536v1",
+            "http://arxiv.org/pdf/2306.17536v1"
+        ],
+        "source": "http://arxiv.org/abs/2306.17536v1",
+        "date": 20230630
+    },
+    {
+        "source": "https://www.numbersstation.ai/post/introducing-nsql-open-source-sql-copilot-foundation-models"
+    },
+    {
+        "Published": "2023-06-30",
+        "Title": "Large Language Models are Effective Text Rankers with Pairwise Ranking Prompting",
+        "Authors": "Zhen Qin, Rolf Jagerman, Kai Hui, Honglei Zhuang, Junru Wu, Jiaming Shen, Tianqi Liu, Jialu Liu, Donald Metzler, Xuanhui Wang, Michael Bendersky",
+        "published_first_time": "2023-06-30",
+        "comment": "12 pages, 3 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.IR",
+        "categories": [
+            "cs.IR",
+            "cs.CL",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.17563v1",
+            "http://arxiv.org/pdf/2306.17563v1"
+        ],
+        "source": "http://arxiv.org/abs/2306.17563v1",
+        "date": 20230630
     }
 ]
