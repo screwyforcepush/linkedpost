@@ -302,7 +302,7 @@ tools = [
     StructuredTool.from_function(
         func=update_research_memory,
         name = "Get new learnings",
-        description=f"useful for when you need to learn more about {list(PineconeNamespaceEnum.__members__.values())}",
+        description=f"useful for when you need to learn more about {list(PineconeNamespaceEnum.get_all_namespaces())}",
         args_schema= UpdateResearchMemoryInput
     ),
     StructuredTool.from_function(
