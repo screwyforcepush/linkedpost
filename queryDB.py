@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from typing import Optional, Type
 from langchain.callbacks.manager import AsyncCallbackManagerForToolRun, CallbackManagerForToolRun
 from typing import Literal
-from namespaceEnum import PineconeNamespaceEnum
+from namespaceEnum import PineconeNamespaceEnum, get_all_namespaces
 from langchain import LLMMathChain, PromptTemplate, SerpAPIWrapper
 from langchain.agents import AgentType, initialize_agent
 from langchain.chat_models import ChatOpenAI
@@ -37,7 +37,7 @@ PAPER_PATTERN = r'paper "(.*?)"'
 OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
 TITLES_FILENAME = './json/titles.json'
 RESEARCH_FILENAME = './json/research_summaries.json'
-NAMESPACE_AI=PineconeNamespaceEnum.AI_RESEARCH.value
+NAMESPACE_AI=PineconeNamespaceEnum.AI_RESEARCH
 SEED_QUERY="SEED QUERY PLACEHOLDER"
 entity_memory_long_cache=[]
 
@@ -302,7 +302,7 @@ tools = [
     StructuredTool.from_function(
         func=update_research_memory,
         name = "get_new_learnings",
-        description=f"useful for when you need to learn more from one of {list(PineconeNamespaceEnum.get_all_namespaces())}",
+        description=f"useful for when you need to learn more from one of {list(get_all_namespaces())}",
         args_schema= UpdateResearchMemoryInput
     ),
     StructuredTool.from_function(

@@ -100,31 +100,31 @@ from pydantic import BaseModel, Field, validator
 class ResearchInput(BaseModel):
     """Get answer from research already performed"""
     ai_query: str = Field(..., description="should be the question to be answered by research assistant")
-    research_field: PineconeNamespaceEnum.get_all_namespace_names() = Field(..., description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
+    research_field: PineconeNamespaceEnum = Field(..., description=f"must be one of{list(PineconeNamespaceEnum)}")
     @validator('research_field')
     def validate_research_field(cls, v):
-        if v not in PineconeNamespaceEnum.get_all_namespace_names():
-            raise ValueError(f'research_field must be one of {list(PineconeNamespaceEnum.get_all_namespace_names())}')
+        if v not in PineconeNamespaceEnum:
+            raise ValueError(f'research_field must be one of {list(PineconeNamespaceEnum)}')
         return v    
     
 class UpdateResearchMemoryInput(BaseModel):
     """Research a topic"""
     query: str = Field(..., description="should be the question the research will provide learnings about")
-    namespace: PineconeNamespaceEnum.get_all_namespace_names() = Field(..., description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
+    namespace: PineconeNamespaceEnum = Field(..., description=f"must be one of{list(PineconeNamespaceEnum)}")
     # dig_deeper: bool = Field(description="set to 'True' to get interesting tangental learnings")
     @validator('namespace')
     def validate_research_field(cls, v):
-        if v not in PineconeNamespaceEnum.get_all_namespace_names():
-            raise ValueError(f'namespace must be one of {list(PineconeNamespaceEnum.get_all_namespace_names())}')
+        if v not in PineconeNamespaceEnum:
+            raise ValueError(f'namespace must be one of {list(PineconeNamespaceEnum)}')
         return v    
     
 class UpdateResearchMemoryDeeperInput(BaseModel):
     query: str = Field(..., description="should be the question used inspire research assistant to provide tangental learnings")
-    namespace: PineconeNamespaceEnum.get_all_namespace_names() = Field(..., description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
+    namespace: PineconeNamespaceEnum = Field(..., description=f"must be one of{list(PineconeNamespaceEnum)}")
     @validator('namespace')
     def validate_research_field(cls, v):
-        if v not in PineconeNamespaceEnum.get_all_namespace_names():
-            raise ValueError(f'namespace must be one of {list(PineconeNamespaceEnum.get_all_namespace_names())}')
+        if v not in PineconeNamespaceEnum:
+            raise ValueError(f'namespace must be one of {list(PineconeNamespaceEnum)}')
         return v    
 
 #     
