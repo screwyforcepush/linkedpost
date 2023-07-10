@@ -125,7 +125,7 @@ def answer_from_resource(ai_query, research_field):
         """
     prompt = PromptTemplate(template=template, input_variables=["content", "question", "entities", "topic"])
 
-    chain = LLMChain(llm=LLM_CHAT, prompt=chat_prompt)
+    chain = LLMChain(llm=LLM_CHAT, prompt=prompt)
     response = chain.run(content=content, question=ai_query, topic=research_field, entities=get_entities(cache=entity_memory_long_cache))
     response = response.replace("\n", "")
     return response
@@ -302,7 +302,7 @@ tools = [
     StructuredTool.from_function(
         func=update_research_memory,
         name = "get_new_learnings",
-        description=f"useful for when you need to learn more from one of {list(get_all_namespaces())}",
+        description="get new research on a topic",
         args_schema= UpdateResearchMemoryInput
     ),
     StructuredTool.from_function(
@@ -321,7 +321,6 @@ ENTITY_MEMORY.save_context(
     {"output": ""}
 )
 # %%
-ENTITY_MEMORY.entity_cache
-
+print(get_all_namespaces())
 
 # %%

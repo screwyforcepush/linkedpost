@@ -63,7 +63,9 @@ agent_executor = initialize_agent(tools, LLM_PLAN, agent=AgentType.STRUCTURED_CH
 agent = PlanAndExecute(planner=planner, executor=executor, verbose=True)
 # agent.run(PLANNER_QUERY)
 # %%
-executor.run(
+openexecutor.run(
     "Explain some video streaming metrics."
 )
+# %%
+openexecutor.tools
 # %%
