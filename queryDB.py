@@ -294,19 +294,19 @@ def get_entity_def(term):
     return ENTITY_MEMORY.entity_store.get(term, "Not in Database")
 tools = [
     StructuredTool.from_function(
-        func=answer_from_resource,
+        func=answer_from_resource_wrapper,
         name = "answer_from_learnings",
         description=f"useful for when you need to answer a question based on learnings so far",
         args_schema= ResearchInput
     ),
     StructuredTool.from_function(
-        func=update_research_memory,
+        func=update_research_memory_wrapper,
         name = "get_new_learnings",
         description="get new research on a topic",
         args_schema= UpdateResearchMemoryInput
     ),
     StructuredTool.from_function(
-        func=get_entity_def,
+        func=get_entity_def_wrapper,
         name = "search_database_for_term_definition",
         description="""quickly returns definition of a term if it is in the database. Useful for "What is <term>?" questions""",
     )
