@@ -37,7 +37,7 @@ PAPER_PATTERN = r'paper "(.*?)"'
 OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
 TITLES_FILENAME = './json/titles.json'
 RESEARCH_FILENAME = './json/research_summaries.json'
-NAMESPACE_AI=PineconeNamespaceEnum.AI_RESEARCH
+NAMESPACE_AI=PineconeNamespaceEnum.AI_RESEARCH.value
 SEED_QUERY="SEED QUERY PLACEHOLDER"
 entity_memory_long_cache=[]
 
