@@ -12,3 +12,6 @@ class PineconeNamespaceDescription:
 
 def get_all_namespaces():
     return {member: PineconeNamespaceDescription.__dict__[member] for member in PineconeNamespaceEnum.__members__}
+
+def get_all_namespace_values():
+    return [e.value for e in PineconeNamespaceEnum]
