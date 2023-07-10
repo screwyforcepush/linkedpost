@@ -1,12 +1,12 @@
+urllib3
 jupyterlab
-langchain
-pinecone-client
+langchain[llm]
 pinecone-client[grpc]
 openai
 python-dotenv
 unstructured
 arxiv
 pymupdf
-youtube_transcript_api
 aider-chat
 nest_asyncio
+aider-chat

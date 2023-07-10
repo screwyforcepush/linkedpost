@@ -93,26 +93,6 @@ from langchain.prompts.chat import (
 )
 from langchain.chains import LLMChain
 
-
-template = """
-        Act as a research assistant in {topic}.
-        You dig deep into your research, and create detailed and thoughtful queries to be run on an extensive database of research.
-        You will be presented with research content, and you will respond with a thought provoking query.
-        Your query is progressive from your last query "{question}".
-        If there is an unusually interesting research potential, you respond with multiple queries seperated by newline.
-        """
-
-system_message_prompt = SystemMessagePromptTemplate.from_template(template)
-
-# Human question prompt
-human_template = "Content: {docs}"
-human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
-
-chat_prompt = ChatPromptTemplate.from_messages(
-    [system_message_prompt, human_message_prompt]
-)
-
-dig_deeper_chain = LLMChain(llm=LLM_CHAT, prompt=chat_prompt)
 # %%
 
 
@@ -139,20 +119,13 @@ def answer_from_resource(ai_query, research_field):
 
         # content
         {content}
+
+        # question
+        {question}
         """
+    prompt = PromptTemplate(template=template, input_variables=["content", "question", "entities", "topic"])
 
-    system_message_prompt = SystemMessagePromptTemplate.from_template(template)
-
-    # Human question prompt
-    human_template = "{question}"
-    human_message_prompt = HumanMessagePromptTemplate.from_template(human_template)
-
-    chat_prompt = ChatPromptTemplate.from_messages(
-        [system_message_prompt, human_message_prompt]
-    )
-
-    chain = ConversationChain(llm=LLM_CHAT, prompt=chat_prompt)
-    chain = ConversationChain(llm=LLM_CHAT, prompt=chat_prompt)
+    chain = LLMChain(llm=LLM_CHAT, prompt=chat_prompt)
     response = chain.run(content=content, question=ai_query, topic=research_field, entities=get_entities(cache=entity_memory_long_cache))
     response = response.replace("\n", "")
     return response
@@ -256,14 +229,7 @@ def get_reserach_from_file(filename, seed_query):
 
 
 
-def update_research_memory(query, namespace, dig_deeper=False):
-    if dig_deeper:
-        query = dig_deeper_chain.run(question=query, docs=get_content_from_db(namespace, query), topic=namespace)
-        title = extract_paper_title(query)
-        
-        #TODO check datasource is not in metadata.json already, throw exception if it is
-        if title and not check_if_exists(title, TITLES_FILENAME):
-            add_string_to_filearray(title, TITLES_FILENAME)
+def update_research_memory(query, namespace):
     docs=get_content_from_db(namespace, query)
     sumer = summarise(docs, query)
     add_research_to_file(sumer,docs, RESEARCH_FILENAME,SEED_QUERY)
@@ -277,9 +243,6 @@ def update_research_memory(query, namespace, dig_deeper=False):
 
     return sumer
 
-# %%
-def dig_deeper_research_wrapper(query, namespace):
-    return update_research_memory(query, namespace, dig_deeper=True)
 # %%
 def get_entities(cache = ENTITY_MEMORY.entity_cache):
     entity_summaries = {}
@@ -327,25 +290,25 @@ def warm_cache(query):
     ENTITY_MEMORY.entity_cache = entities
     save_entities_to_long_cach()
     return get_entities(entities)
-
+def get_entity_def(term):
+    return ENTITY_MEMORY.entity_store.get(term, "Not in Database")
 tools = [
     StructuredTool.from_function(
         func=answer_from_resource,
-        name = "Answer from learnings",
+        name = "answer_from_learnings",
         description=f"useful for when you need to answer a question based on learnings so far",
         args_schema= ResearchInput
     ),
     StructuredTool.from_function(
         func=update_research_memory,
-        name = "Get new learnings",
+        name = "get_new_learnings",
         description=f"useful for when you need to learn more from one of {list(PineconeNamespaceEnum.get_all_namespaces())}",
         args_schema= UpdateResearchMemoryInput
     ),
     StructuredTool.from_function(
-        func=dig_deeper_research_wrapper,
-        name = "Get tangental learnings",
-        description=f"useful for when you need to explore and learn about connected subject matter from one of {list(PineconeNamespaceEnum.get_all_namespaces())}. Will not answer your direct question.",
-        args_schema= UpdateResearchMemoryDeeperInput
+        func=get_entity_def,
+        name = "search_database_for_term_definition",
+        description="""quickly returns definition of a term if it is in the database. Useful for "What is <term>?" questions""",
     )
 ]
 

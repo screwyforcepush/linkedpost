@@ -98,8 +98,9 @@ from namespaceEnum import PineconeNamespaceEnum
 from pydantic import BaseModel, Field, validator
 
 class ResearchInput(BaseModel):
-    ai_query: str = Field(description="should be the question to be answered by research assistant")
-    research_field: str = Field(description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
+    """Get answer from research already performed"""
+    ai_query: str = Field(..., description="should be the question to be answered by research assistant")
+    research_field: PineconeNamespaceEnum.get_all_namespace_names() = Field(..., description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
     @validator('research_field')
     def validate_research_field(cls, v):
         if v not in PineconeNamespaceEnum.get_all_namespace_names():
@@ -107,8 +108,9 @@ class ResearchInput(BaseModel):
         return v    
     
 class UpdateResearchMemoryInput(BaseModel):
-    query: str = Field(description="should be the question the research will provide learnings about")
-    namespace: str = Field(description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
+    """Research a topic"""
+    query: str = Field(..., description="should be the question the research will provide learnings about")
+    namespace: PineconeNamespaceEnum.get_all_namespace_names() = Field(..., description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
     # dig_deeper: bool = Field(description="set to 'True' to get interesting tangental learnings")
     @validator('namespace')
     def validate_research_field(cls, v):
@@ -117,8 +119,8 @@ class UpdateResearchMemoryInput(BaseModel):
         return v    
     
 class UpdateResearchMemoryDeeperInput(BaseModel):
-    query: str = Field(description="should be the question used inspire research assistant to provide tangental learnings")
-    namespace: str = Field(description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
+    query: str = Field(..., description="should be the question used inspire research assistant to provide tangental learnings")
+    namespace: PineconeNamespaceEnum.get_all_namespace_names() = Field(..., description=f"must be one of{list(PineconeNamespaceEnum.get_all_namespace_names())}")
     @validator('namespace')
     def validate_research_field(cls, v):
         if v not in PineconeNamespaceEnum.get_all_namespace_names():
