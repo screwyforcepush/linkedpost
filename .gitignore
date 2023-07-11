@@ -2,3 +2,5 @@
 /pdfs_processed
 .aider.chat.history.md
 .aider.input.history
+/.aider.ident.cache.v1
+/.aider.tags.cache.v1

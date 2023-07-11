@@ -1,32 +1,22 @@
 # %%
 import os
-from langchain.embeddings.openai import OpenAIEmbeddings
-import pinecone
-from langchain.vectorstores import Pinecone
-from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
 from langchain.tools import BaseTool, StructuredTool
 from pydantic import BaseModel, Field, validator
 from dotenv import load_dotenv
 from typing import Optional, Type
-from langchain.callbacks.manager import AsyncCallbackManagerForToolRun, CallbackManagerForToolRun
-from typing import Literal
+from get_content_from_db import get_content_from_db
 from namespaceEnum import PineconeNamespaceEnum, get_all_namespaces,get_all_namespace_values, NamespaceArg
 from langchain import LLMMathChain, PromptTemplate, SerpAPIWrapper
-from langchain.agents import AgentType, initialize_agent
 from langchain.chat_models import ChatOpenAI
 from langchain.tools import BaseTool, Tool, tool
-from langchain.chains.summarize import load_summarize_chain, map_reduce_prompt, refine_prompts, stuff_prompt
-from langchain.memory import ConversationSummaryBufferMemory
 from langchain.memory import ConversationEntityMemory
-from langchain.memory import ConversationBufferMemory, CombinedMemory, ConversationSummaryMemory
 from customClasses import (ResearchInput, SQLiteEntityStore, 
                            CUSTOM_ENTITY_EXTRACTION_PROMPT, UpdateResearchMemoryDeeperInput, UpdateResearchMemoryInput)
 from langchain.memory import ConversationBufferMemory, ReadOnlySharedMemory
 import re
 import json
 import tiktoken
-from langchain.chains import ConversationChain
 
 
 load_dotenv()
@@ -53,11 +43,6 @@ def set_entity_memory_long_cache(cache):
     global entity_memory_long_cache
     entity_memory_long_cache=cache
 
-openai = OpenAI(
-    model_name="text-davinci-003",
-    openai_api_key=OPENAI_API_KEY
-)
-
 LLM_FACT = ChatOpenAI(
     model_name='gpt-3.5-turbo',
     temperature=0.0
@@ -78,10 +63,6 @@ tokenizer = tiktoken.get_encoding("cl100k_base")
 def tiktoken_len(text):
     tokens = tokenizer.encode(text, disallowed_special=())
     return len(tokens)
-
-pinecone.init(api_key=os.getenv("PINECONE_API_KEY"), environment=os.getenv("PINECONE_ENV"))
-index_name = "langchain-demo"
-embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
 
 # %%
 from langchain.llms import OpenAI
@@ -130,13 +111,6 @@ def answer_from_resource(query: str, namespace: NamespaceArg) -> str:
     response = chain.run(content=content, question=query, topic=namespace, entities=get_entities(cache=entity_memory_long_cache))
     response = response.replace("\n", "")
     return response
-
-def get_content_from_db(namespace, db_query, k=4):
-    db = Pinecone.from_existing_index(index_name, embeddings, namespace=namespace)
-    docs = db.similarity_search(db_query,k=k)
-    docs_page_content = " ".join([d.page_content for d in docs])
-    # print(docs_page_content)
-    return docs_page_content
 
 def summarise(content,question):
     prompt_template = """Act as a research assistant. 
