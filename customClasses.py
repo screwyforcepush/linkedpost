@@ -94,35 +94,35 @@ class SQLiteEntityStore(BaseEntityStore):
         with self.conn:
             self.conn.execute(query)
 
-from namespaceEnum import PineconeNamespaceEnum, get_all_namespace_values
+from namespaceEnum import PineconeNamespaceEnum, NamespaceArg, get_all_namespace_values
 from pydantic import BaseModel, Field, validator
 
 class ResearchInput(BaseModel):
     """Get answer from research already performed"""
-    ai_query: str = Field(..., description="should be the question to be answered by research assistant")
-    research_field: PineconeNamespaceEnum = Field(..., description=f"must be one of{get_all_namespace_values()}")
-    @validator('research_field')
-    def validate_research_field(cls, v):
+    query: str = Field(..., description="should be the question to be answered by research assistant")
+    namespace: NamespaceArg = Field(..., description=f"must be one of{get_all_namespace_values()}")
+    @validator('namespace')
+    def validate_namespace(cls, v):
         if v not in get_all_namespace_values():
-            raise ValueError(f'research_field must be one of {get_all_namespace_values()}')
+            raise ValueError(f'namespace must be one of {get_all_namespace_values()}')
         return v    
     
 class UpdateResearchMemoryInput(BaseModel):
     """Research a topic"""
-    query: str = Field(..., description="should be the question the research will provide learnings about")
-    namespace: PineconeNamespaceEnum = Field(..., description=f"must be one of{get_all_namespace_values()}")
+    query: str = Field(..., description="should be the question the research assistant will provide learnings about")
+    namespace: str = Field(..., description=f"must be one of{get_all_namespace_values()}")
     # dig_deeper: bool = Field(description="set to 'True' to get interesting tangental learnings")
     @validator('namespace')
-    def validate_research_field(cls, v):
+    def validate_namespace(cls, v):
         if v not in get_all_namespace_values():
             raise ValueError(f'namespace must be one of {get_all_namespace_values()}')
         return v    
     
 class UpdateResearchMemoryDeeperInput(BaseModel):
     query: str = Field(..., description="should be the question used inspire research assistant to provide tangental learnings")
-    namespace: PineconeNamespaceEnum = Field(..., description=f"must be one of{get_all_namespace_values()}")
+    namespace: NamespaceArg = Field(..., description=f"must be one of{get_all_namespace_values()}")
     @validator('namespace')
-    def validate_research_field(cls, v):
+    def validate_namespace(cls, v):
         if v not in get_all_namespace_values():
             raise ValueError(f'namespace must be one of {get_all_namespace_values()}')
         return v    
@@ -170,6 +170,5 @@ CUSTOM_ENTITY_EXTRACTION_PROMPT = PromptTemplate(
 )
 
 #%%
-list(get_all_namespace_values())
-
+NamespaceArg
 # %%

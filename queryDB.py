@@ -11,7 +11,7 @@ from dotenv import load_dotenv
 from typing import Optional, Type
 from langchain.callbacks.manager import AsyncCallbackManagerForToolRun, CallbackManagerForToolRun
 from typing import Literal
-from namespaceEnum import PineconeNamespaceEnum, get_all_namespaces
+from namespaceEnum import PineconeNamespaceEnum, get_all_namespaces,get_all_namespace_values, NamespaceArg
 from langchain import LLMMathChain, PromptTemplate, SerpAPIWrapper
 from langchain.agents import AgentType, initialize_agent
 from langchain.chat_models import ChatOpenAI
@@ -96,11 +96,12 @@ from langchain.chains import LLMChain
 # %%
 
 
-#TODO make a multi chain instead of nested llm
-def answer_from_resource(ai_query, research_field):
-    """
-    gpt-3.5-turbo can handle up to 4097 tokens. Setting the chunksize to 1000 and k to 4 maximizes
-    the number of tokens to analyze.
+def answer_from_resource(query: str, namespace: NamespaceArg) -> str:
+    """Get answer from research already performed.
+    
+    Args:
+        query: The question to be answered by research assistant.
+        namespace: A NamespaceArg object that is the research domain.
     """
     content = json.dumps(get_reserach_from_file(RESEARCH_FILENAME,SEED_QUERY)['summaries'])
     print("content length", tiktoken_len(content))
@@ -126,7 +127,7 @@ def answer_from_resource(ai_query, research_field):
     prompt = PromptTemplate(template=template, input_variables=["content", "question", "entities", "topic"])
 
     chain = LLMChain(llm=LLM_CHAT, prompt=prompt)
-    response = chain.run(content=content, question=ai_query, topic=research_field, entities=get_entities(cache=entity_memory_long_cache))
+    response = chain.run(content=content, question=query, topic=namespace, entities=get_entities(cache=entity_memory_long_cache))
     response = response.replace("\n", "")
     return response
 
@@ -229,7 +230,13 @@ def get_reserach_from_file(filename, seed_query):
 
 
 
-def update_research_memory(query, namespace):
+def update_research_memory(query:str, namespace:NamespaceArg)->str:
+    """Get new research on a topic.
+    
+    Args:
+        query: The question to be answered by research assistant.
+        namespace: A NamespaceArg object that is the research domain.
+    """
     docs=get_content_from_db(namespace, query)
     sumer = summarise(docs, query)
     add_research_to_file(sumer,docs, RESEARCH_FILENAME,SEED_QUERY)
@@ -290,28 +297,60 @@ def warm_cache(query):
     ENTITY_MEMORY.entity_cache = entities
     save_entities_to_long_cach()
     return get_entities(entities)
-def get_entity_def(term):
+def get_entity_def(term:str)->str:
+    """Look up definition of a term in entity database.
+    
+    Args:
+        term: The entity key to query from the database.
+    """
     return ENTITY_MEMORY.entity_store.get(term, "Not in Database")
+
+def answer_from_resource_tool(query, namespace):
+     return answer_from_resource(query, namespace)
+def update_research_memory_tool(query, namespace):
+     return update_research_memory(query, namespace)
 tools = [
     StructuredTool.from_function(
-        func=answer_from_resource_wrapper,
+        func=answer_from_resource,
         name = "answer_from_learnings",
-        description=f"useful for when you need to answer a question based on learnings so far",
+        description="useful for when you need to answer a question based on learnings so far",
         args_schema= ResearchInput
     ),
     StructuredTool.from_function(
-        func=update_research_memory_wrapper,
+        func=update_research_memory,
         name = "get_new_learnings",
         description="get new research on a topic",
         args_schema= UpdateResearchMemoryInput
     ),
     StructuredTool.from_function(
-        func=get_entity_def_wrapper,
+        func=get_entity_def,
         name = "search_database_for_term_definition",
         description="""quickly returns definition of a term if it is in the database. Useful for "What is <term>?" questions""",
     )
 ]
 
+open_funk = [
+    answer_from_resource,
+    update_research_memory,
+    get_entity_def
+]
+
+
+class NewLearningsTool(BaseTool):
+    name = "get_new_learnings"
+    description = f"""Useful when you want your research assistant to get new research on a topic
+    """
+    args_schema: Type[BaseModel] = UpdateResearchMemoryInput
+
+    def _run(self, query: str, namespace: NamespaceArg):
+        response = update_research_memory(query, namespace)
+        return response
+
+    def _arun(self, query: str, namespace: NamespaceArg):
+        raise NotImplementedError("get_new_learnings does not support async")
+open_tools = [
+    NewLearningsTool()
+]
 
 # %%
 _input = {"input": "what is a unique AI prompting technique? How can it be applied to video streaming analytics?"}

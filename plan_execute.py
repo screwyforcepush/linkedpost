@@ -1,8 +1,12 @@
-from queryDB import tools, set_seed_query, set_entity_memory_long_cache, get_seed_query, warm_cache
+from queryDB import tools, open_tools,open_funk, set_seed_query, set_entity_memory_long_cache, get_seed_query, warm_cache
 from langchain.experimental.plan_and_execute import PlanAndExecute, load_agent_executor, load_chat_planner
 from langchain.agents import AgentType, initialize_agent
 from langchain.llms import OpenAI
 from langchain.chat_models import ChatOpenAI
+from langchain.chains.openai_functions import create_openai_fn_chain
+from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
+from langchain.schema import HumanMessage, SystemMessage
+from namespaceEnum import get_all_namespaces
 import langchain
 import os
 from dotenv import load_dotenv
@@ -56,16 +60,37 @@ PLANNER_SYSTEM_PROMPT = (
 # %%
 langchain.debug = True
 
-planner = load_chat_planner(LLM_PLAN, system_prompt=PLANNER_SYSTEM_PROMPT)
+
+# %%
+
 executor = load_agent_executor(LLM_PLAN, tools, verbose=True)
-openexecutor = initialize_agent(tools, LLM_FUNCTION, agent=AgentType.OPENAI_MULTI_FUNCTIONS, verbose=True)
-agent_executor = initialize_agent(tools, LLM_PLAN, agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose=True, max_iterations=5)
+planner = load_chat_planner(LLM_PLAN, system_prompt=PLANNER_SYSTEM_PROMPT)
 agent = PlanAndExecute(planner=planner, executor=executor, verbose=True)
-# agent.run(PLANNER_QUERY)
+# 
 # %%
-openexecutor.run(
-    "Explain some video streaming metrics."
-)
-# %%
-openexecutor.tools
+
+##cant be used as executor
+# prompt_msgs = [
+#         SystemMessage(
+#             content=f"You are a helpful AI assistant. You can use tools to obtain information about the namespaces: {get_all_namespaces()}"
+#         ),
+#         HumanMessage(content="Call the relevant function to get information the following input:"),
+#     HumanMessagePromptTemplate.from_template("{input}"),
+#     HumanMessage(content="Tips: Make sure to answer in the correct format"),
+#     ]
+# prompt = ChatPromptTemplate(messages=prompt_msgs)
+
+# funk_chain = create_openai_fn_chain(open_funk, LLM_FUNCTION, prompt, verbose=True)
+# # funk_chain.run("Explain some video streaming metrics.")
+# from langchain.tools import BaseTool, Tool, tool
+
+# chain_tools = [
+#         Tool.from_function(
+#         func=funk_chain.run,
+#         name="Assistant",
+#         description="useful for when you need additional research information"
+#    )
+# ]
+# # %%
+
 # %%
