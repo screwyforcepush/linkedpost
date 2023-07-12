@@ -68,7 +68,7 @@ planner = load_chat_planner(LLM_PLAN, system_prompt=PLANNER_SYSTEM_PROMPT)
 agent = PlanAndExecute(planner=planner, executor=executor, verbose=True)
 # 
 # %%
-
+agent.run(PLANNER_QUERY)
 ##cant be used as executor
 # prompt_msgs = [
 #         SystemMessage(

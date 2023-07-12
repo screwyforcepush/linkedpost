@@ -57,21 +57,14 @@ READ_ONLY_ENTITY_MEMORY = ReadOnlySharedMemory(memory=ENTITY_MEMORY)
 
 
 tokenizer = tiktoken.get_encoding("cl100k_base")
-
-
 # create the length function
 def tiktoken_len(text):
     tokens = tokenizer.encode(text, disallowed_special=())
     return len(tokens)
 
 # %%
-from langchain.llms import OpenAI
+
 from langchain.chains.question_answering import load_qa_chain
-from langchain.prompts.chat import (
-    ChatPromptTemplate,
-    SystemMessagePromptTemplate,
-    HumanMessagePromptTemplate,
-)
 from langchain.chains import LLMChain
 
 # %%
@@ -211,7 +204,7 @@ def update_research_memory(query:str, namespace:NamespaceArg)->str:
         query: The question to be answered by research assistant.
         namespace: A NamespaceArg object that is the research domain.
     """
-    docs=get_content_from_db(namespace, query)
+    docs=get_content_from_db(namespace, query, entities=get_entities(cache=entity_memory_long_cache))
     sumer = summarise(docs, query)
     add_research_to_file(sumer,docs, RESEARCH_FILENAME,SEED_QUERY)
     _input = {"input": sumer}
@@ -279,10 +272,6 @@ def get_entity_def(term:str)->str:
     """
     return ENTITY_MEMORY.entity_store.get(term, "Not in Database")
 
-def answer_from_resource_tool(query, namespace):
-     return answer_from_resource(query, namespace)
-def update_research_memory_tool(query, namespace):
-     return update_research_memory(query, namespace)
 tools = [
     StructuredTool.from_function(
         func=answer_from_resource,
@@ -327,12 +316,12 @@ open_tools = [
 ]
 
 # %%
-_input = {"input": "what is a unique AI prompting technique? How can it be applied to video streaming analytics?"}
-ENTITY_MEMORY.load_memory_variables(_input)
-ENTITY_MEMORY.save_context(
-    _input,
-    {"output": ""}
-)
+# _input = {"input": "what is a unique AI prompting technique? How can it be applied to video streaming analytics?"}
+# ENTITY_MEMORY.load_memory_variables(_input)
+# ENTITY_MEMORY.save_context(
+#     _input,
+#     {"output": ""}
+# )
 # %%
 print(get_all_namespaces())
 

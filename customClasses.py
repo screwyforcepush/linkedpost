@@ -100,7 +100,7 @@ from pydantic import BaseModel, Field, validator
 class ResearchInput(BaseModel):
     """Get answer from research already performed"""
     query: str = Field(..., description="should be the question to be answered by research assistant")
-    namespace: NamespaceArg = Field(..., description=f"must be one of{get_all_namespace_values()}")
+    namespace: str = Field(..., description=f"must be one of{get_all_namespace_values()}")
     @validator('namespace')
     def validate_namespace(cls, v):
         if v not in get_all_namespace_values():
@@ -120,7 +120,7 @@ class UpdateResearchMemoryInput(BaseModel):
     
 class UpdateResearchMemoryDeeperInput(BaseModel):
     query: str = Field(..., description="should be the question used inspire research assistant to provide tangental learnings")
-    namespace: NamespaceArg = Field(..., description=f"must be one of{get_all_namespace_values()}")
+    namespace: str = Field(..., description=f"must be one of{get_all_namespace_values()}")
     @validator('namespace')
     def validate_namespace(cls, v):
         if v not in get_all_namespace_values():

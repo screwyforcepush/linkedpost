@@ -9,4 +9,4 @@ arxiv
 pymupdf
 aider-chat
 nest_asyncio
-aider-chat
+scikit-learn
