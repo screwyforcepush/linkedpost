@@ -155,5 +155,6 @@ TEST = {
     "Optimization": "Optimization is a process that can be enhanced by applying Chain of Thought Prompting (CoTP) in video streaming analytics. CoTP involves using prompts or questions to guide analysts in exploring different aspects of the data and uncovering valuable insights. It provides a structured approach to data analysis, helping analysts ask the right questions, identify patterns, and optimize video streaming services.",
     "Video Streaming Services": "Video Streaming Services can benefit from the application of Chain of Thought Prompting (CoTP) in their analytics process, as it improves the accuracy and efficiency of data analysis. CoTP involves using prompts or questions to guide analysts in exploring different aspects of the data and uncovering valuable insights. By implementing CoTP, organizations can make data-driven decisions and optimize their video streaming services."
   }
-tiktoken_len(TEST)
+for key, value in TEST.items():
+    print(f"{key}: {tiktoken_len(key + ' ' + value)}")
 # %%
