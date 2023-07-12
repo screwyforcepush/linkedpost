@@ -52,7 +52,7 @@ from langchain.output_parsers import PydanticOutputParser
 #%% 
 tokenizer = tiktoken.get_encoding("cl100k_base")
 # create the length function
-def tiktoken_len(text):
+def tiktoken_len(text:str):
     tokens = tokenizer.encode(text, disallowed_special=())
     return len(tokens)
 
