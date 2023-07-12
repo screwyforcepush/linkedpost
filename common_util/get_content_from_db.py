@@ -1,54 +1,37 @@
 import pinecone
 import os
-from langchain.embeddings.openai import OpenAIEmbeddings
-from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
-
 from langchain.vectorstores import Pinecone
-from langchain.llms import OpenAI
 from langchain.document_transformers import EmbeddingsRedundantFilter,EmbeddingsClusteringFilter
 from langchain.retrievers.document_compressors import DocumentCompressorPipeline
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain.retrievers.merger_retriever import MergerRetriever
-from custom.multi_query import MultiQueryRetriever
-
+from custom.multi_query import MultiQueryRetriever, DEFAULT_QUERY_PROMPT
+from common_util.llms import LLM_FACT, EMBEDDINGS
 import tiktoken
 from dotenv import load_dotenv
 
 load_dotenv()
-OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
+tokens_gpt_4 = 8192
+tokens_gpt_3 = 4096
 
-openai = OpenAI(
-    model_name="text-davinci-003",
-    openai_api_key=OPENAI_API_KEY
-)
-llm = ChatOpenAI(temperature=0)
 import logging
 logging.basicConfig()
 logging.getLogger('custom.multi_query').setLevel(logging.INFO)
 pinecone.init(api_key=os.getenv("PINECONE_API_KEY"), environment=os.getenv("PINECONE_ENV"))
 index_name = "langchain-demo"
-embeddings = OpenAIEmbeddings(openai_api_key=OPENAI_API_KEY)
-filter = EmbeddingsRedundantFilter(embeddings=embeddings)
+filter = EmbeddingsRedundantFilter(embeddings=EMBEDDINGS)
 
 # This filter will divide the documents vectors into clusters or "centers" of meaning.
 # Then it will pick the closest document to that center for the final results.
 # By default the result document will be ordered/grouped by clusters.
 filter_ordered_cluster = EmbeddingsClusteringFilter(
-            embeddings=embeddings,
+            embeddings=EMBEDDINGS,
             num_clusters=10,
             num_closest=1,
         )
 
 pipeline = DocumentCompressorPipeline(transformers=[filter_ordered_cluster])
 
-
-
-from typing import List
-from langchain import LLMChain
-from pydantic import BaseModel, Field
-from langchain.prompts import PromptTemplate
-from langchain.output_parsers import PydanticOutputParser  
 #%% 
 tokenizer = tiktoken.get_encoding("cl100k_base")
 # create the length function
@@ -57,21 +40,21 @@ def tiktoken_len(text:str):
     return len(tokens)
 
 max_doc_content_tokens=2000
-def get_docs_content(docs):
+def get_docs_content(docs,tokens):
     joined_content = ""
     temp_joined = ""
     docs_page_content = []
     for d in docs:
         docs_page_content.append(d.page_content)
         temp_joined = "\n".join(docs_page_content)
-        if tiktoken_len(temp_joined)>max_doc_content_tokens:
+        if tiktoken_len(temp_joined)>tokens:
             break
         joined_content = "\n".join(docs_page_content)
     print("max tokens reached ->",tiktoken_len(joined_content),tiktoken_len(temp_joined))
     return joined_content
 
-def get_content_from_db(namespace, db_query, entities={}, k=20):
-    db = Pinecone.from_existing_index(index_name, embeddings, namespace=namespace)
+def get_content_from_db(namespace, db_query, entities={}, tokens=max_doc_content_tokens, k=20):
+    db = Pinecone.from_existing_index(index_name, EMBEDDINGS, namespace=namespace)
     # Define 2 diff retrievers with 2 diff embeddings and diff search type.
     retriever_all = db.as_retriever(
         search_type="similarity", search_kwargs={"k": k}
@@ -83,11 +66,11 @@ def get_content_from_db(namespace, db_query, entities={}, k=20):
     # retriever on different types of chains.
     lotr = MergerRetriever(retrievers=[retriever_all, retriever_multi_qa])
 
-    retriever_from_llm = MultiQueryRetriever.from_llm(retriever=lotr,llm=llm,entities=entities)
+    retriever_from_llm = MultiQueryRetriever.from_llm(retriever=lotr,llm=LLM_FACT,entities=entities)
     compression_retriever = ContextualCompressionRetriever(
         base_compressor=pipeline, base_retriever=retriever_from_llm)
     docs = compression_retriever.get_relevant_documents(db_query)
-    return get_docs_content(docs)
+    return get_docs_content(docs, tokens)
 
 
 # %%
@@ -155,6 +138,14 @@ TEST = {
     "Optimization": "Optimization is a process that can be enhanced by applying Chain of Thought Prompting (CoTP) in video streaming analytics. CoTP involves using prompts or questions to guide analysts in exploring different aspects of the data and uncovering valuable insights. It provides a structured approach to data analysis, helping analysts ask the right questions, identify patterns, and optimize video streaming services.",
     "Video Streaming Services": "Video Streaming Services can benefit from the application of Chain of Thought Prompting (CoTP) in their analytics process, as it improves the accuracy and efficiency of data analysis. CoTP involves using prompts or questions to guide analysts in exploring different aspects of the data and uncovering valuable insights. By implementing CoTP, organizations can make data-driven decisions and optimize their video streaming services."
   }
+cost = {}
 for key, value in TEST.items():
-    print(f"{key}: {tiktoken_len(key + ' ' + value)}")
+    cost[key]= tiktoken_len(key + ' ' + value)
+print(cost)
+
+
+# %%
+
+DEFAULT_QUERY_PROMPT.template
+
 # %%

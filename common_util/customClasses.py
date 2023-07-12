@@ -94,7 +94,7 @@ class SQLiteEntityStore(BaseEntityStore):
         with self.conn:
             self.conn.execute(query)
 
-from namespaceEnum import PineconeNamespaceEnum, NamespaceArg, get_all_namespace_values
+from common_util.namespaceEnum import NamespaceArg, get_all_namespace_values
 from pydantic import BaseModel, Field, validator
 
 class ResearchInput(BaseModel):
@@ -118,15 +118,6 @@ class UpdateResearchMemoryInput(BaseModel):
             raise ValueError(f'namespace must be one of {get_all_namespace_values()}')
         return v    
     
-class UpdateResearchMemoryDeeperInput(BaseModel):
-    query: str = Field(..., description="should be the question used inspire research assistant to provide tangental learnings")
-    namespace: str = Field(..., description=f"must be one of{get_all_namespace_values()}")
-    @validator('namespace')
-    def validate_namespace(cls, v):
-        if v not in get_all_namespace_values():
-            raise ValueError(f'namespace must be one of {get_all_namespace_values()}')
-        return v    
-
 #     
 _CUSTOM_ENTITY_EXTRACTION_TEMPLATE = """You are an AI assistant reading the Abstract of a research paper. 
 

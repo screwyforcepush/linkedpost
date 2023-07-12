@@ -1,35 +1,24 @@
 # %%
 import os
 import time
-from langchain import FewShotPromptTemplate
-from langchain import PromptTemplate
-from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
 import json
 from langchain.document_loaders import OnlinePDFLoader
 import tiktoken
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.embeddings.openai import OpenAIEmbeddings
 import pinecone
 from langchain.vectorstores import Pinecone
 from dotenv import load_dotenv
 from langchain.retrievers import ArxivRetriever
-from langchain.chains.qa_with_sources import load_qa_with_sources_chain
-from langchain.chains.question_answering import load_qa_chain
 from langchain.prompts.chat import (
     ChatPromptTemplate,
     SystemMessagePromptTemplate,
     HumanMessagePromptTemplate,
 )
 from langchain.chains import LLMChain
+from common_util.llms import LLM_CHAT, EMBEDDINGS
 
 # %%
 load_dotenv()
-
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-
-openai = OpenAI(model_name="text-davinci-003", openai_api_key=OPENAI_API_KEY)
-chat = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.1)
 
 retriever = ArxivRetriever(load_max_docs=5, load_all_available_meta=True)
 
@@ -52,7 +41,7 @@ chat_prompt = ChatPromptTemplate.from_messages(
     [system_message_prompt, human_message_prompt]
 )
 
-chain = LLMChain(llm=chat, prompt=chat_prompt)
+chain = LLMChain(llm=LLM_CHAT, prompt=chat_prompt)
 
 def is_content_related_to_topic(content, topic):
     response = chain.run(content=content, topic=topic)
@@ -135,11 +124,10 @@ def get_chunks_from_loader_data(data, metadata=False, source_merge=False):
     return chunks
 
 # %%
-embeddings = OpenAIEmbeddings()
 
 texts = ["this is the first chunk of text", "then another second chunk of text is here"]
 
-res = embeddings.embed_documents(texts)
+res = EMBEDDINGS.embed_documents(texts)
 len(res), len(res[0])
 
 
@@ -171,7 +159,7 @@ index.describe_index_stats()
 def upsert_chunks(chunks, namespace):
     try:
         docsearch = Pinecone.from_documents(
-            chunks, embeddings, index_name=index_name, namespace=namespace
+            chunks, EMBEDDINGS, index_name=index_name, namespace=namespace
         )
         time.sleep(1)
         print(index.describe_index_stats())

@@ -1,35 +1,29 @@
 # %%
 import os
-from langchain.chat_models import ChatOpenAI
 from langchain.tools import BaseTool, StructuredTool
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel
 from dotenv import load_dotenv
 from typing import Optional, Type
-from get_content_from_db import get_content_from_db
-from namespaceEnum import PineconeNamespaceEnum, get_all_namespaces,get_all_namespace_values, NamespaceArg
-from langchain import LLMMathChain, PromptTemplate, SerpAPIWrapper
-from langchain.chat_models import ChatOpenAI
-from langchain.tools import BaseTool, Tool, tool
-from langchain.memory import ConversationEntityMemory
-from customClasses import (ResearchInput, SQLiteEntityStore, 
-                           CUSTOM_ENTITY_EXTRACTION_PROMPT, UpdateResearchMemoryDeeperInput, UpdateResearchMemoryInput)
-from langchain.memory import ConversationBufferMemory, ReadOnlySharedMemory
+from common_util.memory import load_memory_vars, get_entities, save_entities_to_long_cach
+from common_util.llms import LLM_CHAT, LLM_FACT
+from common_util.get_content_from_db import get_content_from_db
+from common_util.memory import get_entity_def
+from common_util.namespaceEnum import PineconeNamespaceEnum, get_all_namespaces,get_all_namespace_values, NamespaceArg
+from langchain import PromptTemplate
+from langchain.tools import BaseTool
+from common_util.customClasses import (ResearchInput, UpdateResearchMemoryInput)
 import re
 import json
 import tiktoken
-
-
 load_dotenv()
 # %%
 
 # Regular expression pattern to match paper titles
 PAPER_PATTERN = r'paper "(.*?)"'
-OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
 TITLES_FILENAME = './json/titles.json'
 RESEARCH_FILENAME = './json/research_summaries.json'
 NAMESPACE_AI=PineconeNamespaceEnum.AI_RESEARCH
 SEED_QUERY="SEED QUERY PLACEHOLDER"
-entity_memory_long_cache=[]
 
 def set_seed_query(query):
     global SEED_QUERY
@@ -39,23 +33,6 @@ def get_seed_query():
     global SEED_QUERY
     return SEED_QUERY
     
-def set_entity_memory_long_cache(cache):
-    global entity_memory_long_cache
-    entity_memory_long_cache=cache
-
-LLM_FACT = ChatOpenAI(
-    model_name='gpt-3.5-turbo',
-    temperature=0.0
-)
-LLM_CHAT = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.2)
-
-entity_store=SQLiteEntityStore()
-print(entity_store.conn)
-# %%
-ENTITY_MEMORY = ConversationEntityMemory(llm=LLM_FACT, entity_store=entity_store, entity_extraction_prompt=CUSTOM_ENTITY_EXTRACTION_PROMPT, k=0)
-READ_ONLY_ENTITY_MEMORY = ReadOnlySharedMemory(memory=ENTITY_MEMORY)
-
-
 tokenizer = tiktoken.get_encoding("cl100k_base")
 # create the length function
 def tiktoken_len(text):
@@ -101,7 +78,7 @@ def answer_from_resource(query: str, namespace: NamespaceArg) -> str:
     prompt = PromptTemplate(template=template, input_variables=["content", "question", "entities", "topic"])
 
     chain = LLMChain(llm=LLM_CHAT, prompt=prompt)
-    response = chain.run(content=content, question=query, topic=namespace, entities=get_entities(cache=entity_memory_long_cache))
+    response = chain.run(content=content, question=query, topic=namespace, entities=get_entities(use_long_cache=True))
     response = response.replace("\n", "")
     return response
 
@@ -204,74 +181,15 @@ def update_research_memory(query:str, namespace:NamespaceArg)->str:
         query: The question to be answered by research assistant.
         namespace: A NamespaceArg object that is the research domain.
     """
-    docs=get_content_from_db(namespace, query, entities=get_entities(cache=entity_memory_long_cache))
+    docs=get_content_from_db(namespace, query, entities=get_entities(use_long_cache=True))
     sumer = summarise(docs, query)
     add_research_to_file(sumer,docs, RESEARCH_FILENAME,SEED_QUERY)
-    _input = {"input": sumer}
-    ENTITY_MEMORY.load_memory_variables(_input)
-    ENTITY_MEMORY.save_context(
-        _input,
-        {"output": ""}
-    )
+    load_memory_vars(sumer)
     save_entities_to_long_cach()
 
     return sumer
 
 # %%
-def get_entities(cache = ENTITY_MEMORY.entity_cache):
-    entity_summaries = {}
-    for entity in cache:
-        if ENTITY_MEMORY.entity_store.get(entity):
-            entity_summaries[entity] = ENTITY_MEMORY.entity_store.get(entity, "")
-    return entity_summaries
-def save_entities_to_long_cach():
-    for entity in ENTITY_MEMORY.entity_cache:
-        if entity not in entity_memory_long_cache:
-            entity_memory_long_cache.append(entity)
-def key_words(query):
-    prompt_template = """Act as a an SEO expert. 
-    Your task is to extract key words from the given text. Output a capitalised array.
-    
-    # EXAMPLE
-    ## Text
-    What is a unique AI prompting strategy? How can it be applied to video streaming analytics?
-    ## Output
-    ["AI Prompting", "AI Prompting Strategy", "Video Streaming", Video Streaming Analytics"]
-    END OF EXAMPLE
-
-    # EXAMPLE
-    ## Text
-    How can chain of thought prompting be used to increase video ad revenue?
-    ## Output
-    ["Chain of Thought", "Chain of Thought Prompting", "Video Ads", "Video Ad Revenue", "Ad Revenue"]
-    END OF EXAMPLE
-
-    ## Text
-    {query}
-    ## Output
-    """
-    prompt = PromptTemplate(template=prompt_template, input_variables=["query"])
-
-    key_words_chain = LLMChain(
-        prompt=prompt,
-        llm=LLM_FACT
-    )
-    return(key_words_chain.run(query=query)) 
-
-
-def warm_cache(query):
-    entities = json.loads(key_words(query))
-    ENTITY_MEMORY.entity_cache = entities
-    save_entities_to_long_cach()
-    return get_entities(entities)
-def get_entity_def(term:str)->str:
-    """Look up definition of a term in entity database.
-    
-    Args:
-        term: The entity key to query from the database.
-    """
-    return ENTITY_MEMORY.entity_store.get(term, "Not in Database")
-
 tools = [
     StructuredTool.from_function(
         func=answer_from_resource,
@@ -314,15 +232,4 @@ class NewLearningsTool(BaseTool):
 open_tools = [
     NewLearningsTool()
 ]
-
-# %%
-# _input = {"input": "what is a unique AI prompting technique? How can it be applied to video streaming analytics?"}
-# ENTITY_MEMORY.load_memory_variables(_input)
-# ENTITY_MEMORY.save_context(
-#     _input,
-#     {"output": ""}
-# )
-# %%
-print(get_all_namespaces())
-
 # %%

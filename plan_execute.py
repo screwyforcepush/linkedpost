@@ -1,39 +1,8 @@
-from queryDB import tools, open_tools,open_funk, set_seed_query, set_entity_memory_long_cache, get_seed_query, warm_cache
+from common_util.memory import set_entity_memory_long_cache, warm_cache
+from queryDB import tools, set_seed_query, get_seed_query
 from langchain.experimental.plan_and_execute import PlanAndExecute, load_agent_executor, load_chat_planner
-from langchain.agents import AgentType, initialize_agent
-from langchain.llms import OpenAI
-from langchain.chat_models import ChatOpenAI
-from langchain.chains.openai_functions import create_openai_fn_chain
-from langchain.prompts import ChatPromptTemplate, HumanMessagePromptTemplate
-from langchain.schema import HumanMessage, SystemMessage
-from namespaceEnum import get_all_namespaces
 import langchain
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-OPENAI_API_KEY=os.getenv("OPENAI_API_KEY")
-
-openai = OpenAI(
-    model_name="text-davinci-003",
-    openai_api_key=OPENAI_API_KEY
-)
-
-LLM_FACT = ChatOpenAI(
-    model_name='gpt-3.5-turbo',
-    temperature=0.0
-)
-
-LLM_PLAN = ChatOpenAI(
-    model_name='gpt-4',
-    temperature=0.1
-)
-LLM_FUNCTION = ChatOpenAI(
-    model_name='gpt-4-0613',
-    temperature=0.1
-)
-
-LLM_CHAT = ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0.2)
+from common_util.llms import LLM_CHAT, LLM_FACT, LLM_PLAN
 
 # %%
 

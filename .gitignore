@@ -4,3 +4,5 @@
 .aider.input.history
 /.aider.ident.cache.v1
 /.aider.tags.cache.v1
+/__pycache__
+/common_util/__pycache__
