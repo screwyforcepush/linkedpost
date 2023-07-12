@@ -5,7 +5,7 @@ from langchain.document_transformers import EmbeddingsRedundantFilter,Embeddings
 from langchain.retrievers.document_compressors import DocumentCompressorPipeline
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain.retrievers.merger_retriever import MergerRetriever
-from custom.multi_query import MultiQueryRetriever, DEFAULT_QUERY_PROMPT
+from common_util.multi_query import MultiQueryRetriever, DEFAULT_QUERY_PROMPT
 from common_util.llms import LLM_FACT, EMBEDDINGS
 import tiktoken
 from dotenv import load_dotenv
