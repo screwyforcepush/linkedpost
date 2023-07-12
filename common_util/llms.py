@@ -10,13 +10,18 @@ LLM_FACT = ChatOpenAI(
 LLM_CHAT = ChatOpenAI(
     model_name="gpt-3.5-turbo", 
     temperature=0.2
-    )
+)
 
 EMBEDDINGS = OpenAIEmbeddings()
 
 LLM_PLAN = ChatOpenAI(
     model_name='gpt-4',
     temperature=0.1
+)
+
+LLM_FACT_4 = ChatOpenAI(
+    model_name='gpt-4',
+    temperature=0.0
 )
 
 LLM_FUNCTION = ChatOpenAI(

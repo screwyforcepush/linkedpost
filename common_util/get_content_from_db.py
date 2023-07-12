@@ -8,6 +8,7 @@ from langchain.retrievers.merger_retriever import MergerRetriever
 from common_util.multi_query import MultiQueryRetriever, DEFAULT_QUERY_PROMPT
 from common_util.llms import LLM_FACT, EMBEDDINGS
 import tiktoken
+import json
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -36,10 +37,11 @@ pipeline = DocumentCompressorPipeline(transformers=[filter_ordered_cluster])
 tokenizer = tiktoken.get_encoding("cl100k_base")
 # create the length function
 def tiktoken_len(text:str):
+    global tokenizer
     tokens = tokenizer.encode(text, disallowed_special=())
     return len(tokens)
 
-max_doc_content_tokens=2000
+max_doc_content_tokens=3000
 def get_docs_content(docs,tokens):
     joined_content = ""
     temp_joined = ""
@@ -142,10 +144,29 @@ cost = {}
 for key, value in TEST.items():
     cost[key]= tiktoken_len(key + ' ' + value)
 print(cost)
+print("test",tiktoken_len(json.dumps(cost)))
+prompt_template = """Act as a an SEO expert. 
+    Your task is to extract key words from the given text. Output a capitalised array.
+    
+    # EXAMPLE
+    ## Text
+    What is a unique AI prompting strategy? How can it be applied to video streaming analytics?
+    ## Output
+    ["AI Prompting", "AI Prompting Strategy", "Video Streaming", Video Streaming Analytics"]
+    END OF EXAMPLE
 
+    # EXAMPLE
+    ## Text
+    How can chain of thought prompting be used to increase video ad revenue?
+    ## Output
+    ["Chain of Thought", "Chain of Thought Prompting", "Video Ads", "Video Ad Revenue", "Ad Revenue"]
+    END OF EXAMPLE
 
+    ## Text
+    {query}
+    ## Output
+    """
 # %%
-
-DEFAULT_QUERY_PROMPT.template
+tiktoken_len(prompt_template)
 
 # %%

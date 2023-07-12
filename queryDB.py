@@ -88,9 +88,9 @@ def summarise(content,question):
     Concisely summarise the key points from the abstract provided.
     Include specifics about how it works and how application can be executed.
     You have access to some additional relevant information provided in the Context section below.
-    Draw upon your existing working knowledge of the subject to enrich your response.
+    Include in your summary any points of interest connected to the given Context.
     
-    # Working knowledge
+    # Context
     {entities}
 
     # Abstract 
