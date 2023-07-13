@@ -772,5 +772,47 @@
         ],
         "source": "http://arxiv.org/abs/2306.17563v1",
         "date": 20230630
+    },
+    {
+        "source": "https://towardsdatascience.com/introduction-to-recommender-systems-1-971bd274f421"
+    },
+    {
+        "source": "https://ottverse.com/important-engagement-metrics-for-ott-platforms/"
+    },
+    {
+        "source": "https://developer.bitmovin.com/playback/docs/analytics-dashboard-metrics-reference"
+    },
+    {
+        "source": "https://bitmovin.com/implementing-video-player-per-title-encoding-aws-p3/"
+    },
+    {
+        "source": "https://bitmovin.com/video-error-cost-mitigation-granular-data/"
+    },
+    {
+        "source": "https://bitmovin.com/top-down-error-reporting/"
+    },
+    {
+        "source": "https://www.muvi.com/blogs/metrics-and-kpis-for-increasing-user-engagement-for-ott-apps"
+    },
+    {
+        "source": "https://www.bsgroup.eu/blog/ott-analytics-an-overview-of-the-key-metrics-and-practices/"
+    },
+    {
+        "source": "https://www.conviva.com/ott-101-your-guide-to-streaming-metrics-that-matter/"
+    },
+    {
+        "source": "measuring-video-quality-and-performance-best-practices.pdf"
+    },
+    {
+        "source": "Measuring_the_Quality_of_Experience_of_HTTP_Video_.pdf"
+    },
+    {
+        "source": "https://developer.bitmovin.com/playback/docs/segmenting-your-audience"
+    },
+    {
+        "source": "https://www.kilowott.com/blog/ott-metrics/"
+    },
+    {
+        "source": "https://experienceleague.adobe.com/docs/media-analytics/using/implementation/variables/calculated-metrics.html"
     }
 ]

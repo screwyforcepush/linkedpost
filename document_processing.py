@@ -1,6 +1,6 @@
 filename = './json/metadata.json'
 
-from embeddingsFromResource import (
+from common_util.embeddingsFromResource import (
     get_docs_from_resource,
     is_content_related_to_topic_from_resource,
     process_document_metadata_from_resource,
@@ -13,11 +13,11 @@ from embeddingsFromResource import (
     published_to_int,
     get_chunks_from_loader_data_from_resource
 )
-from loadGitResource import load_git_resource
+from common_util.loadGitResource import load_git_resource
 from langchain.document_loaders import DiffbotLoader
 import os
 from dotenv import load_dotenv
-from namespaceEnum import PineconeNamespaceEnum
+from common_util.namespaceEnum import PineconeNamespaceEnum
 from langchain.document_loaders import UnstructuredPDFLoader
 
 load_dotenv()
@@ -116,7 +116,7 @@ def process_local_pdfs():
 # %%
 process_arxv()
 process_git()
-process_scrape_urls()
+process_scrape_urls(PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value)
 process_local_pdfs()
 
 

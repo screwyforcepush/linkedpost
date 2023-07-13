@@ -4,10 +4,10 @@ from langchain.tools import BaseTool, StructuredTool
 from pydantic import BaseModel
 from dotenv import load_dotenv
 from typing import Optional, Type
-from common_util.memory import load_memory_vars, get_entities, save_entities_to_long_cach
-from common_util.llms import LLM_CHAT, LLM_FACT
+from common_util.memory import load_memory_vars, split_json, get_entities, save_entities_to_long_cach
+from common_util.llms import LLM_CHAT, LLM_FACT, LLM_FACT_4, LLM_CHAT_4
 from common_util.get_content_from_db import get_content_from_db
-from common_util.memory import get_entity_def
+from common_util.memory import get_entity_def, tiktoken_len
 from common_util.namespaceEnum import PineconeNamespaceEnum, get_all_namespaces,get_all_namespace_values, NamespaceArg
 from langchain import PromptTemplate
 from langchain.tools import BaseTool
@@ -32,12 +32,6 @@ def set_seed_query(query):
 def get_seed_query():
     global SEED_QUERY
     return SEED_QUERY
-    
-tokenizer = tiktoken.get_encoding("cl100k_base")
-# create the length function
-def tiktoken_len(text):
-    tokens = tokenizer.encode(text, disallowed_special=())
-    return len(tokens)
 
 # %%
 
@@ -55,13 +49,21 @@ def answer_from_resource(query: str, namespace: NamespaceArg) -> str:
         namespace: A NamespaceArg object that is the research domain.
     """
     content = json.dumps(get_reserach_from_file(RESEARCH_FILENAME,SEED_QUERY)['summaries'])
-    print("content length", tiktoken_len(content))
-    # Template to use for the system message prompt
+    print("Start content length", tiktoken_len(content))
+    if tiktoken_len(content)>4000:
+        if tiktoken_len(content)<6000:
+            content = summarise(content,query,{})
+        else:
+            cont1,cont2 = split_json(content)
+            content= {**cont1, **cont2}
+        print("End content length", tiktoken_len(content))
+
+    # TODO refine this prompt
     template = """
         Act as an expert in {topic}. You answer questions and provide insight into the content.
 
         # constraints
-        Only use the factual information from the content to form a response.
+        Only use the factual information from the Content to form a response.
         If you feel like you don't have enough information to respond truthfully, say "I don't know".
         Your responses should be verbose and detailed.
         Draw upon your working knowledge to enrich your response
@@ -69,7 +71,7 @@ def answer_from_resource(query: str, namespace: NamespaceArg) -> str:
         # Working knowledge
         {entities}
 
-        # content
+        # Content
         {content}
 
         # question
@@ -77,32 +79,38 @@ def answer_from_resource(query: str, namespace: NamespaceArg) -> str:
         """
     prompt = PromptTemplate(template=template, input_variables=["content", "question", "entities", "topic"])
 
-    chain = LLMChain(llm=LLM_CHAT, prompt=prompt)
-    response = chain.run(content=content, question=query, topic=namespace, entities=get_entities(use_long_cache=True))
+    chain = LLMChain(llm=LLM_CHAT_4, prompt=prompt)
+
+    entities=get_entities(use_long_cache=True,query=query)
+    response = chain.run(content=content, question=query, topic=namespace, entities=entities)
     response = response.replace("\n", "")
     return response
 
-def summarise(content,question):
-    prompt_template = """Act as a research assistant. 
-    Your task is to share your subject matter expertiese on the topic "{question}".
-    Concisely summarise the key points from the abstract provided.
-    Include specifics about how it works and how application can be executed.
-    You have access to some additional relevant information provided in the Context section below.
+def summarise(content,question,entities):
+    prompt_template = """[System][Temperature=0][Persona]You are the Research Condenser. 
+    You love deeply understand the inner workings behind Research, then distill the applicable essence. You maximally compress the meaningful takeaways, while staying unambiguous to the model in a bare context.
+    [TASK]
+    Your task is to share your subject matter expertise on the topic "{question}".
+    Concisely summarise the key points from the Research provided.
+    Include specifics about how and why the concept, method, technique works.
+    Include an application execution example if applicable.
+    You have access to some additional relevant entity Context.
     Include in your summary any points of interest connected to the given Context.
-    
+    [/TASK]
+
     # Context
     {entities}
 
-    # Abstract 
+    # Research 
     {content}
     """
     prompt = PromptTemplate(template=prompt_template, input_variables=["content", "question", "entities"])
 
     summary_chain = LLMChain(
         prompt=prompt,
-        llm=LLM_FACT
+        llm=LLM_FACT_4
     )
-    return(summary_chain.run(content=content,question=question, entities=get_entities())) 
+    return(summary_chain.run(content=content,question=question, entities=entities)) 
 
 
 
@@ -181,8 +189,11 @@ def update_research_memory(query:str, namespace:NamespaceArg)->str:
         query: The question to be answered by research assistant.
         namespace: A NamespaceArg object that is the research domain.
     """
-    docs=get_content_from_db(namespace, query, entities=get_entities(use_long_cache=True))
-    sumer = summarise(docs, query)
+    #entities are used for multiquery, tokens used for output doc length
+    docs=get_content_from_db(namespace, query, 
+                             entities=get_entities(use_long_cache=True,entity_tokens=3000,query=query),
+                             tokens=5000)
+    sumer = summarise(docs, query, entities=get_entities(use_long_cache=True,entity_tokens=1000,query=query))
     add_research_to_file(sumer,docs, RESEARCH_FILENAME,SEED_QUERY)
     load_memory_vars(sumer)
     save_entities_to_long_cach()
