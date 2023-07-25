@@ -44,4 +44,7 @@ def add_new_week_papers():
 
     # Use re.findall to get all matches in the text
     arxiv_ids = re.findall(pattern, data[0].page_content)
-    arxiv_ids
+
+    # Add each arxiv_id to the titles file
+    for arxiv_id in arxiv_ids:
+        add_string_to_filearray(arxiv_id, TITLES_FILENAME)
