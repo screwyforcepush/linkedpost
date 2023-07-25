@@ -814,5 +814,204 @@
     },
     {
         "source": "https://experienceleague.adobe.com/docs/media-analytics/using/implementation/variables/calculated-metrics.html"
+    },
+    {
+        "source": "https://netflixtechblog.com/artwork-personalization-c589f074ad76"
+    },
+    {
+        "source": "https://netflixtechblog.com/interleaving-in-online-experiments-at-netflix-a04ee392ec55"
+    },
+    {
+        "source": "https://netflixtechblog.com/using-machine-learning-to-improve-streaming-quality-at-netflix-9651263ef09f"
+    },
+    {
+        "source": "https://netflixtechblog.com/studio-production-data-science-646ee2cc21a1"
+    },
+    {
+        "source": "https://netflixtechblog.com/streaming-video-experimentation-at-netflix-visualizing-practical-and-statistical-significance-7117420f4e9a"
+    },
+    {
+        "source": "https://netflixtechblog.com/quasi-experimentation-at-netflix-566b57d2e362"
+    },
+    {
+        "source": "https://netflixtechblog.com/netflix-mediadatabase-media-timeline-data-model-4e657e6ffe93"
+    },
+    {
+        "source": "https://netflixtechblog.com/scaling-time-series-data-storage-part-ii-d67939655586"
+    },
+    {
+        "source": "https://netflixtechblog.com/improving-experimentation-efficiency-at-netflix-with-meta-analysis-and-optimal-stopping-d8ec290ae5be"
+    },
+    {
+        "source": "https://netflixtechblog.com/design-principles-for-mathematical-engineering-in-experimentation-platform-15b3ea143b1f"
+    },
+    {
+        "source": "https://netflixtechblog.com/building-and-scaling-data-lineage-at-netflix-to-improve-data-infrastructure-reliability-and-1a52526a7977"
+    },
+    {
+        "source": "https://netflixtechblog.com/lerner-using-rl-agents-for-test-case-scheduling-3e0686211198"
+    },
+    {
+        "source": "https://netflixtechblog.com/delta-a-data-synchronization-and-enrichment-platform-e82c36a79aee"
+    },
+    {
+        "source": "https://netflixtechblog.com/reimagining-experimentation-analysis-at-netflix-71356393af21"
+    },
+    {
+        "source": "https://netflixtechblog.com/how-netflix-microservices-tackle-dataset-pub-sub-4a068adcc9a"
+    },
+    {
+        "source": "https://netflixtechblog.com/ml-platform-meetup-infra-for-contextual-bandits-and-reinforcement-learning-4a90305948ef"
+    },
+    {
+        "source": "https://netflixtechblog.com/open-sourcing-mantis-a-platform-for-building-cost-effective-realtime-operations-focused-5b8ff387813a"
+    },
+    {
+        "source": "https://netflixtechblog.com/open-sourcing-metaflow-a-human-centric-framework-for-data-science-fa72e04a5d9"
+    },
+    {
+        "source": "https://netflixtechblog.com/data-compression-for-large-scale-streaming-experimentation-c20bfab8b9ce"
+    },
+    {
+        "source": "https://netflixtechblog.com/open-sourcing-riskquant-a-library-for-quantifying-risk-6720cc1e4968"
+    },
+    {
+        "source": "https://netflixtechblog.com/ready-for-changes-with-hexagonal-architecture-b315ec967749"
+    },
+    {
+        "source": "https://netflixtechblog.com/computational-causal-inference-at-netflix-293591691c62"
+    },
+    {
+        "source": "https://netflixtechblog.com/unbundling-data-science-workflows-with-metaflow-and-aws-step-functions-d454780c6280"
+    },
+    {
+        "source": "https://netflixtechblog.com/key-challenges-with-quasi-experiments-at-netflix-89b4f234b852"
+    },
+    {
+        "source": "https://netflixtechblog.com/analytics-at-netflix-who-we-are-and-what-we-do-7d9c08fe6965"
+    },
+    {
+        "source": "https://netflixtechblog.com/a-day-in-the-life-of-a-content-analytics-engineer-eb0250b993be"
+    },
+    {
+        "source": "https://netflixtechblog.com/a-day-in-the-life-of-an-experimentation-and-causal-inference-scientist-netflix-388edfb77d21"
+    },
+    {
+        "source": "https://netflixtechblog.com/supporting-content-decision-makers-with-machine-learning-995b7b76006f"
+    },
+    {
+        "source": "https://netflixtechblog.com/toward-a-better-quality-metric-for-the-video-community-7ed94e752a30"
+    },
+    {
+        "source": "https://netflixtechblog.com/mythbusting-the-analytics-journey-58d692ea707e"
+    },
+    {
+        "source": "https://netflixtechblog.com/optimizing-data-warehouse-storage-7b94a48fdcbe"
+    },
+    {
+        "source": "https://netflixtechblog.com/growth-engineering-at-netflix-automated-imagery-generation-5a105fd51569"
+    },
+    {
+        "source": "https://netflixtechblog.com/growth-engineering-at-netflix-creating-a-scalable-offers-platform-69330136dd87"
+    },
+    {
+        "source": "https://netflixtechblog.com/exploring-data-netflix-9d87e20072e3"
+    },
+    {
+        "source": "https://netflixtechblog.com/data-movement-in-netflix-studio-via-data-mesh-3fddcceb1059"
+    },
+    {
+        "source": "https://netflixtechblog.com/decision-making-at-netflix-33065fa06481"
+    },
+    {
+        "source": "https://netflixtechblog.com/what-is-an-a-b-test-b08cc1b57962"
+    },
+    {
+        "source": "https://netflixtechblog.com/interpreting-a-b-test-results-false-positives-and-statistical-significance-c1522d0db27a"
+    },
+    {
+        "source": "https://netflixtechblog.com/interpreting-a-b-test-results-false-negatives-and-power-6943995cf3a8"
+    },
+    {
+        "source": "https://netflixtechblog.com/data-pipeline-asset-management-with-dataflow-86525b3e21ca"
+    },
+    {
+        "source": "https://netflixtechblog.com/building-confidence-in-a-decision-8705834e6fd8"
+    },
+    {
+        "source": "https://netflixtechblog.com/auto-diagnosis-and-remediation-in-netflix-data-platform-5bcc52d853d1"
+    },
+    {
+        "source": "https://netflixtechblog.com/experimentation-is-a-major-focus-of-data-science-across-netflix-f67923f8e985"
+    },
+    {
+        "source": "https://netflixtechblog.com/fixing-performance-regressions-before-they-happen-eab2602b86fe"
+    },
+    {
+        "source": "https://netflixtechblog.com/how-netflix-content-engineering-makes-a-federated-graph-searchable-5c0c1c7d7eaf"
+    },
+    {
+        "source": "https://netflixtechblog.com/evolution-of-ml-fact-store-5941d3231762"
+    },
+    {
+        "source": "https://netflixtechblog.com/a-survey-of-causal-inference-applications-at-netflix-b62d25175e6f"
+    },
+    {
+        "source": "https://netflixtechblog.com/how-netflix-content-engineering-makes-a-federated-graph-searchable-part-2-49348511c06c"
+    },
+    {
+        "source": "https://netflixtechblog.com/data-mesh-a-data-movement-and-processing-platform-netflix-1288bcab2873"
+    },
+    {
+        "source": "https://netflixtechblog.com/reinforcement-learning-for-budget-constrained-recommendations-6cbc5263a32a"
+    },
+    {
+        "source": "https://netflixtechblog.com/how-product-teams-can-build-empathy-through-experimentation-6253603880a6"
+    },
+    {
+        "source": "https://netflixtechblog.com/orchestrating-data-ml-workflows-at-scale-with-netflix-maestro-aaa2b41b800c"
+    },
+    {
+        "source": "https://netflixtechblog.com/for-your-eyes-only-improving-netflix-video-quality-with-neural-networks-5b8d032da09c"
+    },
+    {
+        "source": "https://netflixtechblog.com/discovering-creative-insights-in-promotional-artwork-295e4d788db5"
+    },
+    {
+        "source": "https://netflixtechblog.com/scaling-media-machine-learning-at-netflix-f19b400243"
+    },
+    {
+        "source": "https://netflixtechblog.com/data-ingestion-pipeline-with-operation-management-3c5c638740a8"
+    },
+    {
+        "source": "https://netflixtechblog.com/building-a-media-understanding-platform-for-ml-innovations-9bef9962dcb7"
+    },
+    {
+        "source": "OpenELM_Paper.pdf"
+    },
+    {
+        "source": "Symphony of Thought v3.pdf"
+    },
+    {
+        "Published": "2023-05-26",
+        "Title": "Large Language Models as Tool Makers",
+        "Authors": "Tianle Cai, Xuezhi Wang, Tengyu Ma, Xinyun Chen, Denny Zhou",
+        "published_first_time": "2023-05-26",
+        "comment": "Code available at https://github.com/ctlllll/LLM-ToolMaker",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL",
+            "stat.ML"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2305.17126v1",
+            "http://arxiv.org/pdf/2305.17126v1"
+        ],
+        "source": "http://arxiv.org/abs/2305.17126v1",
+        "date": 20230526
     }
 ]

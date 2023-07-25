@@ -12,7 +12,7 @@ LLM_CHAT = ChatOpenAI(
     temperature=0.2
 )
 
-EMBEDDINGS = OpenAIEmbeddings()
+EMBEDDINGS = OpenAIEmbeddings(disallowed_special=())
 
 LLM_PLAN = ChatOpenAI(
     model_name='gpt-4',

@@ -6,7 +6,7 @@ from common_util.llms import LLM_CHAT, LLM_FACT, LLM_PLAN
 
 # %%
 
-set_seed_query("How does Chain of thought prompting work? How can it be applied to video streaming analytics?")
+set_seed_query("How does Chain of thought prompting work? How can it be applied to specific video streaming analytics?")
 set_entity_memory_long_cache([])
 entities = warm_cache(get_seed_query())
 

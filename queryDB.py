@@ -129,21 +129,6 @@ def check_if_exists(title, filename):
     # Check if the title is in the file
     return title in data
 
-def add_string_to_filearray(str, filename):
-    arr = []
-
-    # If file exists, load existing data
-    if os.path.exists(filename):
-        with open(filename, 'r') as f:
-            arr = json.load(f)
-
-    # Add the new title
-    arr.append(str)
-
-    # Write the data back to the file
-    with open(filename, 'w') as f:
-        json.dump(arr, f, indent=4)
-
 def add_research_to_file(summary, raw, filename, seed_query):
     data = []
 

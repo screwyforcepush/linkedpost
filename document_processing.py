@@ -1,5 +1,6 @@
 filename = './json/metadata.json'
 
+import re
 from common_util.embeddingsFromResource import (
     get_docs_from_resource,
     is_content_related_to_topic_from_resource,
@@ -19,6 +20,7 @@ import os
 from dotenv import load_dotenv
 from common_util.namespaceEnum import PineconeNamespaceEnum
 from langchain.document_loaders import UnstructuredPDFLoader
+import time
 
 load_dotenv()
 DIFFBOT_API_KEY = os.getenv("DIFFBOT_API_KEY")
@@ -70,7 +72,20 @@ def process_git():
         remove_doc_query_from_resource(git_queries_filename, query)
     print("process_git complete")
 
-# %%
+# %%\
+
+def get_data_loader(loader:DiffbotLoader):
+    MAX_RETRIES = 20
+    for i in range(MAX_RETRIES):
+        data = loader.load()
+        if i < MAX_RETRIES - 1 and len(data)==0:  # i is zero indexed
+                print("URL scape failed... retrying")
+                time.sleep(1)  # wait a bit before trying again
+                continue
+        else:
+            return data
+            break
+
 def process_scrape_urls(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value):
     url_queries_filename = './json/scrape_urls.json'
     
@@ -82,21 +97,24 @@ def process_scrape_urls(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYT
         if check_if_exists_from_resource(metadata, filename):
             print("URL docs exist ", query)
         else:
-            keep_queries.append(query)
-    loader = DiffbotLoader(urls=keep_queries, api_token=DIFFBOT_API_KEY)
-    data = loader.load()
-    chunks = get_chunks_from_loader_data_from_resource(data)
-    upsert_chunks_from_resource(chunks, namespace)
-    for query in keep_queries:
-        metadata={}
-        metadata['source']=query
-        add_metadata_from_resource(metadata, filename)
-        remove_doc_query_from_resource(url_queries_filename, query)
-    print("process_scrape_urls complete")
+            loader = DiffbotLoader(urls=[query], api_token=DIFFBOT_API_KEY)
+            data = get_data_loader(loader)
+            if len(data)>0:
+                chunks = get_chunks_from_loader_data_from_resource(data)
+                upsert_chunks_from_resource(chunks, namespace)
+                keep_queries.append(query)
+                metadata={}
+                metadata['source']=query
+                add_metadata_from_resource(metadata, filename)
+                remove_doc_query_from_resource(url_queries_filename, query)
+                print("URL processed", query)
+            else:
+                print("URL scrape failed",query)
+        
+    print("process_scrape_urls complete", len(keep_queries), "failed or exists", len(url_queries)-len(keep_queries))
 
-def process_local_pdfs():
+def process_local_pdfs(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value):
     pdfs_folder_path = './pdfs/'
-    namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value
     processed_pdfs_folder_path = './pdfs_processed/'
     for file in os.listdir(pdfs_folder_path):
         if file.endswith(".pdf"):
@@ -117,7 +135,7 @@ def process_local_pdfs():
 process_arxv()
 process_git()
 process_scrape_urls(PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value)
-process_local_pdfs()
+process_local_pdfs(namespace = PineconeNamespaceEnum.AI_ENGINEERING_DOCUMENTATION.value)
 
 
 # %%

@@ -9,7 +9,7 @@ class PineconeNamespaceEnum(str, Enum):
 class PineconeNamespaceDescription(Enum):
     AI_RESEARCH = 'catalog of ai academic research papers'
     VIDEO_STREAMING_ANALYTICS = 'best practices, metrics, and analytics within the video streaming domain'
-    AI_ENGINEERING_DOCUMENTATION = 'code documentation and readme files for ai engineering libraries'
+    AI_ENGINEERING_DOCUMENTATION = 'code documentation and architecture design for ai engineering libraries'
 
 def get_all_namespaces():
     return {PineconeNamespaceEnum[member].value: PineconeNamespaceDescription[member].value for member in PineconeNamespaceEnum.__members__}
