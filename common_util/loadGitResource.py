@@ -49,7 +49,11 @@ def add_new_week_papers():
     with open(TITLES_FILENAME, 'r') as f:
         existing_titles = json.load(f)
 
-    # Add each arxiv_id to the titles file if it's not already there
+    # Load excluded titles
+    with open(EXCLUDE_TITLES_FILENAME, 'r') as f:
+        excluded_titles = json.load(f)
+
+    # Add each arxiv_id to the titles file if it's not already there and not in the excluded titles
     for arxiv_id in arxiv_ids:
-        if arxiv_id not in existing_titles:
+        if arxiv_id not in existing_titles and arxiv_id not in excluded_titles:
             add_string_to_filearray(arxiv_id, TITLES_FILENAME)
