@@ -45,6 +45,11 @@ def add_new_week_papers():
     # Use re.findall to get all matches in the text
     arxiv_ids = re.findall(pattern, data[0].page_content)
 
-    # Add each arxiv_id to the titles file
+    # Load existing titles
+    with open(TITLES_FILENAME, 'r') as f:
+        existing_titles = json.load(f)
+
+    # Add each arxiv_id to the titles file if it's not already there
     for arxiv_id in arxiv_ids:
-        add_string_to_filearray(arxiv_id, TITLES_FILENAME)
+        if arxiv_id not in existing_titles:
+            add_string_to_filearray(arxiv_id, TITLES_FILENAME)
