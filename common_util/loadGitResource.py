@@ -52,8 +52,11 @@ def add_new_week_papers():
     # Load excluded titles
     with open(EXCLUDE_TITLES_FILENAME, 'r') as f:
         excluded_titles = json.load(f)
-
+    count = 0
     # Add each arxiv_id to the titles file if it's not already there and not in the excluded titles
     for arxiv_id in arxiv_ids:
         if arxiv_id not in existing_titles and arxiv_id not in excluded_titles:
             add_string_to_filearray(arxiv_id, TITLES_FILENAME)
+            add_string_to_filearray(arxiv_id, EXCLUDE_TITLES_FILENAME)
+            count = count + 1
+    print(count, "new ml papers added")

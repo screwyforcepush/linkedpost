@@ -14,7 +14,7 @@ from common_util.embeddingsFromResource import (
     published_to_int,
     get_chunks_from_loader_data_from_resource
 )
-from common_util.loadGitResource import load_git_resource
+from common_util.loadGitResource import load_git_resource, add_new_week_papers
 from langchain.document_loaders import DiffbotLoader
 import os
 from dotenv import load_dotenv
@@ -49,6 +49,7 @@ def process_arxv():
             if not not pdfLink:
                 chunks = get_chunks_from_pdf_url_from_resource(pdfLink, docMetadata)
                 upsert_chunks_from_resource(chunks, namespace)
+                doc.metadata['namespace']=namespace
                 add_metadata_from_resource(doc.metadata, filename)
         remove_doc_query_from_resource(doc_queries_filename, query)
     print("process_arxv complete")
@@ -61,6 +62,7 @@ def process_git():
     for query in git_queries:
         metadata={}
         metadata['source']=query
+        metadata['namespace']=namespace
         if check_if_exists_from_resource(metadata, filename):
             print("git docs exist ", query)
         else:
@@ -94,6 +96,7 @@ def process_scrape_urls(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYT
     for query in url_queries:
         metadata={}
         metadata['source']=query
+        metadata['namespace']=namespace
         if check_if_exists_from_resource(metadata, filename):
             print("URL docs exist ", query)
         else:
@@ -120,6 +123,7 @@ def process_local_pdfs(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTI
         if file.endswith(".pdf"):
             metadata={}
             metadata['source']=file
+            metadata['namespace']=namespace
             if check_if_exists_from_resource(metadata, filename):
                 print("PDF docs exist ", file)
             else:
@@ -132,9 +136,11 @@ def process_local_pdfs(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTI
     print("process_local_pdfs complete")
 
 # %%
+add_new_week_papers()
 process_arxv()
+
 process_git()
-process_scrape_urls(PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value)
+process_scrape_urls(PineconeNamespaceEnum.AI_ENGINEERING_DOCUMENTATION.value)
 process_local_pdfs(namespace = PineconeNamespaceEnum.AI_ENGINEERING_DOCUMENTATION.value)
 
 
