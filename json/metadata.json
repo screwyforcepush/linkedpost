@@ -6394,5 +6394,13 @@
     {
         "source": "Build a Transparent QA Bot with LangChain and GPT-3 Towards Data Science.pdf",
         "namespace": "ai-engineering-documentation"
+    },
+    {
+        "source": "backup of Moat vs Datazoom video ad measurement.pdf",
+        "namespace": "video-streaming-analytics"
+    },
+    {
+        "source": "Introduction to Embedding-Based Recommender Systems by Dr. Robert Ku\u0308bler Towards Data Science.pdf",
+        "namespace": "ai-engineering-documentation"
     }
 ]
