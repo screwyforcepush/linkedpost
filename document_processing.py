@@ -1,6 +1,8 @@
 filename = './json/metadata.json'
 
 import re
+import sys                                                                                                                                                                
+sys.path.insert(0, './common_util/')           
 from common_util.embeddingsFromResource import (
     get_docs_from_resource,
     is_content_related_to_topic_from_resource,
@@ -21,6 +23,7 @@ from dotenv import load_dotenv
 from common_util.namespaceEnum import PineconeNamespaceEnum
 from langchain.document_loaders import UnstructuredPDFLoader
 import time
+
 
 load_dotenv()
 DIFFBOT_API_KEY = os.getenv("DIFFBOT_API_KEY")
