@@ -10,6 +10,7 @@ from common_util.llms import LLM_FACT, EMBEDDINGS
 import tiktoken
 import json
 from dotenv import load_dotenv
+from datetime import datetime, timedelta
 
 load_dotenv()
 tokens_gpt_4 = 8192
@@ -76,9 +77,10 @@ def get_content_from_db(namespace, db_query, entities={}, tokens=max_doc_content
 
 # %%
 def get_latest_week_ai_research_abstracts():
+    seven_days_ago = (datetime.now() - timedelta(days=7)).strftime('%Y%m%d')
     db = Pinecone.from_existing_index(index_name, EMBEDDINGS, namespace='ai-research')
     retriever_all = db.as_retriever(
-        search_type="similarity", search_kwargs={"k": 10, "filter": { "date": { '$gt': 20230607 } }}
+        search_type="similarity", search_kwargs={"k": 10, "filter": { "date": { '$gt': int(seven_days_ago) } }}
     )
     docs = retriever_all.get_relevant_documents("\nAbstract \n1 Introduction")
     return get_docs_content(docs)
