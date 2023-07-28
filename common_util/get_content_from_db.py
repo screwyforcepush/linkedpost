@@ -77,13 +77,15 @@ def get_content_from_db(namespace, db_query, entities={}, tokens=max_doc_content
 
 # %%
 def get_latest_week_ai_research_abstracts():
-    seven_days_ago = (datetime.now() - timedelta(days=7)).strftime('%Y%m%d')
+    two_weeks_ago = (datetime.now() - timedelta(days=14)).strftime('%Y%m%d')
     db = Pinecone.from_existing_index(index_name, EMBEDDINGS, namespace='ai-research')
     retriever_all = db.as_retriever(
-        search_type="similarity", search_kwargs={"k": 10, "filter": { "date": { '$gt': int(seven_days_ago) } }}
+        search_type="similarity", search_kwargs={"k": 20, "filter": { "date": { '$gt': int(two_weeks_ago) } }}
     )
-    docs = retriever_all.get_relevant_documents("\nAbstract \n1 Introduction")
-    return get_docs_content(docs)
+    docs = retriever_all.get_relevant_documents("in conclusion the main findings are summarised")
+    return docs
 # %%
-
+docs=get_latest_week_ai_research_abstracts()
+# %%
+docs
 # %%
