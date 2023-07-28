@@ -47,12 +47,15 @@ def get_docs_content(docs,tokens=max_doc_content_tokens):
     joined_content = ""
     temp_joined = ""
     docs_page_content = []
+    unique_docs = {}
     for d in docs:
-        docs_page_content.append(d.page_content)
-        temp_joined = "\n".join(docs_page_content)
-        if tiktoken_len(temp_joined)>tokens:
-            break
-        joined_content = "\n".join(docs_page_content)
+        if d.page_content not in unique_docs:
+            unique_docs[d.page_content] = True
+            docs_page_content.append(d.page_content)
+            temp_joined = "\n".join(docs_page_content)
+            if tiktoken_len(temp_joined)>tokens:
+                break
+            joined_content = "\n".join(docs_page_content)
     print("max tokens reached ->",tiktoken_len(joined_content),tiktoken_len(temp_joined))
     return joined_content
 
