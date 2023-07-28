@@ -1,8 +1,6 @@
 filename = './json/metadata.json'
 
 import re
-import sys                                                                                                                                                                
-sys.path.insert(0, './common_util/')           
 from common_util.embeddingsFromResource import (
     get_docs_from_resource,
     is_content_related_to_topic_from_resource,
@@ -145,8 +143,5 @@ process_arxv()
 process_git()
 process_scrape_urls(PineconeNamespaceEnum.AI_ENGINEERING_DOCUMENTATION.value)
 process_local_pdfs(namespace = PineconeNamespaceEnum.AI_ENGINEERING_DOCUMENTATION.value)
-
-
-# %%
 
 # %%

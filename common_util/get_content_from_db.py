@@ -42,7 +42,7 @@ def tiktoken_len(text:str):
     return len(tokens)
 
 max_doc_content_tokens=3000
-def get_docs_content(docs,tokens):
+def get_docs_content(docs,tokens=max_doc_content_tokens):
     joined_content = ""
     temp_joined = ""
     docs_page_content = []
@@ -73,5 +73,15 @@ def get_content_from_db(namespace, db_query, entities={}, tokens=max_doc_content
         base_compressor=pipeline, base_retriever=retriever_from_llm)
     docs = compression_retriever.get_relevant_documents(db_query)
     return get_docs_content(docs, tokens)
+
+# %%
+def get_latest_week_ai_research_abstracts():
+    db = Pinecone.from_existing_index(index_name, EMBEDDINGS, namespace='ai-research')
+    retriever_all = db.as_retriever(
+        search_type="similarity", search_kwargs={"k": 10, "filter": { "date": { '$gt': 20230607 } }}
+    )
+    docs = retriever_all.get_relevant_documents("\nAbstract \n1 Introduction")
+    return get_docs_content(docs)
+# %%
 
 # %%
