@@ -6,11 +6,11 @@ from common_util.llms import LLM_CHAT, LLM_FACT, LLM_PLAN
 
 # %%
 
-set_seed_query("How does Chain of thought prompting work? How can it be applied to specific video streaming analytics?")
+set_seed_query("What is the latest AI research? Find an interesting connection to other AI reserach. How can it be applied to specific video streaming analytics?")
 set_entity_memory_long_cache([])
 entities = warm_cache(get_seed_query())
 
-PLANNER_INSTRUCTION=f"Create a short tutorial including an implementation example."
+PLANNER_INSTRUCTION=f"Provide detailed factual information for use as reference material for a content creator"
 PLANNER_QUERY=f"""{get_seed_query()}
 {PLANNER_INSTRUCTION}
 """

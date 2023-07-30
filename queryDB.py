@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from typing import Optional, Type
 from common_util.memory import load_memory_vars, split_json, get_entities, save_entities_to_long_cach
 from common_util.llms import LLM_CHAT, LLM_FACT, LLM_FACT_4, LLM_CHAT_4
-from common_util.get_content_from_db import get_content_from_db
+from common_util.get_content_from_db import get_content_from_db, get_latest_week_ai_research_abstracts
 from common_util.memory import get_entity_def, tiktoken_len
 from common_util.namespaceEnum import PineconeNamespaceEnum, get_all_namespaces,get_all_namespace_values, NamespaceArg
 from langchain import PromptTemplate
@@ -86,9 +86,9 @@ def answer_from_resource(query: str, namespace: NamespaceArg) -> str:
     response = response.replace("\n", "")
     return response
 
-def summarise(content,question,entities):
+def summarise(content,question,entities={}):
     prompt_template = """[System][Temperature=0][Persona]You are the Research Condenser. 
-    You love deeply understand the inner workings behind Research, then distill the applicable essence. You maximally compress the meaningful takeaways, while staying unambiguous to the model in a bare context.
+    You love to deeply understand the inner workings behind Research, then distill the applicable essence. You maximally compress the meaningful takeaways, while staying unambiguous to the model in a bare context.
     [TASK]
     Your task is to share your subject matter expertise on the topic "{question}".
     Concisely summarise the key points from the Research provided.
@@ -185,6 +185,13 @@ def update_research_memory(query:str, namespace:NamespaceArg)->str:
 
     return sumer
 
+def get_latest_ai_research():
+    docs=get_latest_week_ai_research_abstracts()
+    sumer = summarise(docs, "novel, breakthrough, and unique methods and technology")
+
+    add_research_to_file(sumer,docs, RESEARCH_FILENAME,SEED_QUERY)
+    load_memory_vars(sumer)
+    save_entities_to_long_cach()
 # %%
 tools = [
     StructuredTool.from_function(
@@ -198,6 +205,11 @@ tools = [
         name = "get_new_learnings",
         description="get new research on a topic",
         args_schema= UpdateResearchMemoryInput
+    ),
+    StructuredTool.from_function(
+        func=get_latest_ai_research,
+        name = "get_latest_ai_research",
+        description="get the latest AI news and research",
     ),
     StructuredTool.from_function(
         func=get_entity_def,

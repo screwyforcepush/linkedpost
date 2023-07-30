@@ -86,9 +86,6 @@ def get_latest_week_ai_research_abstracts():
         search_type="similarity", search_kwargs={"k": 20, "filter": { "date": { '$gt': int(two_weeks_ago) } }}
     )
     docs = retriever_all.get_relevant_documents("in conclusion the main findings are summarised")
-    return docs
+    return get_docs_content(docs)
 # %%
-docs=get_latest_week_ai_research_abstracts()
-# %%
-docs
 # %%
