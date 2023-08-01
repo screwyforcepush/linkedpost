@@ -6402,5 +6402,11 @@
     {
         "source": "Introduction to Embedding-Based Recommender Systems by Dr. Robert Ku\u0308bler Towards Data Science.pdf",
         "namespace": "ai-engineering-documentation"
+    },
+    {
+        "source": "https://noahgoodman.substack.com/p/meta-prompt-a-simple-self-improving"
+    },
+    {
+        "source": "https://python.langchain.com/docs/use_cases/tabular/sqlite"
     }
 ]

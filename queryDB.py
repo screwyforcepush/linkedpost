@@ -192,6 +192,7 @@ def get_latest_ai_research():
     add_research_to_file(sumer,docs, RESEARCH_FILENAME,SEED_QUERY)
     load_memory_vars(sumer)
     save_entities_to_long_cach()
+    return sumer
 # %%
 tools = [
     StructuredTool.from_function(
@@ -206,11 +207,11 @@ tools = [
         description="get new research on a topic",
         args_schema= UpdateResearchMemoryInput
     ),
-    StructuredTool.from_function(
-        func=get_latest_ai_research,
-        name = "get_latest_ai_research",
-        description="get the latest AI news and research",
-    ),
+    # StructuredTool.from_function(
+    #     func=get_latest_ai_research,
+    #     name = "get_latest_ai_research",
+    #     description="get the latest AI news and research",
+    # ),
     StructuredTool.from_function(
         func=get_entity_def,
         name = "search_database_for_term_definition",

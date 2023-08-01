@@ -9,6 +9,7 @@ from common_util.customClasses import CUSTOM_ENTITY_EXTRACTION_PROMPT, SQLiteEnt
 from common_util.llms import LLM_FACT
 from langchain.memory import ConversationEntityMemory
 import tiktoken
+import time
 
 tokenizer = tiktoken.get_encoding("cl100k_base")
 # create the length function
@@ -49,10 +50,17 @@ def get_entities(use_long_cache:bool=False, entity_tokens:int=2000, query:str=No
         if ENTITY_MEMORY.entity_store.get(entity):
             entity_summaries[entity] = ENTITY_MEMORY.entity_store.get(entity, "")
     if query:
-        return get_filtered_entities(entity_summaries, entity_tokens, query)
+        entities= get_filtered_entities(entity_summaries, entity_tokens, query)
+        override_long_cache(entities)
+        return entities
     else:
         print("Full summary as no query for get_entities")
         return entity_summaries
+def override_long_cache(entities):
+    cache=[]
+    for key, value in entities.items():
+        cache.append(key)
+    set_entity_memory_long_cache(cache)
 
 def split_json(json_obj):
     keys = list(json_obj.keys())
@@ -74,7 +82,6 @@ def get_filtered_entities(entities, entity_tokens, query):
         filtered_ent1 = get_filtered_entities(ent1,entity_tokens/2,query)
         filtered_ent2 = get_filtered_entities(ent2,entity_tokens/2,query)
         return {**filtered_ent1, **filtered_ent2}
-    #TODO will break if entities is more than 4k tokens. need to split if this happens
     else:
         cost = {}
         totalcost=0
@@ -145,13 +152,23 @@ def get_filtered_entities(entities, entity_tokens, query):
             prompt=prompt,
             llm=LLM_FACT
         )
-        entity_keys = entity_reduce.run(query=query,entities=entities,cost=cost,budget=entity_tokens)
-        print(entity_keys)
-        match = re.search(r'\[.*?\]', entity_keys)
-        array_str = match.group(0) if match else None
-        
-        # Converting the extracted string to an actual array
-        entity_keys_arr = ast.literal_eval(array_str) if array_str else None
+        for i in range(3):
+
+            try:
+                entity_keys = entity_reduce.run(query=query,entities=entities,cost=cost,budget=entity_tokens)
+                print(entity_keys)
+                match = re.search(r'\[.*?\]', entity_keys)
+                array_str = match.group(0) if match else None
+                
+                # Converting the extracted string to an actual array
+                #TODO this is too brittle. did a try catch for now
+                # ValueError: malformed node or string on line 1: 
+                entity_keys_arr = ast.literal_eval(array_str) if array_str else None
+                break
+            except ValueError:
+                if i < 3 - 1:  # i is zero indexed
+                    print("ValueError parsing llm output to array for entitites... retrying")
+                    continue
         if entity_keys_arr:
             filtered_json = {k: entities[k] for k in entity_keys_arr if k in entities}
         else:
@@ -163,10 +180,25 @@ def load_memory_vars(from_text:str):
     global ENTITY_MEMORY
     _input = {"input": from_text}
     ENTITY_MEMORY.load_memory_variables(_input)
-    ENTITY_MEMORY.save_context(
-        _input,
-        {"output": ""}
-    )
+    #TODO infinite loop?
+
+    # Define save_context_with_timeout function
+    def save_context_with_timeout(_input, _output, timeout):
+        start_time = time.time()
+
+        # Assuming ENTITY_MEMORY.save_context() involves a loop or repeated operations
+        # You'll need to replace the following loop with the actual implementation
+        for i in range(1000000):  # Some large number
+            # Check if more than timeout seconds have passed
+            if time.time() - start_time > timeout:
+                print('ENTITY_MEMORY.save_context took too long to run.')
+                return
+            # The actual operation would go here
+            ENTITY_MEMORY.save_context(_input, _output)
+        pass
+
+    save_context_with_timeout(_input, {"output": ""}, 30.0)
+
     save_entities_to_long_cach()
 
 

@@ -28,7 +28,7 @@ filter = EmbeddingsRedundantFilter(embeddings=EMBEDDINGS)
 # By default the result document will be ordered/grouped by clusters.
 filter_ordered_cluster = EmbeddingsClusteringFilter(
             embeddings=EMBEDDINGS,
-            num_clusters=10,
+            num_clusters=5,
             num_closest=1,
         )
 

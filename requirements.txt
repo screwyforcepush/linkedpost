@@ -10,3 +10,5 @@ pymupdf
 aider-chat
 nest_asyncio
 scikit-learn
+google-api-python-client
+langchain_experimental
