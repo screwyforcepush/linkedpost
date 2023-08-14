@@ -6408,5 +6408,413 @@
     },
     {
         "source": "https://python.langchain.com/docs/use_cases/tabular/sqlite"
+    },
+    {
+        "Published": "2023-07-27",
+        "Title": "Open Problems and Fundamental Limitations of Reinforcement Learning from Human Feedback",
+        "Authors": "Stephen Casper, Xander Davies, Claudia Shi, Thomas Krendl Gilbert, J\u00e9r\u00e9my Scheurer, Javier Rando, Rachel Freedman, Tomasz Korbak, David Lindner, Pedro Freire, Tony Wang, Samuel Marks, Charbel-Rapha\u00ebl Segerie, Micah Carroll, Andi Peng, Phillip Christoffersen, Mehul Damani, Stewart Slocum, Usman Anwar, Anand Siththaranjan, Max Nadeau, Eric J. Michaud, Jacob Pfau, Dmitrii Krasheninnikov, Xin Chen, Lauro Langosco, Peter Hase, Erdem B\u0131y\u0131k, Anca Dragan, David Krueger, Dorsa Sadigh, Dylan Hadfield-Menell",
+        "published_first_time": "2023-07-27",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.15217v1",
+            "http://arxiv.org/pdf/2307.15217v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.15217v1",
+        "date": 20230727,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-27",
+        "Title": "Med-Flamingo: a Multimodal Medical Few-shot Learner",
+        "Authors": "Michael Moor, Qian Huang, Shirley Wu, Michihiro Yasunaga, Cyril Zakka, Yash Dalmia, Eduardo Pontes Reis, Pranav Rajpurkar, Jure Leskovec",
+        "published_first_time": "2023-07-27",
+        "comment": "Preprint",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.15189v1",
+            "http://arxiv.org/pdf/2307.15189v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.15189v1",
+        "date": 20230727,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-31",
+        "Title": "ToolLLM: Facilitating Large Language Models to Master 16000+ Real-world APIs",
+        "Authors": "Yujia Qin, Shihao Liang, Yining Ye, Kunlun Zhu, Lan Yan, Yaxi Lu, Yankai Lin, Xin Cong, Xiangru Tang, Bill Qian, Sihan Zhao, Runchu Tian, Ruobing Xie, Jie Zhou, Mark Gerstein, Dahai Li, Zhiyuan Liu, Maosong Sun",
+        "published_first_time": "2023-07-31",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.16789v1",
+            "http://arxiv.org/pdf/2307.16789v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.16789v1",
+        "date": 20230731,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-28",
+        "Title": "Skeleton-of-Thought: Large Language Models Can Do Parallel Decoding",
+        "Authors": "Xuefei Ning, Zinan Lin, Zixuan Zhou, Huazhong Yang, Yu Wang",
+        "published_first_time": "2023-07-28",
+        "comment": "Technical report, work in progress",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.15337v1",
+            "http://arxiv.org/pdf/2307.15337v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.15337v1",
+        "date": 20230728,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-07",
+        "Title": "MetaGPT: Meta Programming for Multi-Agent Collaborative Framework",
+        "Authors": "Sirui Hong, Xiawu Zheng, Jonathan Chen, Yuheng Cheng, Jinlin Wang, Ceyao Zhang, Zili Wang, Steven Ka Shing Yau, Zijuan Lin, Liyang Zhou, Chenyu Ran, Lingfeng Xiao, Chenglin Wu",
+        "published_first_time": "2023-08-01",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.MA"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.00352v3",
+            "http://arxiv.org/pdf/2308.00352v3"
+        ],
+        "source": "http://arxiv.org/abs/2308.00352v3",
+        "date": 20230807,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-07",
+        "Title": "OpenFlamingo: An Open-Source Framework for Training Large Autoregressive Vision-Language Models",
+        "Authors": "Anas Awadalla, Irena Gao, Josh Gardner, Jack Hessel, Yusuf Hanafy, Wanrong Zhu, Kalyani Marathe, Yonatan Bitton, Samir Gadre, Shiori Sagawa, Jenia Jitsev, Simon Kornblith, Pang Wei Koh, Gabriel Ilharco, Mitchell Wortsman, Ludwig Schmidt",
+        "published_first_time": "2023-08-02",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.AI",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.01390v2",
+            "http://arxiv.org/pdf/2308.01390v2"
+        ],
+        "source": "http://arxiv.org/abs/2308.01390v2",
+        "date": 20230807,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-28",
+        "Title": "The Hydra Effect: Emergent Self-repair in Language Model Computations",
+        "Authors": "Thomas McGrath, Matthew Rahtz, Janos Kramar, Vladimir Mikulik, Shane Legg",
+        "published_first_time": "2023-07-28",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.15771v1",
+            "http://arxiv.org/pdf/2307.15771v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.15771v1",
+        "date": 20230728,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-02",
+        "Title": "SelfCheck: Using LLMs to Zero-Shot Check Their Own Step-by-Step Reasoning",
+        "Authors": "Ning Miao, Yee Whye Teh, Tom Rainforth",
+        "published_first_time": "2023-08-01",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.00436v2",
+            "http://arxiv.org/pdf/2308.00436v2"
+        ],
+        "source": "http://arxiv.org/abs/2308.00436v2",
+        "date": 20230802,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-31",
+        "Title": "Learning to Model the World with Language",
+        "Authors": "Jessy Lin, Yuqing Du, Olivia Watkins, Danijar Hafner, Pieter Abbeel, Dan Klein, Anca Dragan",
+        "published_first_time": "2023-07-31",
+        "comment": "Website: https://dynalang.github.io/",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.01399v1",
+            "http://arxiv.org/pdf/2308.01399v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.01399v1",
+        "date": 20230731,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-31",
+        "Title": "Discovering Adaptable Symbolic Algorithms from Scratch",
+        "Authors": "Stephen Kelly, Daniel S. Park, Xingyou Song, Mitchell McIntire, Pranav Nashikkar, Ritam Guha, Wolfgang Banzhaf, Kalyanmoy Deb, Vishnu Naresh Boddeti, Jie Tan, Esteban Real",
+        "published_first_time": "2023-07-31",
+        "comment": "Published as a conference paper at International Conference on\n  Intelligent Robots and Systems (IROS) 2023. See https://youtu.be/sEFP1Hay4nE\n  for associated video file",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.RO",
+        "categories": [
+            "cs.RO",
+            "cs.AI",
+            "cs.LG",
+            "cs.NE"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.16890v1",
+            "http://arxiv.org/pdf/2307.16890v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.16890v1",
+        "date": 20230731,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-27",
+        "Title": "Universal and Transferable Adversarial Attacks on Aligned Language Models",
+        "Authors": "Andy Zou, Zifan Wang, J. Zico Kolter, Matt Fredrikson",
+        "published_first_time": "2023-07-27",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.CR",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.15043v1",
+            "http://arxiv.org/pdf/2307.15043v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.15043v1",
+        "date": 20230727,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-26",
+        "Title": "Towards Generalist Biomedical AI",
+        "Authors": "Tao Tu, Shekoofeh Azizi, Danny Driess, Mike Schaekermann, Mohamed Amin, Pi-Chuan Chang, Andrew Carroll, Chuck Lau, Ryutaro Tanno, Ira Ktena, Basil Mustafa, Aakanksha Chowdhery, Yun Liu, Simon Kornblith, David Fleet, Philip Mansfield, Sushant Prakash, Renee Wong, Sunny Virmani, Christopher Semturs, S Sara Mahdavi, Bradley Green, Ewa Dominowska, Blaise Aguera y Arcas, Joelle Barral, Dale Webster, Greg S. Corrado, Yossi Matias, Karan Singhal, Pete Florence, Alan Karthikesalingam, Vivek Natarajan",
+        "published_first_time": "2023-07-26",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.CV"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.14334v1",
+            "http://arxiv.org/pdf/2307.14334v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.14334v1",
+        "date": 20230726,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-26",
+        "Title": "Tracking Anything in High Quality",
+        "Authors": "Jiawen Zhu, Zhenyu Chen, Zeqi Hao, Shijie Chang, Lu Zhang, Dong Wang, Huchuan Lu, Bin Luo, Jun-Yan He, Jin-Peng Lan, Hanyuan Chen, Chenyang Li",
+        "published_first_time": "2023-07-26",
+        "comment": "Technical Report",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.13974v1",
+            "http://arxiv.org/pdf/2307.13974v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.13974v1",
+        "date": 20230726,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-25",
+        "Title": "Foundational Models Defining a New Era in Vision: A Survey and Outlook",
+        "Authors": "Muhammad Awais, Muzammal Naseer, Salman Khan, Rao Muhammad Anwer, Hisham Cholakkal, Mubarak Shah, Ming-Hsuan Yang, Fahad Shahbaz Khan",
+        "published_first_time": "2023-07-25",
+        "comment": "Project page:\n  https://github.com/awaisrauf/Awesome-CV-Foundational-Models",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.13721v1",
+            "http://arxiv.org/pdf/2307.13721v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.13721v1",
+        "date": 20230725,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-31",
+        "Title": "L-Eval: Instituting Standardized Evaluation for Long Context Language Models",
+        "Authors": "Chenxin An, Shansan Gong, Ming Zhong, Mukai Li, Jun Zhang, Lingpeng Kong, Xipeng Qiu",
+        "published_first_time": "2023-07-20",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.11088v2",
+            "http://arxiv.org/pdf/2307.11088v2"
+        ],
+        "source": "http://arxiv.org/abs/2307.11088v2",
+        "date": 20230731,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-25",
+        "Title": "LoraHub: Efficient Cross-Task Generalization via Dynamic LoRA Composition",
+        "Authors": "Chengsong Huang, Qian Liu, Bill Yuchen Lin, Tianyu Pang, Chao Du, Min Lin",
+        "published_first_time": "2023-07-25",
+        "comment": "Work in progress. The first three authors contributed equally to this\n  work",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.13269v1",
+            "http://arxiv.org/pdf/2307.13269v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.13269v1",
+        "date": 20230725,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-24",
+        "Title": "Aligning Large Language Models with Human: A Survey",
+        "Authors": "Yufei Wang, Wanjun Zhong, Liangyou Li, Fei Mi, Xingshan Zeng, Wenyong Huang, Lifeng Shang, Xin Jiang, Qun Liu",
+        "published_first_time": "2023-07-24",
+        "comment": "work in progress",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.12966v1",
+            "http://arxiv.org/pdf/2307.12966v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.12966v1",
+        "date": 20230724,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-26",
+        "Title": "WavJourney: Compositional Audio Creation with Large Language Models",
+        "Authors": "Xubo Liu, Zhongkai Zhu, Haohe Liu, Yi Yuan, Meng Cui, Qiushi Huang, Jinhua Liang, Yin Cao, Qiuqiang Kong, Mark D. Plumbley, Wenwu Wang",
+        "published_first_time": "2023-07-26",
+        "comment": "Project Page: https://audio-agi.github.io/WavJourney_demopage/",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.SD",
+        "categories": [
+            "cs.SD",
+            "cs.AI",
+            "cs.MM",
+            "eess.AS"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.14335v1",
+            "http://arxiv.org/pdf/2307.14335v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.14335v1",
+        "date": 20230726,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-26",
+        "Title": "FacTool: Factuality Detection in Generative AI -- A Tool Augmented Framework for Multi-Task and Multi-Domain Scenarios",
+        "Authors": "I-Chun Chern, Steffi Chern, Shiqi Chen, Weizhe Yuan, Kehua Feng, Chunting Zhou, Junxian He, Graham Neubig, Pengfei Liu",
+        "published_first_time": "2023-07-25",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.13528v2",
+            "http://arxiv.org/pdf/2307.13528v2"
+        ],
+        "source": "http://arxiv.org/abs/2307.13528v2",
+        "date": 20230726,
+        "namespace": "ai-research"
     }
 ]

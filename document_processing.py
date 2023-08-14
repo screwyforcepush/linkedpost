@@ -139,7 +139,7 @@ def process_local_pdfs(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTI
 # %%
 add_new_week_papers()
 process_arxv()
-
+#%%
 process_git()
 process_scrape_urls(PineconeNamespaceEnum.AI_ENGINEERING_DOCUMENTATION.value)
 process_local_pdfs(namespace = PineconeNamespaceEnum.AI_ENGINEERING_DOCUMENTATION.value)

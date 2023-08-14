@@ -29,6 +29,11 @@ LLM_CHAT_4 = ChatOpenAI(
     temperature=0.2
 )
 
+LLM_BRAINSTORM = ChatOpenAI(
+    model_name='gpt-4',
+    temperature=0.7
+)
+
 LLM_FUNCTION = ChatOpenAI(
     model_name='gpt-4-0613',
     temperature=0.1

@@ -24,7 +24,7 @@ TITLES_FILENAME = './json/titles.json'
 RESEARCH_FILENAME = './json/research_summaries.json'
 NAMESPACE_AI=PineconeNamespaceEnum.AI_RESEARCH
 SEED_QUERY="SEED QUERY PLACEHOLDER"
-
+CONDUCTOR_KEY="NOT SET"
 def set_seed_query(query):
     global SEED_QUERY
     SEED_QUERY=query
@@ -32,6 +32,14 @@ def set_seed_query(query):
 def get_seed_query():
     global SEED_QUERY
     return SEED_QUERY
+
+def set_conductor_key(key):
+    global CONDUCTOR_KEY
+    CONDUCTOR_KEY=key
+
+def get_conductor_key():
+    global CONDUCTOR_KEY
+    return CONDUCTOR_KEY
 
 # %%
 
@@ -48,7 +56,7 @@ def answer_from_resource(query: str, namespace: NamespaceArg) -> str:
         query: The question to be answered by research assistant.
         namespace: A NamespaceArg object that is the research domain.
     """
-    content = json.dumps(get_reserach_from_file(RESEARCH_FILENAME,SEED_QUERY)['summaries'])
+    content = json.dumps(get_reserach_from_file(RESEARCH_FILENAME,CONDUCTOR_KEY)['summaries'])
     print("Start content length", tiktoken_len(content))
     if tiktoken_len(content)>4000:
         if tiktoken_len(content)<6000:
@@ -129,7 +137,7 @@ def check_if_exists(title, filename):
     # Check if the title is in the file
     return title in data
 
-def add_research_to_file(summary, raw, filename, seed_query):
+def add_research_to_file(summary, raw, filename, key=CONDUCTOR_KEY):
     data = []
 
     # If file exists, load existing data
@@ -139,18 +147,25 @@ def add_research_to_file(summary, raw, filename, seed_query):
 
     # Add the new metadata
     for item in data:
-        if item['seed'] == seed_query:
-            item['summaries'].append(summary)
-            item['raw'].append(raw)
+        if 'key' in item and item['key'] == key:
+            if 'summaries' in item:
+                item['summaries'].append(summary)
+            else:
+                item['summaries']=[summary]
+            if 'raw' in item:
+                item['raw'].append(raw)
+            else:
+                item['raw']=[raw]
+            item['seed']=SEED_QUERY
             break
     else:
-        data.append({'seed':seed_query,'summaries':[summary],'raw':[raw]})
+        data.append({'key':key,'seed':SEED_QUERY,'summaries':[summary],'raw':[raw]})
 
     # Write the data back to the file
     with open(filename, 'w') as f:
         json.dump(data, f, indent=4)
 
-def get_reserach_from_file(filename, seed_query):
+def add_to_research_file(property, value, key=CONDUCTOR_KEY, filename=RESEARCH_FILENAME):
     data = []
 
     # If file exists, load existing data
@@ -160,7 +175,27 @@ def get_reserach_from_file(filename, seed_query):
 
     # Add the new metadata
     for item in data:
-        if item['seed'] == seed_query:
+        if 'key' in item and item['key'] == key:
+            item[property]=(value)
+            break
+    else:
+        data.append({'key':key,property:value})
+
+    # Write the data back to the file
+    with open(filename, 'w') as f:
+        json.dump(data, f, indent=4)
+
+def get_reserach_from_file(key, filename=RESEARCH_FILENAME):
+    data = []
+
+    # If file exists, load existing data
+    if os.path.exists(filename):
+        with open(filename, 'r') as f:
+            data = json.load(f)
+
+    # Add the new metadata
+    for item in data:
+        if 'key' in item and item['key'] == key:
             return item
     else:
         return None
@@ -179,7 +214,7 @@ def update_research_memory(query:str, namespace:NamespaceArg)->str:
                              entities=get_entities(use_long_cache=True,entity_tokens=3000,query=query),
                              tokens=5000)
     sumer = summarise(docs, query, entities=get_entities(use_long_cache=True,entity_tokens=1000,query=query))
-    add_research_to_file(sumer,docs, RESEARCH_FILENAME,SEED_QUERY)
+    add_research_to_file(sumer,docs, RESEARCH_FILENAME,CONDUCTOR_KEY)
     load_memory_vars(sumer)
     save_entities_to_long_cach()
 
@@ -189,18 +224,18 @@ def get_latest_ai_research():
     docs=get_latest_week_ai_research_abstracts()
     sumer = summarise(docs, "novel, breakthrough, and unique methods and technology")
 
-    add_research_to_file(sumer,docs, RESEARCH_FILENAME,SEED_QUERY)
+    add_research_to_file(sumer,docs, RESEARCH_FILENAME,CONDUCTOR_KEY)
     load_memory_vars(sumer)
     save_entities_to_long_cach()
     return sumer
 # %%
 tools = [
-    StructuredTool.from_function(
-        func=answer_from_resource,
-        name = "answer_from_learnings",
-        description="useful for when you need to answer a question based on learnings so far",
-        args_schema= ResearchInput
-    ),
+    # StructuredTool.from_function(
+    #     func=answer_from_resource,
+    #     name = "answer_from_learnings",
+    #     description="useful for when you need to answer a question based on learnings so far",
+    #     args_schema= ResearchInput
+    # ),
     StructuredTool.from_function(
         func=update_research_memory,
         name = "get_new_learnings",
