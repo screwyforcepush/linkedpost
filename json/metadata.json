@@ -6816,5 +6816,569 @@
         "source": "http://arxiv.org/abs/2307.13528v2",
         "date": 20230726,
         "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-11",
+        "Title": "LLM As DBA",
+        "Authors": "Xuanhe Zhou, Guoliang Li, Zhiyuan Liu",
+        "published_first_time": "2023-08-10",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.DB",
+        "categories": [
+            "cs.DB",
+            "cs.AI",
+            "cs.CL",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.05481v2",
+            "http://arxiv.org/pdf/2308.05481v2"
+        ],
+        "source": "http://arxiv.org/abs/2308.05481v2",
+        "date": 20230811,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-07",
+        "Title": "AgentBench: Evaluating LLMs as Agents",
+        "Authors": "Xiao Liu, Hao Yu, Hanchen Zhang, Yifan Xu, Xuanyu Lei, Hanyu Lai, Yu Gu, Hangliang Ding, Kaiwen Men, Kejuan Yang, Shudan Zhang, Xiang Deng, Aohan Zeng, Zhengxiao Du, Chenhui Zhang, Sheng Shen, Tianjun Zhang, Yu Su, Huan Sun, Minlie Huang, Yuxiao Dong, Jie Tang",
+        "published_first_time": "2023-08-07",
+        "comment": "38 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.03688v1",
+            "http://arxiv.org/pdf/2308.03688v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.03688v1",
+        "date": 20230807,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-07",
+        "Title": "Studying Large Language Model Generalization with Influence Functions",
+        "Authors": "Roger Grosse, Juhan Bae, Cem Anil, Nelson Elhage, Alex Tamkin, Amirhossein Tajdini, Benoit Steiner, Dustin Li, Esin Durmus, Ethan Perez, Evan Hubinger, Kamil\u0117 Luko\u0161i\u016bt\u0117, Karina Nguyen, Nicholas Joseph, Sam McCandlish, Jared Kaplan, Samuel R. Bowman",
+        "published_first_time": "2023-08-07",
+        "comment": "119 pages, 47 figures, 22 tables",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.CL",
+            "stat.ML"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.03296v1",
+            "http://arxiv.org/pdf/2308.03296v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.03296v1",
+        "date": 20230807,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-27",
+        "Title": "Seeing through the Brain: Image Reconstruction of Visual Perception from Human Brain Signals",
+        "Authors": "Yu-Ting Lan, Kan Ren, Yansen Wang, Wei-Long Zheng, Dongsheng Li, Bao-Liang Lu, Lili Qiu",
+        "published_first_time": "2023-07-27",
+        "comment": "A preprint version of an ongoing work",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "eess.IV",
+        "categories": [
+            "eess.IV",
+            "cs.AI",
+            "cs.CV",
+            "cs.MM",
+            "q-bio.NC"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.02510v1",
+            "http://arxiv.org/pdf/2308.02510v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.02510v1",
+        "date": 20230727,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-07",
+        "Title": "SynJax: Structured Probability Distributions for JAX",
+        "Authors": "Milo\u0161 Stanojevi\u0107, Laurent Sartran",
+        "published_first_time": "2023-08-07",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.03291v1",
+            "http://arxiv.org/pdf/2308.03291v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.03291v1",
+        "date": 20230807,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-07",
+        "Title": "Simple synthetic data reduces sycophancy in large language models",
+        "Authors": "Jerry Wei, Da Huang, Yifeng Lu, Denny Zhou, Quoc V. Le",
+        "published_first_time": "2023-08-07",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.03958v1",
+            "http://arxiv.org/pdf/2308.03958v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.03958v1",
+        "date": 20230807,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-08",
+        "Title": "PUG: Photorealistic and Semantically Controllable Synthetic Data for Representation Learning",
+        "Authors": "Florian Bordes, Shashank Shekhar, Mark Ibrahim, Diane Bouchacourt, Pascal Vincent, Ari S. Morcos",
+        "published_first_time": "2023-08-08",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.03977v1",
+            "http://arxiv.org/pdf/2308.03977v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.03977v1",
+        "date": 20230808,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-06",
+        "Title": "Pre-Trained Large Language Models for Industrial Control",
+        "Authors": "Lei Song, Chuheng Zhang, Li Zhao, Jiang Bian",
+        "published_first_time": "2023-08-06",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.03028v1",
+            "http://arxiv.org/pdf/2308.03028v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.03028v1",
+        "date": 20230806,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-10",
+        "Title": "Trustworthy LLMs: a Survey and Guideline for Evaluating Large Language Models' Alignment",
+        "Authors": "Yang Liu, Yuanshun Yao, Jean-Francois Ton, Xiaoying Zhang, Ruocheng Guo Hao Cheng, Yegor Klochkov, Muhammad Faaiz Taufiq, Hang Li",
+        "published_first_time": "2023-08-10",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.05374v1",
+            "http://arxiv.org/pdf/2308.05374v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.05374v1",
+        "date": 20230810,
+        "namespace": "ai-research"
+    },
+    {
+        "source": "Prompt Ensembles Make LLMs More Reliable by Cameron R. Wolfe, Ph.D. Aug, 2023 Towards Data Science.pdf",
+        "namespace": "ai-engineering-documentation"
+    },
+    {
+        "source": "Example Applications of K-Nearest-Neighbors Towards Data Science.pdf",
+        "namespace": "ai-engineering-documentation"
+    },
+    {
+        "Published": "2023-08-14",
+        "Title": "Self-Alignment with Instruction Backtranslation",
+        "Authors": "Xian Li, Ping Yu, Chunting Zhou, Timo Schick, Luke Zettlemoyer, Omer Levy, Jason Weston, Mike Lewis",
+        "published_first_time": "2023-08-11",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.06259v2",
+            "http://arxiv.org/pdf/2308.06259v2"
+        ],
+        "source": "http://arxiv.org/abs/2308.06259v2",
+        "date": 20230814,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-14",
+        "Title": "Platypus: Quick, Cheap, and Powerful Refinement of LLMs",
+        "Authors": "Ariel N. Lee, Cole J. Hunter, Nataniel Ruiz",
+        "published_first_time": "2023-08-14",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.07317v1",
+            "http://arxiv.org/pdf/2308.07317v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.07317v1",
+        "date": 20230814,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-17",
+        "Title": "A Survey on Model Compression for Large Language Models",
+        "Authors": "Xunyu Zhu, Jian Li, Yong Liu, Can Ma, Weiping Wang",
+        "published_first_time": "2023-08-15",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.07633v2",
+            "http://arxiv.org/pdf/2308.07633v2"
+        ],
+        "source": "http://arxiv.org/abs/2308.07633v2",
+        "date": 20230817,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-08",
+        "Title": "Shepherd: A Critic for Language Model Generation",
+        "Authors": "Tianlu Wang, Ping Yu, Xiaoqing Ellen Tan, Sean O'Brien, Ramakanth Pasunuru, Jane Dwivedi-Yu, Olga Golovneva, Luke Zettlemoyer, Maryam Fazel-Zarandi, Asli Celikyilmaz",
+        "published_first_time": "2023-08-08",
+        "comment": "7 figures, 7 tables",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.04592v1",
+            "http://arxiv.org/pdf/2308.04592v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.04592v1",
+        "date": 20230808,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-15",
+        "Title": "Solving Challenging Math Word Problems Using GPT-4 Code Interpreter with Code-based Self-Verification",
+        "Authors": "Aojun Zhou, Ke Wang, Zimu Lu, Weikang Shi, Sichun Luo, Zipeng Qin, Shaoqing Lu, Anya Jia, Linqi Song, Mingjie Zhan, Hongsheng Li",
+        "published_first_time": "2023-08-15",
+        "comment": "Solving Challenging Math Word Problems Using GPT-4 Code Interpreter\n  with Code-based Self-Verification",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.CV"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.07921v1",
+            "http://arxiv.org/pdf/2308.07921v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.07921v1",
+        "date": 20230815,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-15",
+        "Title": "Teach LLMs to Personalize -- An Approach inspired by Writing Education",
+        "Authors": "Cheng Li, Mingyang Zhang, Qiaozhu Mei, Yaqing Wang, Spurthi Amba Hombaiah, Yi Liang, Michael Bendersky",
+        "published_first_time": "2023-08-15",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.07968v1",
+            "http://arxiv.org/pdf/2308.07968v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.07968v1",
+        "date": 20230815,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-14",
+        "Title": "OctoPack: Instruction Tuning Code Large Language Models",
+        "Authors": "Niklas Muennighoff, Qian Liu, Armel Zebaze, Qinkai Zheng, Binyuan Hui, Terry Yue Zhuo, Swayam Singh, Xiangru Tang, Leandro von Werra, Shayne Longpre",
+        "published_first_time": "2023-08-14",
+        "comment": "57 pages (9 main), 39 figures, 16 tables",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.07124v1",
+            "http://arxiv.org/pdf/2308.07124v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.07124v1",
+        "date": 20230814,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-19",
+        "Title": "Efficient Guided Generation for Large Language Models",
+        "Authors": "Brandon T. Willard, R\u00e9mi Louf",
+        "published_first_time": "2023-07-19",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.09702v4",
+            "http://arxiv.org/pdf/2307.09702v4"
+        ],
+        "source": "http://arxiv.org/abs/2307.09702v4",
+        "date": 20230819,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-14",
+        "Title": "Bayesian Flow Networks",
+        "Authors": "Alex Graves, Rupesh Kumar Srivastava, Timothy Atkinson, Faustino Gomez",
+        "published_first_time": "2023-08-14",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.07037v1",
+            "http://arxiv.org/pdf/2308.07037v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.07037v1",
+        "date": 20230814,
+        "namespace": "ai-research"
+    },
+    {
+        "source": "Advanced Prompt Engineering. What to do when few-shot learning isn\u2019t\u2026 by Cameron R. Wolfe, Ph.D. Aug, 2023 Towards Data Science.pdf",
+        "namespace": "ai-engineering-documentation"
+    },
+    {
+        "Published": "2023-08-21",
+        "Title": "Instruction Tuning for Large Language Models: A Survey",
+        "Authors": "Shengyu Zhang, Linfeng Dong, Xiaoya Li, Sen Zhang, Xiaofei Sun, Shuhe Wang, Jiwei Li, Runyi Hu, Tianwei Zhang, Fei Wu, Guoyin Wang",
+        "published_first_time": "2023-08-21",
+        "comment": "A Survey paper, Pre-print",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.10792v1",
+            "http://arxiv.org/pdf/2308.10792v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.10792v1",
+        "date": 20230821,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-24",
+        "Title": "Use of LLMs for Illicit Purposes: Threats, Prevention Measures, and Vulnerabilities",
+        "Authors": "Maximilian Mozes, Xuanli He, Bennett Kleinberg, Lewis D. Griffin",
+        "published_first_time": "2023-08-24",
+        "comment": "Pre-print",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.CR"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.12833v1",
+            "http://arxiv.org/pdf/2308.12833v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.12833v1",
+        "date": 20230824,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-21",
+        "Title": "Giraffe: Adventures in Expanding Context Lengths in LLMs",
+        "Authors": "Arka Pal, Deep Karkhanis, Manley Roberts, Samuel Dooley, Arvind Sundararajan, Siddartha Naidu",
+        "published_first_time": "2023-08-21",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.10882v1",
+            "http://arxiv.org/pdf/2308.10882v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.10882v1",
+        "date": 20230821,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-22",
+        "Title": "IT3D: Improved Text-to-3D Generation with Explicit View Synthesis",
+        "Authors": "Yiwen Chen, Chi Zhang, Xiaofeng Yang, Zhongang Cai, Gang Yu, Lei Yang, Guosheng Lin",
+        "published_first_time": "2023-08-22",
+        "comment": "Project Page: https://github.com/buaacyw/IT3D-text-to-3D",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.11473v1",
+            "http://arxiv.org/pdf/2308.11473v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.11473v1",
+        "date": 20230822,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-22",
+        "Title": "A Survey on Large Language Model based Autonomous Agents",
+        "Authors": "Lei Wang, Chen Ma, Xueyang Feng, Zeyu Zhang, Hao Yang, Jingsen Zhang, Zhiyuan Chen, Jiakai Tang, Xu Chen, Yankai Lin, Wayne Xin Zhao, Zhewei Wei, Ji-Rong Wen",
+        "published_first_time": "2023-08-22",
+        "comment": "32 pages, 3 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.11432v1",
+            "http://arxiv.org/pdf/2308.11432v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.11432v1",
+        "date": 20230822,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-23",
+        "Title": "Prompt2Model: Generating Deployable Models from Natural Language Instructions",
+        "Authors": "Vijay Viswanathan, Chenyang Zhao, Amanda Bertsch, Tongshuang Wu, Graham Neubig",
+        "published_first_time": "2023-08-23",
+        "comment": "8 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.12261v1",
+            "http://arxiv.org/pdf/2308.12261v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.12261v1",
+        "date": 20230823,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-20",
+        "Title": "LegalBench: A Collaboratively Built Benchmark for Measuring Legal Reasoning in Large Language Models",
+        "Authors": "Neel Guha, Julian Nyarko, Daniel E. Ho, Christopher R\u00e9, Adam Chilton, Aditya Narayana, Alex Chohlas-Wood, Austin Peters, Brandon Waldon, Daniel N. Rockmore, Diego Zambrano, Dmitry Talisman, Enam Hoque, Faiz Surani, Frank Fagan, Galit Sarfaty, Gregory M. Dickinson, Haggai Porat, Jason Hegland, Jessica Wu, Joe Nudell, Joel Niklaus, John Nay, Jonathan H. Choi, Kevin Tobia, Margaret Hagan, Megan Ma, Michael Livermore, Nikon Rasumov-Rahe, Nils Holzenberger, Noam Kolt, Peter Henderson, Sean Rehaag, Sharad Goel, Shang Gao, Spencer Williams, Sunny Gandhi, Tom Zur, Varun Iyer, Zehua Li",
+        "published_first_time": "2023-08-20",
+        "comment": "143 pages, 79 tables, 4 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.CY"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.11462v1",
+            "http://arxiv.org/pdf/2308.11462v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.11462v1",
+        "date": 20230820,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-06-16",
+        "Title": "Language to Rewards for Robotic Skill Synthesis",
+        "Authors": "Wenhao Yu, Nimrod Gileadi, Chuyuan Fu, Sean Kirmani, Kuang-Huei Lee, Montse Gonzalez Arenas, Hao-Tien Lewis Chiang, Tom Erez, Leonard Hasenclever, Jan Humplik, Brian Ichter, Ted Xiao, Peng Xu, Andy Zeng, Tingnan Zhang, Nicolas Heess, Dorsa Sadigh, Jie Tan, Yuval Tassa, Fei Xia",
+        "published_first_time": "2023-06-14",
+        "comment": "https://language-to-reward.github.io/",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.RO",
+        "categories": [
+            "cs.RO",
+            "cs.AI",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.08647v2",
+            "http://arxiv.org/pdf/2306.08647v2"
+        ],
+        "source": "http://arxiv.org/abs/2306.08647v2",
+        "date": 20230616,
+        "namespace": "ai-research"
     }
 ]

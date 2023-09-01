@@ -175,4 +175,185 @@ Thought Process > Choice
 IDEA_SELECTOR_PROMPT = PromptTemplate(
     input_variables=["ideas"], template=IDEA_SELECTOR_TEMPLATE
 )
+
+SOLUTION_REQUIREMENTS_TEMPLATE = """
+System {{
+You are the Product Manager.
+You are tuned to business value as an outcome as you document Product Requirements.
+You take an Explored Idea and generate functional requirements from a Product perspective.
+When a solution is designed to your requirement's spec, it always achieves results.
+}}
+
+Explored Idea{{
+{idea}
+
+Tech Feedback:{enrich}
+}}
+
+Task{{
+Document Requirements
+}}
+"""
+
+SOLUTION_REQUIREMENTS_PROMPT = PromptTemplate(
+    input_variables=["idea", "enrich"], template=SOLUTION_REQUIREMENTS_TEMPLATE
+)
+
+SOLUTION_DESIGN_SKELETON_TEMPLATE = """
+System {{
+You are the Solution Design Skeleton.
+You take Product Requirements with Context, and create a Skeleton Solution Design.
+When a Solution is Designed to your Skeleton, it will meet all Requirements.
+}}
+
+Context{{
+{idea}
+
+Tech Feedback: {enrich}
+}}
+
+Product Requirements{{
+{requirements}
+}}
+
+Task{{
+Skeleton
+}}
+"""
+
+SOLUTION_DESIGN_SKELETON_PROMPT = PromptTemplate(
+    input_variables=["idea", "enrich", "requirements"], template=SOLUTION_DESIGN_SKELETON_TEMPLATE
+)
+# %%
+SOLUTION_REVIEW_TEMPLATE = """
+System {{
+You are the Tech Solution Critic.
+Your domain of expertise is the Exploration Topic.
+You examine how a Solution Architecture meets the Product Requirements.
+Your Output is concise, Critical Feedback as a numbered list.
+}}
+
+Output Format{{
+#. First Critical Feedback
+#. Second Critical Feedback
+}}
+
+Exploration Topic{{
+{idea}
+
+Tech Feedback: {enrich}
+}}
+
+Product Requirements{{
+{requirements}
+}}
+
+Solution Architecture{{
+{solution}
+}}
+
+Task{{
+Critical Feedback
+}}
+"""
+
+SOLUTION_REVIEW_PROMT = PromptTemplate(
+    input_variables=["idea", "enrich", "requirements", "solution"], template=SOLUTION_REVIEW_TEMPLATE
+)
+
+TECH_EDITOR_TEMPLATE = """
+System {{
+    You are the Tech Doc Editor. Your edited solution Document Sections form a natural *coherent flow*.
+    Apply the provided Research to detail the implementation "hows". You know which research is applied to which Sections without overlap.
+    The Document Sections you edit are part of a larger document. The Concept, full document section Outline, Previous Section and section Purpose is provided for *coherent flow* Contextual Adhesion.
+    Structure and format output for readability.
+}}
+Contextual Adhesion{{
+    Concept {{
+        {idea}
+    }}
+
+    Outline {{
+        {outline}
+    }}
+
+    Previous Section {{
+        {previous_section}
+    }}
+}}
+
+Research {{
+    {feedback_reference}
+}}
+
+Document Sections {{
+    {edit_sections}
+}}
+
+Task{{
+    Edit Document Sections
+    Structure Format
+}}
+"""
+
+TECH_EDITOR_PROMT = PromptTemplate(
+    input_variables=["idea", "outline", "previous_section", "feedback_reference", "edit_sections"], template=TECH_EDITOR_TEMPLATE
+)
+
+FEEDBACK_PARSER_TEMPLATE = """
+System {{
+    You are the Feedback -> Query Parser. You take a list of Feedback and convert into an array of concise *Web Queries*.
+    When your Queries are answered, the Feedback can be addressed.
+    Only Parse Feedback Items that require additional research. Syntax, formatting, and coherency feedback are not your concern.
+}}
+
+Output Format{{
+["query 1", "query 2", "query 3"]
+Constraint: strict array with no newline or other array breaking characters
+}}
+
+Ideation Context{{
+    {idea}
+}}
+
+Feedback Items: {{
+    {solution_feedback}
+}}
+
+Task{{
+Feedback -> Query Parse
+}}
+"""
+
+FEEDBACK_PARSER_PROMT = PromptTemplate(
+    input_variables=["idea", "solution_feedback"], template=FEEDBACK_PARSER_TEMPLATE
+)
+
+DOC_ORDER_TEMPLATE = """
+System {{
+    You are the Document Section Sorter. You take sections of a solution document and reorder them for ultimate coherency.
+    You only output an array of Numbers, corresponding to optimially sorted Document Section IDs. 
+    Consider the initial Draft Doc as inspiration context for Document Sections.
+}}
+
+Output Format{{
+[#, #, #]
+}}
+
+Draft Doc {{
+    {solution_skeleton}
+}}
+
+Document Sections: {{
+    {document_sections}
+}}
+
+Task{{
+Sort
+}}
+"""
+
+DOC_ORDER_PROMT = PromptTemplate(
+    input_variables=["solution_skeleton", "document_sections"], template=DOC_ORDER_TEMPLATE
+)
 # %%

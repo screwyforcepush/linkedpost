@@ -152,6 +152,7 @@ def get_filtered_entities(entities, entity_tokens, query):
             prompt=prompt,
             llm=LLM_FACT
         )
+        entity_keys_arr=None
         for i in range(3):
 
             try:
@@ -197,8 +198,8 @@ def load_memory_vars(from_text:str):
             ENTITY_MEMORY.save_context(_input, _output)
         pass
 
-    save_context_with_timeout(_input, {"output": ""}, 30.0)
-
+    save_context_with_timeout(_input, {"output": ""}, 10.0)
+    ENTITY_MEMORY.chat_memory.clear()
     save_entities_to_long_cach()
 
 

@@ -8,7 +8,7 @@ from common_util.memory import load_memory_vars, split_json, get_entities, save_
 from common_util.llms import LLM_CHAT, LLM_FACT, LLM_FACT_4, LLM_CHAT_4
 from common_util.get_content_from_db import get_content_from_db, get_latest_week_ai_research_abstracts
 from common_util.memory import get_entity_def, tiktoken_len
-from common_util.namespaceEnum import PineconeNamespaceEnum, get_all_namespaces,get_all_namespace_values, NamespaceArg
+from common_util.namespaceEnum import PineconeNamespaceEnum, PineconeNamespaceDescription, get_all_namespaces,get_all_namespace_values, NamespaceArg
 from langchain import PromptTemplate
 from langchain.tools import BaseTool
 from common_util.customClasses import (ResearchInput, UpdateResearchMemoryInput)
@@ -22,7 +22,6 @@ load_dotenv()
 PAPER_PATTERN = r'paper "(.*?)"'
 TITLES_FILENAME = './json/titles.json'
 RESEARCH_FILENAME = './json/research_summaries.json'
-NAMESPACE_AI=PineconeNamespaceEnum.AI_RESEARCH
 SEED_QUERY="SEED QUERY PLACEHOLDER"
 CONDUCTOR_KEY="NOT SET"
 def set_seed_query(query):
@@ -165,7 +164,7 @@ def add_research_to_file(summary, raw, filename, key=CONDUCTOR_KEY):
     with open(filename, 'w') as f:
         json.dump(data, f, indent=4)
 
-def add_to_research_file(property, value, key=CONDUCTOR_KEY, filename=RESEARCH_FILENAME):
+def add_to_research_file(property, value, key=CONDUCTOR_KEY, filename=RESEARCH_FILENAME, isArray=False):
     data = []
 
     # If file exists, load existing data
@@ -176,7 +175,13 @@ def add_to_research_file(property, value, key=CONDUCTOR_KEY, filename=RESEARCH_F
     # Add the new metadata
     for item in data:
         if 'key' in item and item['key'] == key:
-            item[property]=(value)
+            if isArray:
+                if property in item:
+                    item[property].append(value)
+                else:
+                    item[property]=[value]
+            else:
+                item[property]=(value)
             break
     else:
         data.append({'key':key,property:value})
@@ -276,4 +281,38 @@ class NewLearningsTool(BaseTool):
 open_tools = [
     NewLearningsTool()
 ]
+
+ENTITY_TOOL = StructuredTool.from_function(
+        func=get_entity_def,
+        name = "search_database_for_term_definition",
+        description="""quickly returns definition of a term if it is in the database. Useful for "What is <term>?" questions""",
+    )
+
+def reserach_ai(query:str):
+    return update_research_memory(query=query, namespace=PineconeNamespaceEnum.AI_RESEARCH.value)
+
+AI_RESEARCH_TOOL = StructuredTool.from_function(
+        func=reserach_ai,
+        name = "research_ai",
+        description=f"learn from ai research database containing {PineconeNamespaceDescription.AI_RESEARCH.value}",
+    )
+
+def reserach_video_streaming(query:str):
+    return update_research_memory(query=query, namespace=PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value)
+
+VIDEO_STREAMING_RESEARCH_TOOL = StructuredTool.from_function(
+        func=reserach_ai,
+        name = "research_video_streaming",
+        description=f"learn from video streaming database containing {PineconeNamespaceDescription.VIDEO_STREAMING_ANALYTICS.value}",
+    )
+
+def reserach_ai_engineering(query:str):
+    return update_research_memory(query=query, namespace=PineconeNamespaceEnum.AI_ENGINEERING_DOCUMENTATION.value)
+
+AI_ENGINEERING_TOOL = StructuredTool.from_function(
+        func=reserach_ai_engineering,
+        name = "research_ai_engineering",
+        description=f"learn from ai engineering database containing {PineconeNamespaceDescription.AI_ENGINEERING_DOCUMENTATION.value}",
+    )
+
 # %%

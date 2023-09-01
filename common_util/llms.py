@@ -7,6 +7,11 @@ LLM_FACT = ChatOpenAI(
     temperature=0.0
 )
 
+LLM_FACT_DAV = ChatOpenAI(
+    model_name='davinci-003',
+    temperature=0.0
+)
+
 LLM_CHAT = ChatOpenAI(
     model_name="gpt-3.5-turbo", 
     temperature=0.2

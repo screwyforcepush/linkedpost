@@ -1,19 +1,44 @@
 import ast
 import re
+
+from pyparsing import Optional
 from common_util.memory import set_entity_memory_long_cache, warm_cache, get_entities
-from queryDB import tools, set_seed_query, get_latest_ai_research
+from queryDB import get_conductor_key, tools, set_seed_query, get_latest_ai_research
 from langchain_experimental.plan_and_execute import PlanAndExecute, load_agent_executor, load_chat_planner
 import langchain
 from langchain.chains import LLMChain
 from datetime import datetime
-from common_util.customPrompts import BRAINSTORMER_PROMPT, OUTPUT_PARSER_PROMPT, IDEA_ENRICH_COMBINE_PROMPT, IDEA_SELECTOR_PROMPT
-from common_util.llms import LLM_BRAINSTORM, LLM_FACT_4, LLM_FACT
-from common_util.searchWeb import WEB_SEARCH_QA_CHAIN, run_judge_idea_agent
-from queryDB import add_to_research_file, set_conductor_key, get_reserach_from_file
+from common_util.customPrompts import DOC_ORDER_PROMT, FEEDBACK_PARSER_PROMT, TECH_EDITOR_PROMT, SOLUTION_REVIEW_PROMT, SOLUTION_DESIGN_SKELETON_PROMPT, SOLUTION_REQUIREMENTS_PROMPT, BRAINSTORMER_PROMPT, OUTPUT_PARSER_PROMPT, IDEA_ENRICH_COMBINE_PROMPT, IDEA_SELECTOR_PROMPT
+from common_util.llms import LLM_BRAINSTORM, LLM_FACT_4, LLM_FACT, EMBEDDINGS, LLM_FACT_DAV
+from common_util.searchWeb import run_search_conflict_agent, run_judge_idea_agent, SEARCH_TOOL
+from queryDB import ENTITY_TOOL, AI_ENGINEERING_TOOL, VIDEO_STREAMING_RESEARCH_TOOL, AI_RESEARCH_TOOL, add_to_research_file, set_conductor_key, get_reserach_from_file
 from langchain.agents import initialize_agent, AgentType
+from baby_agi_pm.baby_agi import BabyAGI
+from baby_agi_pm.task_execution import TaskExecutionAgent
+from langchain import LLMChain
+from langchain.vectorstores import FAISS
+from langchain.docstore import InMemoryDocstore
+from langchain.agents import Tool
+
+import faiss
 
 langchain.debug = True
 #%%
+def load_global_vars(hist_obj):
+    global ordered_doc_sections, feedback_reference, solution_feedback, baby_results, choice_number, ideas_obj, enrich, idea_of_choice, requirements, solution_skeleton
+    choice_number=hist_obj["idea_choice"]
+    ideas_obj=hist_obj["ideas_obj"]
+    enrich=ideas_obj[choice_number]['enrichment']
+    idea_of_choice=ideas_obj[choice_number]['idea']
+    requirements=ideas_obj[choice_number]['requirements']
+    solution_skeleton=ideas_obj[choice_number]['solution_skeleton']
+    baby_results=hist_obj["baby_results"]
+    solution_feedback=ideas_obj[choice_number]['solution_feedback']
+    feedback_reference=ideas_obj[choice_number]['feedback_reference']
+    ordered_doc_sections=ideas_obj[choice_number]['ordered_doc_sections']
+
+
+
 CONDUCTOR_KEY = datetime.now().strftime("%Y%m%d%H%M%S")
 set_conductor_key(CONDUCTOR_KEY)
 set_seed_query("AI, analytics, video streaming crossover")
@@ -82,10 +107,6 @@ add_to_research_file(property="idea_choice", value=choice_number, key=CONDUCTOR_
 idea_of_choice=ideas_obj[choice_number]['idea']
 #%%
 # %%
-hist_vars =get_historical_variable("20230814160057")
-
-ideas_obj=hist_vars["ideas_obj"]
-idea_of_choice=ideas_obj[hist_vars["idea_choice"]]['idea']
 
 agent_executor = initialize_agent(tools, LLM_FACT_4, agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose=True, max_iterations=5)
 
@@ -103,10 +124,182 @@ Task{{
 Enrich
 }}
 """
+
 enrich=agent_executor.run(agent_query)
 # %%
-ideas_obj[hist_vars["idea_choice"]]['enrichment']=enrich
+
+ideas_obj[choice_number]['enrichment']=enrich
 add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
 
+#%%
+# %%
+requirements_chain = LLMChain(prompt=SOLUTION_REQUIREMENTS_PROMPT, llm=LLM_BRAINSTORM)
+requirements = requirements_chain.run({'idea':idea_of_choice,'enrich':enrich})
+ideas_obj[choice_number]['requirements']=requirements
+add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
+
+# %%
+solution_skeleton_chain = LLMChain(prompt=SOLUTION_DESIGN_SKELETON_PROMPT, llm=LLM_BRAINSTORM)
+solution_skeleton = solution_skeleton_chain.run({'idea':idea_of_choice,'enrich':enrich, 'requirements':requirements})
+
+#%%
+ideas_obj[choice_number]['solution_skeleton']=solution_skeleton
+add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
+
+# %%
+
+def get_solution_skeleton(input):
+    return solution_skeleton
+
+SOLUTION_SKELETON_TOOL=Tool.from_function(
+    name="Solution Skeleton",
+    func=get_solution_skeleton,
+    description="useful for when you need the solution skeleton.",
+)
+
+embedding_size = 1536
+index = faiss.IndexFlatL2(embedding_size)
+vectorstore = FAISS(EMBEDDINGS.embed_query, index, InMemoryDocstore({}), {})
+
+baby_tools = [AI_ENGINEERING_TOOL, 
+              VIDEO_STREAMING_RESEARCH_TOOL, 
+              AI_RESEARCH_TOOL, 
+              SOLUTION_SKELETON_TOOL,
+              ENTITY_TOOL]
+
+baby_agent_executor = TaskExecutionAgent.from_agent_and_tools(
+    llm=LLM_FACT_4, tools=baby_tools, verbose=True, max_iterations=5
+)
+
+# Run the BabyAGI
+
+OBJECTIVE = f"Solution architect: {idea_of_choice}"
+
+# If None, will keep on going forever
+max_iterations = 15
+baby_agi = BabyAGI.from_llm(
+    llm=LLM_FACT_4,
+    vectorstore=vectorstore,
+    task_execution_chain=baby_agent_executor,
+    verbose=True,
+    max_iterations=max_iterations,
+)
+
+baby_agi({"objective": OBJECTIVE})
+
+# %%
+
+# Factchecking does not work well as it is Novel
+# solution_arr=[]
+# for res in baby_results:
+#     result = res["result"]
+#     task = res["task"]
+    
+#     factcheck=run_search_conflict_agent(result, task)
+#     res["factcheck"]=factcheck
+#     solution_arr.append(res)
+
+# add_to_research_file(property="solution_arr", value=solution_arr, key=CONDUCTOR_KEY)
+
+# %%
+solution_critic_chain = LLMChain(prompt=SOLUTION_REVIEW_PROMT, llm=LLM_BRAINSTORM)
+solution_feedback = solution_critic_chain.run({'idea':idea_of_choice,'enrich':enrich, 'requirements':requirements, 'solution':baby_results})
+
+# %%
+ideas_obj[choice_number]['solution_feedback']=solution_feedback
+add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
+
+
+# %%
+feedback_parser_chain = LLMChain(prompt=FEEDBACK_PARSER_PROMT, llm=LLM_FACT_4)
+feedback_queries = feedback_parser_chain.run({'idea':idea_of_choice,'solution_feedback':solution_feedback})
+
+# %%
+feedback_queries_list = ast.literal_eval(feedback_queries)
+ideas_obj[choice_number]['feedback_queries']=feedback_queries_list
+add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
+
+# %%
+agent_query_tools = tools
+agent_query_tools.append(SEARCH_TOOL)
+
+
+agent_executor = initialize_agent(tools, LLM_FACT_4, agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose=True, max_iterations=5)
+feedback_reference =[]
+for query in feedback_queries_list:
+    agent_query=f"""
+    System {{
+    You are an AI assistant that answeres a single Query. You utilise tools to pull factual relevant information.
+    Final Answer: the final answer to the original input question is the full detailed explanation from the Observation provided as bullet points.
+    }}  
+
+    Tool Prioritisation {{
+    search_database_for_term_definition > get_new_learnings > web_search
+    }}
+
+    Query{{
+    {query}
+    }}
+
+    Answer:
+    """
+
+    ref=agent_executor.run(agent_query)
+    feedback_reference.append(ref)
+# %%
+ideas_obj[choice_number]['feedback_reference']=feedback_reference
+add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
+# %%
+
+i=0
+document_sections=[]
+for baby in baby_results:
+    if i>0:
+        document_sections.append({'ID':i,'Section':baby["task"]})
+    i=i+1
+document_sections
+# %%
+doc_order_chain = LLMChain(prompt=DOC_ORDER_PROMT, llm=LLM_FACT_4)
+doc_order = doc_order_chain.run({'solution_skeleton':solution_skeleton,'document_sections':document_sections})
+doc_order_list = ast.literal_eval(doc_order)
+# %%
+ordered_doc_sections=[]
+for n in doc_order_list:
+    ordered_doc_sections.append({'purpose':baby_results[n]['task'], 'content':baby_results[n]['result']})
+ordered_doc_sections
+ideas_obj[choice_number]['ordered_doc_sections']=ordered_doc_sections
+add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
+# %%
+## LOADS completed vars for step
+CONDUCTOR_KEY="20230814160057"
+hist_var=get_reserach_from_file(CONDUCTOR_KEY)
+load_global_vars(hist_var)
+
+# %%
+tech_editor_chain = LLMChain(prompt=TECH_EDITOR_PROMT, llm=LLM_FACT_4)
+#split into 3 secions chunks
+doc_sec_split = []
+for i in range(0, len(ordered_doc_sections), 3):
+    doc_sec_split.append(ordered_doc_sections[i:i+3])
+outline = []
+for n in ordered_doc_sections:
+    outline.append(n['purpose'])
+
+tech_edit=[]
+previous_section=""
+for chunk in doc_sec_split:
+    sections_edit = tech_editor_chain.run({'idea':idea_of_choice,
+                                    'outline':outline,
+                                    'feedback_reference':feedback_reference,
+                                    'previous_section':previous_section,
+                                    'edit_sections':chunk})
+    previous_section=sections_edit
+    tech_edit.append(sections_edit)
+
+ideas_obj[choice_number]['tech_edit']=tech_edit
+add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
+tech_edit
+# %%
+feedback_reference# %%
 
 # %%

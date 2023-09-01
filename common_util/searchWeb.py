@@ -53,17 +53,22 @@ def search_func(term:str):
         return WEB_SEARCH_QA_CHAIN(term)
     except ClientResponseError:
         return "Bad response from search. Try different search term"
-web_tools = [
-    StructuredTool.from_function(
-        name='Web search',
+
+SEARCH_TOOL=StructuredTool.from_function(
+        name='web_search',
         func=search_func,
         description=(
             'useful to search for existing published materials'
         )
     )
+
+SEARCH_TOOLS = [
+    SEARCH_TOOL
 ]
 
-web_agent_executor = initialize_agent(web_tools, LLM_FACT_4, agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose=True, max_iterations=5)
+
+
+web_agent_executor = initialize_agent(SEARCH_TOOLS, LLM_FACT_4, agent=AgentType.STRUCTURED_CHAT_ZERO_SHOT_REACT_DESCRIPTION, verbose=True, max_iterations=5)
 # %%
 def run_judge_idea_agent(idea:str):
 
@@ -94,3 +99,25 @@ def run_judge_idea_agent(idea:str):
     """
     return web_agent_executor.run(web_agent_query)
 #%%
+def run_search_conflict_agent(solution:str, purpose:str):
+
+    web_agent_query=f"""
+    System {{
+    You are the Fact Checker. You critically assess the accuracy of a Solution.
+    You Search for *existing published materials* that Directly Conflict with the Solution's feasibility.
+    Fact Check Score the Solution with a brief unambiguous explanation.
+    }}
+
+    Solution Purpose{{
+    {purpose}
+    }}
+
+    Solution {{
+    {solution}
+    }}
+
+    Task {{
+    Fact Check
+    }}
+    """
+    return web_agent_executor.run(web_agent_query)

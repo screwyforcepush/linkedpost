@@ -9,7 +9,7 @@ class PineconeNamespaceEnum(str, Enum):
 
 class PineconeNamespaceDescription(Enum):
     AI_RESEARCH = 'catalog of ai academic research papers'
-    VIDEO_STREAMING_ANALYTICS = 'best practices, metrics, and analytics within the video streaming domain'
+    VIDEO_STREAMING_ANALYTICS = 'best practices, metrics analytics, and systems within the video streaming domain'
     AI_ENGINEERING_DOCUMENTATION = 'code documentation and architecture design for ai engineering libraries'
     WEB_SEARCH = 'results from past web searches'
 
