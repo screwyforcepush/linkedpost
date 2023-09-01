@@ -88,4 +88,10 @@ def get_latest_week_ai_research_abstracts():
     docs = retriever_all.get_relevant_documents("in conclusion the main findings are summarised")
     return get_docs_content(docs)
 # %%
+def get_research_source_doc(query):
+    db = Pinecone.from_existing_index(index_name, EMBEDDINGS, namespace='ai-research')
+    retriever_all = db.as_retriever(
+        search_type="similarity", search_kwargs={"k": 5}
+    )
+    return retriever_all.get_relevant_documents(query)
 # %%
