@@ -48,6 +48,7 @@ def get_docs_content(docs,tokens=max_doc_content_tokens):
     temp_joined = ""
     docs_page_content = []
     unique_docs = {}
+    docs_metadata=[]
     for d in docs:
         if d.page_content not in unique_docs:
             unique_docs[d.page_content] = True
@@ -56,8 +57,9 @@ def get_docs_content(docs,tokens=max_doc_content_tokens):
             if tiktoken_len(temp_joined)>tokens:
                 break
             joined_content = "\n".join(docs_page_content)
+            docs_metadata.append(d.metadata)
     print("max tokens reached ->",tiktoken_len(joined_content),tiktoken_len(temp_joined))
-    return joined_content
+    return joined_content, docs_metadata
 
 def get_content_from_db(namespace, db_query, entities={}, tokens=max_doc_content_tokens, k=20):
     db = Pinecone.from_existing_index(index_name, EMBEDDINGS, namespace=namespace)
@@ -91,7 +93,7 @@ def get_latest_week_ai_research_abstracts():
 def get_research_source_doc(query):
     db = Pinecone.from_existing_index(index_name, EMBEDDINGS, namespace='ai-research')
     retriever_all = db.as_retriever(
-        search_type="similarity", search_kwargs={"k": 5}
+        search_type="similarity", search_kwargs={"k": 1}
     )
     return retriever_all.get_relevant_documents(query)
 # %%

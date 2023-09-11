@@ -27,6 +27,8 @@ from common_util.customPrompts import (
     IDEA_ENRICH_COMBINE_PROMPT,
     IDEA_SELECTOR_PROMPT,
     ALEX_PERSONA_PROMPT,
+    EXTRACT_IDEA_CONCEPTS_PROMPT,
+    EXTRACT_SOURCE_CONTENT_PROMPT,
 )
 from common_util.llms import (
     LLM_BRAINSTORM,
@@ -35,6 +37,7 @@ from common_util.llms import (
     EMBEDDINGS,
     LLM_FACT_DAV,
     LLM_CHAT_4,
+    LLM_4_01,
 )
 from common_util.searchWeb import (
     run_search_conflict_agent,
@@ -65,9 +68,10 @@ langchain.debug = True
 
 # %%
 def load_global_vars(hist_obj):
-    global doc_format_obj, tech_edit, ordered_doc_sections, feedback_reference, solution_feedback, baby_results, choice_number, ideas_obj, enrich, idea_of_choice, requirements, solution_skeleton
+    global latest_research, doc_format_obj, tech_edit, ordered_doc_sections, feedback_reference, solution_feedback, baby_results, choice_number, ideas_obj, enrich, idea_of_choice, requirements, solution_skeleton
     choice_number = hist_obj["idea_choice"]
     ideas_obj = hist_obj["ideas_obj"]
+    latest_research = hist_obj["latest_research"]
     enrich = ideas_obj[choice_number]["enrichment"]
     idea_of_choice = ideas_obj[choice_number]["idea"]
     requirements = ideas_obj[choice_number]["requirements"]
@@ -87,9 +91,15 @@ def get_historical_variable(key):
     set_entity_memory_long_cache([])
     return get_reserach_from_file(key=key)
 
-
+DOMAINS = ["OTT video streaming", "Ecommerce", "FinTech", "HealthTech", "eLearning"]
+domain= "OTT video streaming analytics"
 # %%
+###
 
+#### UP HERE !!!!!!!
+
+###
+# %%
 
 CONDUCTOR_KEY = datetime.now().strftime("%Y%m%d%H%M%S")
 set_conductor_key(CONDUCTOR_KEY)
@@ -98,7 +108,7 @@ set_entity_memory_long_cache([])
 
 
 # new research
-latest_research = get_latest_ai_research()
+latest_research, metadata = get_latest_ai_research()
 entities = get_entities()
 add_to_research_file(
     property="latest_research", value=latest_research, key=CONDUCTOR_KEY
@@ -108,7 +118,7 @@ llm_chain = LLMChain(prompt=BRAINSTORMER_PROMPT, llm=LLM_BRAINSTORM)
 ideas = llm_chain.run(
     {
         "concepts": latest_research,
-        "domain": "OTT video streaming analytics",
+        "domain": domain,
         "output": "",
         "instruct": "",
     }
@@ -388,6 +398,100 @@ for chunk in doc_sec_split:
 ideas_obj[choice_number]["tech_edit"] = tech_edit
 add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
 
+
+# %%
+joined_tech_edit = '\n'.join(tech_edit)
+doc_format_chain = LLMChain(prompt=DOC_FORMAT_PROMPT, llm=LLM_BRAINSTORM)
+doc_format = doc_format_chain.run(
+    {"idea": idea_of_choice, "doc_source": joined_tech_edit}
+)
+#Run twice to clean it up
+doc_format = doc_format_chain.run(
+    {"idea": idea_of_choice, "doc_source": joined_tech_edit}
+)
+# %%
+doc_format_obj = json.loads(doc_format)
+ideas_obj[choice_number]["doc_format_obj"] = doc_format_obj
+add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
+
+# %%
+
+# pull out chunks of content as source_content section based on doc format reference sources
+extract_source = LLMChain(prompt=EXTRACT_SOURCE_CONTENT_PROMPT, llm=LLM_FACT_4)
+for current_section in doc_format_obj['content']:
+    if 'reference sources' in current_section:
+        source_content = extract_source.run(
+            {"doc_source":tech_edit, 
+             "reference_sources_section":current_section['reference sources']}
+        )
+        current_section['source_content']=source_content
+
+ideas_obj[choice_number]["doc_format_obj"] = doc_format_obj
+add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
+
+# %%
+# TEMP to get sources
+extract_concept_chain = LLMChain(prompt=EXTRACT_IDEA_CONCEPTS_PROMPT, llm=LLM_FACT)
+concepts = extract_concept_chain.run(
+    {"idea": idea_of_choice, "latest_research": latest_research}
+)
+
+sources_needed = parsed_ideas_list = ast.literal_eval(concepts)
+
+source_metadata=[]
+for concept in sources_needed:
+    doc = get_research_source_doc(concept)
+    source_metadata.append(doc[0].metadata)
+
+source_metadata
+# %%
+
+# Transforming the object array to only include heading and subheadings
+transformed_array = [
+    {key: obj[key] for key in obj if key in ["heading", "subheadings"]}
+    for obj in doc_format_obj['content']
+]
+
+filtered_doc_format_obj = doc_format_obj
+filtered_doc_format_obj['content'] = transformed_array
+filtered_doc_format_obj
+# %%
+
+alex_content_chain = LLMChain(prompt=ALEX_PERSONA_PROMPT, llm=LLM_CHAT_4)
+previous_section = ""
+alex_doc_content = [doc_format_obj['title']]
+for current_section in doc_format_obj['content']:
+    if 'source_content' in current_section:
+        source_content = current_section['source_content']
+        print("doing source content section")
+    additional_info = feedback_reference
+    # introduction - provide full doc source
+    # introduction - provide metadata title and link with instruction as feedback
+    if current_section['heading'] == "Introduction":
+        source_content = tech_edit
+        additional_info = f"Reference research papers Title and Source in Introduction \n {source_metadata}"
+        print("doing intro")
+    # conclusion - provide all alex_doc_content (no new_doc_source or feedback_reference)
+    elif current_section['heading'] == "Conclusion":
+        source_content = alex_doc_content
+        additional_info = "none"
+        print("doing conclusion")
+
+    alex_content_section = alex_content_chain.run(
+        {"idea": idea_of_choice, "feedback_reference": additional_info,
+        "doc_format_obj": filtered_doc_format_obj,
+        "doc_source": source_content,
+        "previous_section": previous_section,
+        "current_section": {key: current_section[key] for key in current_section if key in ["heading", "subheadings"]},
+        "domain": domain}
+    )
+    previous_section = alex_content_section
+    alex_doc_content.append(alex_content_section)
+
+alex_doc_content
+# %%
+ideas_obj[choice_number]["alex_doc_content"] = alex_doc_content
+add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
 # %%
 ## LOADS completed vars for step
 CONDUCTOR_KEY = "20230814160057"
@@ -395,36 +499,7 @@ hist_var = get_reserach_from_file(CONDUCTOR_KEY)
 load_global_vars(hist_var)
 
 # %%
-joined_tech_edit = '\n'.join(tech_edit)
-doc_format_chain = LLMChain(prompt=DOC_FORMAT_PROMPT, llm=LLM_FACT_4)
-doc_format = doc_format_chain.run(
-    {"idea": idea_of_choice, "doc_source": joined_tech_edit}
-)
 
 # %%
-doc_format_obj = json.loads(doc_format)
-ideas_obj[choice_number]["doc_format_obj"] = doc_format_obj
-add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
-
+feedback_reference
 # %%
-alex_content_chain = LLMChain(prompt=ALEX_PERSONA_PROMPT, llm=LLM_CHAT_4)
-previous_section = ""
-alex_doc_content = [doc_format_obj['title']]
-for current_section in doc_format_obj['content']:
-    alex_content_section = alex_content_chain.run(
-        {"idea": idea_of_choice, "feedback_reference": feedback_reference,
-        "doc_format_obj": doc_format_obj,
-        "doc_source": tech_edit,
-        "previous_section": previous_section,
-        "current_section": current_section,}
-    )
-    previous_section = alex_content_section
-    alex_doc_content.append(alex_content_section)
-
-
-# %%
-ideas_obj[choice_number]["alex_doc_content"] = alex_doc_content
-add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
-
-# %%
-idea_of_choice

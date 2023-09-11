@@ -7380,5 +7380,193 @@
         "source": "http://arxiv.org/abs/2306.08647v2",
         "date": 20230616,
         "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-30",
+        "Title": "LLaSM: Large Language and Speech Model",
+        "Authors": "Yu Shu, Siwei Dong, Guangyao Chen, Wenhao Huang, Ruihua Zhang, Daochen Shi, Qiqi Xiang, Yemin Shi",
+        "published_first_time": "2023-08-30",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.LG",
+            "cs.SD",
+            "eess.AS"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.15930v1",
+            "http://arxiv.org/pdf/2308.15930v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.15930v1",
+        "date": 20230830,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-30",
+        "Title": "SAM-Med2D",
+        "Authors": "Junlong Cheng, Jin Ye, Zhongying Deng, Jianpin Chen, Tianbin Li, Haoyu Wang, Yanzhou Su, Ziyan Huang, Jilong Chen, Lei Jiang, Hui Sun, Junjun He, Shaoting Zhang, Min Zhu, Yu Qiao",
+        "published_first_time": "2023-08-30",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.16184v1",
+            "http://arxiv.org/pdf/2308.16184v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.16184v1",
+        "date": 20230830,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-29",
+        "Title": "Vector Search with OpenAI Embeddings: Lucene Is All You Need",
+        "Authors": "Jimmy Lin, Ronak Pradeep, Tommaso Teofili, Jasper Xian",
+        "published_first_time": "2023-08-29",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.IR",
+        "categories": [
+            "cs.IR"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.14963v1",
+            "http://arxiv.org/pdf/2308.14963v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.14963v1",
+        "date": 20230829,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-21",
+        "Title": "Graph of Thoughts: Solving Elaborate Problems with Large Language Models",
+        "Authors": "Maciej Besta, Nils Blach, Ales Kubicek, Robert Gerstenberger, Lukas Gianinazzi, Joanna Gajda, Tomasz Lehmann, Michal Podstawski, Hubert Niewiadomski, Piotr Nyczyk, Torsten Hoefler",
+        "published_first_time": "2023-08-18",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.09687v2",
+            "http://arxiv.org/pdf/2308.09687v2"
+        ],
+        "source": "http://arxiv.org/abs/2308.09687v2",
+        "date": 20230821,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-31",
+        "Title": "MVDream: Multi-view Diffusion for 3D Generation",
+        "Authors": "Yichun Shi, Peng Wang, Jianglong Ye, Mai Long, Kejie Li, Xiao Yang",
+        "published_first_time": "2023-08-31",
+        "comment": "Our project page is https://MV-Dream.github.io",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.16512v1",
+            "http://arxiv.org/pdf/2308.16512v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.16512v1",
+        "date": 20230831,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-25",
+        "Title": "Nougat: Neural Optical Understanding for Academic Documents",
+        "Authors": "Lukas Blecher, Guillem Cucurull, Thomas Scialom, Robert Stojnic",
+        "published_first_time": "2023-08-25",
+        "comment": "17 pages, 10 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.CV"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.13418v1",
+            "http://arxiv.org/pdf/2308.13418v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.13418v1",
+        "date": 20230825,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-04",
+        "Title": "AnomalyGPT: Detecting Industrial Anomalies using Large Vision-Language Models",
+        "Authors": "Zhaopeng Gu, Bingke Zhu, Guibo Zhu, Yingying Chen, Ming Tang, Jinqiao Wang",
+        "published_first_time": "2023-08-29",
+        "comment": "Project page: https://anomalygpt.github.io",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.15366v2",
+            "http://arxiv.org/pdf/2308.15366v2"
+        ],
+        "source": "http://arxiv.org/abs/2308.15366v2",
+        "date": 20230904,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-28",
+        "Title": "FaceChain: A Playground for Identity-Preserving Portrait Generation",
+        "Authors": "Yang Liu, Cheng Yu, Lei Shang, Ziheng Wu, Xingjun Wang, Yuze Zhao, Lin Zhu, Chen Cheng, Weitao Chen, Chao Xu, Haoyu Xie, Yuan Yao, Wenmeng Zhou, Yingda Chen, Xuansong Xie, Baigui Sun",
+        "published_first_time": "2023-08-28",
+        "comment": "This is an ongoing work that will be consistently refined and\n  improved upon",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.14256v1",
+            "http://arxiv.org/pdf/2308.14256v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.14256v1",
+        "date": 20230828,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-24",
+        "Title": "Qwen-VL: A Frontier Large Vision-Language Model with Versatile Abilities",
+        "Authors": "Jinze Bai, Shuai Bai, Shusheng Yang, Shijie Wang, Sinan Tan, Peng Wang, Junyang Lin, Chang Zhou, Jingren Zhou",
+        "published_first_time": "2023-08-24",
+        "comment": "Code, demo and models are available at\n  https://github.com/QwenLM/Qwen-VL",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.12966v1",
+            "http://arxiv.org/pdf/2308.12966v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.12966v1",
+        "date": 20230824,
+        "namespace": "ai-research"
     }
 ]

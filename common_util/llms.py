@@ -29,6 +29,11 @@ LLM_FACT_4 = ChatOpenAI(
     temperature=0.0
 )
 
+LLM_4_01 = ChatOpenAI(
+    model_name='gpt-4',
+    temperature=0.1
+)
+
 LLM_CHAT_4 = ChatOpenAI(
     model_name='gpt-4',
     temperature=0.2
