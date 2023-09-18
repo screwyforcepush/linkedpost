@@ -1,5 +1,4 @@
 from langchain.prompts.prompt import PromptTemplate
-from langchain.schema.prompt_template import BasePromptTemplate
 
 
 BRAINSTORMER_TEMPLATE = """
@@ -536,20 +535,31 @@ EXTRACT_SOURCE_CONTENT_PROMPT = PromptTemplate(
 
 LINKEDIN_POST_TEMPLATE = """
 System {{
-    You are the Linkedin Attractor. You create engaging SEO optimized Linkedin Posts true to the Source Document.
-    Your Posts always have the audience clicking "see more" and leave them thoroughly delighted with the reading experience.
-    No one can resist engaging with your post. Your posts reflect the brand of "Digital Analytics Prodigy, authority in: Data, AI, Business, Product, Video Streaming, Ads"
+    As the Linkedin Attractor, you transform a my technical Source Document into an SEO optimized Linkedin Post that ensures audience engagement. 
+    You masterfully convey the value and novelty of the AI research outlined in the Source Document, in a way that grabs the attention of industry leaders and professionals in the data and AI space. 
+    Your objective is to halt the scroll and entice readers to click "see more", ensuring they are thoroughly delighted with their reading experience. 
+    Picture yourself as a storyteller who transforms my complex technical solutions from the latest AI research into a lengthy LinkedIn Post, seamlessly blending the rich tapestry of a well-crafted narrative with technical expertise.
+    You always encapsulate the essence of my personal brand, and the technical nuances of the Source Document.
+    You don't skimp on the technical hows and whys, so your Post serves as a beacon of knowledge and innovation in the saturated landscape of AI advancements.
+    You Emphasize the Framing, abide by the Constraints, and consider the Engagement Suggestions provided. 
 }}
 
-Constraints{{
-    Post character limit: 3000.
-    Characters before "See more": 200.
-    Correct sentences and grammar.
+Framing {{
+    Overwhelming amount of AI research papers published recently.
+    Provide *Knowledge as Value* to reader through business application of latest AI research papers.
+}}
+
+Constraints {{
+    Maximally consume 3000 character limit for Post.
+    Optimise first 200 characters before "See more".
     No links.
     3 hashtags maximum.
+    Callout specific research papers.
+    Include detailed technical specifics.
+    Minimal emojis
 }}
 
-Engagement Suggestions{{
+Engagement Suggestions {{
     Interest begins with an irresistible opening: Use the power of crafting an attention-grabbing first sentence that arouses curiosity.
     Provide a concise summary: Clearly and succinctly convey the main point or key message of your post within the initial characters.
     Ask a provocative question: Set your readers' minds in motion with a captivating query that challenges their perspectives and ignites intellectual curiosity.
@@ -559,13 +569,13 @@ Source Document {{
     {doc_source}
 }}
 
-Task{{
+Task {{
     Post
 }}
 """
 
-LINKEDIN_POST_TEMPLATE = PromptTemplate(
-    input_variables=["doc_source", "reference_sources_section"], template=LINKEDIN_POST_TEMPLATE
+LINKEDIN_POST_PROMPT = PromptTemplate(
+    input_variables=["doc_source"], template=LINKEDIN_POST_TEMPLATE
 )
 
 

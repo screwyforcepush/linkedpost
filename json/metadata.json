@@ -7568,5 +7568,205 @@
         "source": "http://arxiv.org/abs/2308.12966v1",
         "date": 20230824,
         "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-07",
+        "Title": "Transformers as Support Vector Machines",
+        "Authors": "Davoud Ataee Tarzanagh, Yingcong Li, Christos Thrampoulidis, Samet Oymak",
+        "published_first_time": "2023-08-31",
+        "comment": "minor edits and update global convergence figure",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL",
+            "math.OC"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.16898v2",
+            "http://arxiv.org/pdf/2308.16898v2"
+        ],
+        "source": "http://arxiv.org/abs/2308.16898v2",
+        "date": 20230907,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-01",
+        "Title": "RLAIF: Scaling Reinforcement Learning from Human Feedback with AI Feedback",
+        "Authors": "Harrison Lee, Samrat Phatale, Hassan Mansoor, Kellie Lu, Thomas Mesnard, Colton Bishop, Victor Carbune, Abhinav Rastogi",
+        "published_first_time": "2023-09-01",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.00267v1",
+            "http://arxiv.org/pdf/2309.00267v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.00267v1",
+        "date": 20230901,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-12",
+        "Title": "GPT Can Solve Mathematical Problems Without a Calculator",
+        "Authors": "Zhen Yang, Ming Ding, Qingsong Lv, Zhihuan Jiang, Zehai He, Yuyi Guo, Jinfeng Bai, Jie Tang",
+        "published_first_time": "2023-09-06",
+        "comment": "26pages,14figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.03241v2",
+            "http://arxiv.org/pdf/2309.03241v2"
+        ],
+        "source": "http://arxiv.org/abs/2309.03241v2",
+        "date": 20230912,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-07",
+        "Title": "Large Language Models as Optimizers",
+        "Authors": "Chengrun Yang, Xuezhi Wang, Yifeng Lu, Hanxiao Liu, Quoc V. Le, Denny Zhou, Xinyun Chen",
+        "published_first_time": "2023-09-07",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.03409v1",
+            "http://arxiv.org/pdf/2309.03409v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.03409v1",
+        "date": 20230907,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-11",
+        "Title": "ImageBind-LLM: Multi-modality Instruction Tuning",
+        "Authors": "Jiaming Han, Renrui Zhang, Wenqi Shao, Peng Gao, Peng Xu, Han Xiao, Kaipeng Zhang, Chris Liu, Song Wen, Ziyu Guo, Xudong Lu, Shuai Ren, Yafei Wen, Xiaoxin Chen, Xiangyu Yue, Hongsheng Li, Yu Qiao",
+        "published_first_time": "2023-09-07",
+        "comment": "Code is available at https://github.com/OpenGVLab/LLaMA-Adapter",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.MM",
+        "categories": [
+            "cs.MM",
+            "cs.CL",
+            "cs.CV",
+            "cs.LG",
+            "cs.SD",
+            "eess.AS"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.03905v2",
+            "http://arxiv.org/pdf/2309.03905v2"
+        ],
+        "source": "http://arxiv.org/abs/2309.03905v2",
+        "date": 20230911,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-05",
+        "Title": "Explaining grokking through circuit efficiency",
+        "Authors": "Vikrant Varma, Rohin Shah, Zachary Kenton, J\u00e1nos Kram\u00e1r, Ramana Kumar",
+        "published_first_time": "2023-09-05",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.02390v1",
+            "http://arxiv.org/pdf/2309.02390v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.02390v1",
+        "date": 20230905,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-28",
+        "Title": "AI Deception: A Survey of Examples, Risks, and Potential Solutions",
+        "Authors": "Peter S. Park, Simon Goldstein, Aidan O'Gara, Michael Chen, Dan Hendrycks",
+        "published_first_time": "2023-08-28",
+        "comment": "18 pages (not including executive summary, references, and appendix),\n  six figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CY",
+        "categories": [
+            "cs.CY",
+            "cs.AI",
+            "cs.HC"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.14752v1",
+            "http://arxiv.org/pdf/2308.14752v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.14752v1",
+        "date": 20230828,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-07",
+        "Title": "FLM-101B: An Open LLM and How to Train It with $100K Budget",
+        "Authors": "Xiang Li, Yiqun Yao, Xin Jiang, Xuezhi Fang, Xuying Meng, Siqi Fan, Peng Han, Jing Li, Li Du, Bowen Qin, Zheng Zhang, Aixin Sun, Yequan Wang",
+        "published_first_time": "2023-09-07",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.03852v1",
+            "http://arxiv.org/pdf/2309.03852v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.03852v1",
+        "date": 20230907,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-05",
+        "Title": "Cognitive Architectures for Language Agents",
+        "Authors": "Theodore Sumers, Shunyu Yao, Karthik Narasimhan, Thomas L. Griffiths",
+        "published_first_time": "2023-09-05",
+        "comment": "16 pages of main content, 10 pages of references, 5 figures. Equal\n  contribution among the first two authors, order decided by coin flip. A\n  CoALA-based repo of recent work on language agents:\n  https://github.com/ysymyth/awesome-language-agents",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.LG",
+            "cs.SC"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.02427v1",
+            "http://arxiv.org/pdf/2309.02427v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.02427v1",
+        "date": 20230905,
+        "namespace": "ai-research"
     }
 ]

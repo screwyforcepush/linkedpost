@@ -29,6 +29,7 @@ from common_util.customPrompts import (
     ALEX_PERSONA_PROMPT,
     EXTRACT_IDEA_CONCEPTS_PROMPT,
     EXTRACT_SOURCE_CONTENT_PROMPT,
+    LINKEDIN_POST_PROMPT,
 )
 from common_util.llms import (
     LLM_BRAINSTORM,
@@ -68,7 +69,7 @@ langchain.debug = True
 
 # %%
 def load_global_vars(hist_obj):
-    global latest_research, doc_format_obj, tech_edit, ordered_doc_sections, feedback_reference, solution_feedback, baby_results, choice_number, ideas_obj, enrich, idea_of_choice, requirements, solution_skeleton
+    global alex_doc_content, latest_research, doc_format_obj, tech_edit, ordered_doc_sections, feedback_reference, solution_feedback, baby_results, choice_number, ideas_obj, enrich, idea_of_choice, requirements, solution_skeleton
     choice_number = hist_obj["idea_choice"]
     ideas_obj = hist_obj["ideas_obj"]
     latest_research = hist_obj["latest_research"]
@@ -82,6 +83,7 @@ def load_global_vars(hist_obj):
     ordered_doc_sections = ideas_obj[choice_number]["ordered_doc_sections"]
     tech_edit = ideas_obj[choice_number]["tech_edit"]
     doc_format_obj = ideas_obj[choice_number]["doc_format_obj"]
+    alex_doc_content = ideas_obj[choice_number]["alex_doc_content"]
 
 def get_historical_variable(key):
     global CONDUCTOR_KEY
@@ -488,7 +490,6 @@ for current_section in doc_format_obj['content']:
     previous_section = alex_content_section
     alex_doc_content.append(alex_content_section)
 
-alex_doc_content
 # %%
 ideas_obj[choice_number]["alex_doc_content"] = alex_doc_content
 add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
@@ -499,7 +500,25 @@ hist_var = get_reserach_from_file(CONDUCTOR_KEY)
 load_global_vars(hist_var)
 
 # %%
+# should include something about applying research to business in prompt instruction
+doc_source = '\n'.join(alex_doc_content)
+doc_source
 
 # %%
-feedback_reference
+post_chain = LLMChain(prompt=LINKEDIN_POST_PROMPT, llm=LLM_BRAINSTORM)
+post = post_chain.run(
+    {"doc_source": doc_source}
+)
+post
+
+# %%
+#NEEDS TO BE ABSTRACTED - subfolder
+CONTENT_FILENAME = './content/first/copy.json'
+add_to_research_file(property="post", value=post, key=CONDUCTOR_KEY, filename=CONTENT_FILENAME)
+add_to_research_file(property="article", value=doc_source, key=CONDUCTOR_KEY, filename=CONTENT_FILENAME)
+
+
+# %%
+print (doc_source)
+
 # %%

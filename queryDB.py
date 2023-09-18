@@ -227,13 +227,13 @@ def update_research_memory(query:str, namespace:NamespaceArg)->str:
     return sumer
 
 def get_latest_ai_research():
-    docs=get_latest_week_ai_research_abstracts()
+    docs, metadata = get_latest_week_ai_research_abstracts()
     sumer = summarise(docs, "novel, breakthrough, and unique methods and technology")
 
     add_research_to_file(sumer,docs, RESEARCH_FILENAME,CONDUCTOR_KEY)
     load_memory_vars(sumer)
     save_entities_to_long_cach()
-    return sumer
+    return sumer, metadata
 # %%
 tools = [
     # StructuredTool.from_function(
