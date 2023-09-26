@@ -624,7 +624,7 @@ def old_baby():
         AI_ENGINEERING_TOOL,
         VIDEO_STREAMING_RESEARCH_TOOL,
         AI_RESEARCH_TOOL,
-        SOLUTION_SKELETON_TOOL,
+        # SOLUTION_SKELETON_TOOL,
         ENTITY_TOOL,
     ]
 

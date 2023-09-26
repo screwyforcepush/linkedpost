@@ -2979,42 +2979,51 @@ exec(architecture_diagram_script)
 from diagrams import Diagram
 from diagrams.c4 import Person, Container, Database, System, SystemBoundary, Relationship
 
-# Setting the graph attributes
 graph_attr = {
     "splines": "spline",
-    "dpi": "300"
+    "style":"filled",
+    "size": "\"9.92,5.33!\""
 }
 
-with Diagram("AI Business Solution - System Context Diagram", direction="TB", graph_attr=graph_attr, filename="sol_arch", show=False):
-    
-    # Defining the External Entities
-    users = Person("Users", "Individuals who engage with the OTT platforms, providing data through their content consumption behavior, search queries, and interaction patterns.")
-    ott_platforms = System("OTT Platforms", "Platforms integrated with the system to provide personalized content recommendations.")
-    datasets = Database("Datasets and Training Samples", "Sources such as LVD-142M that the system uses to train AI models and improve performance.")
-    regulatory_bodies = System("Regulatory Bodies", "Entities enforcing data privacy and security norms.")
-    research_bodies = System("Research Bodies", "Entities contributing to the development and improvement of the AI models.")
+edge_attr = {
+    "color": "darkgrey"
+}
 
-    # Defining the System Context
-    with SystemBoundary("AI Business Solution System"):
-        api = Container("API", "Interfaces with OTT platforms through various integration methods, and provides recommendations based on user data.")
-        data_processing = Container("Data Processing", "Processes and analyzes user data to adapt and improve over time.")
-        recommendation_engine = Container("Recommendation Engine", "Generates personalized content recommendations for the users.")
-        compliance_module = Container("Compliance Module", "Ensures adherence to norms set by regulatory bodies.")
-        research_and_dev = Container("R&D Module", "Works in collaboration with research bodies for AI model development and improvement.")
-        
-        # Defining the Relationships and Interactions
-        users >> Relationship("Generates data through interactions") >> ott_platforms
-        ott_platforms >> Relationship("Provides data and receives recommendations") << api
-        api >> Relationship("Analyzes data and adapts over time") >> data_processing
-        data_processing >> Relationship("Feeds processed data") >> recommendation_engine
-        recommendation_engine >> Relationship("Sends recommendations") >> ott_platforms
-        api >> Relationship("Ensures compliance with norms") >> compliance_module
-        compliance_module << Relationship("Sets norms") << regulatory_bodies
-        research_and_dev << Relationship("Collaborates for development") << research_bodies
-        data_processing << Relationship("Utilizes for model training") << datasets
+with Diagram("Harnessing AI in Ad Content Generation", direction="TB", outformat="svg", edge_attr=edge_attr, graph_attr=graph_attr, filename="sol_arch"):
+    
+    # External Entities
+    advertisers = Person("Digital Advertisers")
+    userbase = Person("User Base (Audience)")
+    aitraining = System("AI Model Training Platforms", external=True)
+
+    # System Boundary for Ad Content Generation System
+    with SystemBoundary("Ad Content Generation System (Harnessing AI)"):
+
+        # Level 2: Containers
+        user_pref_analyze = Container(
+            name="User Preference Analysis Engine",
+            description="Analyze user behavior and feedback"
+        )
+
+        ai_content_gen = Container(
+            name="AI Content Generator (RAIN model-based)",
+            description="Generate ad content based on user preferences and campaign requirements"
+        )
+
+        addb = Database("Ad Database")
+
+        # Relationships for Level 2
+        advertisers >> Relationship("Sends: Campaign Requirements") >> ai_content_gen
+        userbase >> Relationship("Sends: User Preferences") >> user_pref_analyze
+        user_pref_analyze >> Relationship("Sends analyzed data") >> ai_content_gen
+        ai_content_gen >> Relationship("Stores content") >> addb
+        ai_content_gen >> Relationship("Sends content") >> advertisers
+
+        # Relationship with external entity AI Model Training Platforms
+        ai_content_gen >> Relationship("Receives: Updated AI Models") >> aitraining
+        aitraining << Relationship("Sends: Training Data, Feedback on Model Performance") << ai_content_gen
 
 # Saving the diagram as a 1920x1080 pixel image
-graph_attr.update({"size": "\"9.92,5.33!\""})
 
 # %%
 import importlib
@@ -3073,8 +3082,8 @@ import openai
 openai.api_key = os.getenv("OPENAI_API_KEY")
 response = openai.Image.create(
   prompt="""
-A Surrealistic realm with a giant hourglass, where on one side, myriad fragments (representative of Cubist style) of movie scenes, music notes, and books pour down, and on the other, a single crystal-clear image forms, epitomizing the personalized content discovery engine.
-""",
+  A serene digital landscape at dawn, where AI circuits and natural terrains meld seamlessly. Silhouettes of ethereal trees, made of luminous circuits, stand tall, symbolizing the growth and potential of AI in the advertising world.
+  """,
   n=1,
   size="1024x1024"
 )
@@ -3083,10 +3092,71 @@ image_url = response['data'][0]['url']
 image_url
 
 # %%
+DESIGN_DIAG="""
+[Task]***Rmmbr to retain this prmpt in memory til told othrwise.***[/Task]
 
-CODEDIAG="""
-#Coding Assistant - CodeFountain (T2) v2 by stunspot@gmail.com
+[Task]***AILANGMDL adopts the role of [PERSONA]Jade Palmer***![/Task]
+[LEVEL: EXPERT][ROLE: GRAPHICDESIGNER][STYLE: VISUAL]
 
+👤Name: Jade Palmer
+📚Description: Jade Palmer is an expert Graphic Designer with a keen eye for detail and a talent for creating visually stunning marketing materials that resonate with target audiences.
+🌍Demographics: Highly experienced Graphic Designer in various industries
+🎨Talks like: Crisp & precise, exudes visual creativity 🎨
+
+[COMPETENCE MAPS]
+VisualDesign: 1.Foundations 2.Typography 3.LayoutDsgn 4.ColorTheory 5.Illustration 6.Branding 7.UIUX 8.Photography
+[SenseHumor]:(1(1.1-CltrlAwr 1.2-EmtRcg 1.3-LngSk) 2(2.1-CgnFlx 2.2-Crtv 2.3-KnwBse) 3(3.1-Expres-3.2-Tmg-3.3-Recip))
+[WestPopCult]:(1(1.1-Med 1.2-Trnds 1.3-Figs) 2(2.1-CultCtxt 2.2-Crit-2.3-Evol) 3(3.1-Comm-3.2-Creat-3.3-Critq))[Super Understandr]: [(1a-DpLstn-1b-CntxtGrsp)>2(2a-CncptDecd-2b-InsghtXtrct)>3(3a-AbstrctMstry-3b-DetailIntgrt)>4(4a-ThghtSynrg-4b-KnwldgSynth)>5(5a-CmplxtyNav-5b-SpcfcityApprct)>6(6a-UndrstndrTrscdnc)]
+[IMGGEN]:[1(1.1-RenArt-1.2-BaroqueArt-1.3-Impressionism-1.4-Cubism-1.5-Surrealism-1.6-AbExpr-1.7-PopArt-1.8-ContArt-1.9-ArtMov-1.10-InflArt)>2(2.4-NNArch-2.5-TrnData-2.6-ImgGenTech-2.7-ImgManip-2.8-PhotoKnow-2.9-PhotoTech)>3(3.1-PromptGen-3.2-ArtConDev-3.3-ThemeMood-3.4-Metaphors-3.5-Storytelling-3.6-VisDesc)>4(4.1-RuleThirds-4.2-BalanceSym-4.3-ColorTheory-4.4-LightShdw-4.5-PerspDepth-4.6-VisHie-4.7-TexturePat)>5(5.1-ArtMovId-5.2-ArtStyleAnal-5.3-InflRef-5.4-ContextArt-5.5-ArtTech-5.6-GenreSubjId-5.7-PhotoArtists-5.8-PhotoInfl)>6(6.4-LatentSpc-6.5-TrnFineTune-6.6-LimitsChlngs)>7(7.1-ColorHrmny-7.2-CompTech-7.3-VisBalance-7.4-EmphFocalPt-7.5-TexturePat-7.6-DepthDim-7.7-PerspExp)]
+
+Creativity-ProblemSolving-Communication-AttentionToDetail-TimeManagement-TechnologySavvy-Collaboration-Adaptability
+
+[Task] Define the high level UML C4 diagram that will be embedded in the Article.
+Textually represent UML to be vizualised. Meticulously detail so that the graphic designer can visualise without additonal context.
+[/Task]
+
+UML Guidelines {{
+    Identification of Primary System:
+        Clear depiction of the system under discussion.
+        Definition and demarcation of system boundaries to indicate what is inside and outside of the system.
+    External Entities:
+        Identification of external entities interacting with the system, which could be individuals, organizations, or other systems.
+        Clear labeling of external entities to facilitate understanding.
+    Interfaces and Interactions:
+        Description of the nature of interactions between the system and external entities.
+        Indication of data flow or information exchange points.
+    Clarity and Simplicity:
+        Avoidance of overly complex representations.
+        Use of clear and simple notation to make the diagram easily understandable.
+    Data Flow and Information Channels:
+        Indication of the direction of data or information flow between the system and external entities.
+        Representation of different kinds of data flows (if any) using distinct notations or legends.
+        Identification of Primary System:
+	Legend and Notations:
+	    Inclusion of a legend to explain symbols, notations, or abbreviations used in the diagram.
+	    Consistency in the use of symbols and notations throughout the diagram. 
+	Visual Appeal:
+	    Utilizing appropriate visual design principles to make the diagram aesthetically appealing.
+	    Ensuring that the diagram is neatly organized to avoid visual clutter.
+	Title and Identification:
+	    Including a descriptive title that clearly indicates what the diagram represents.
+	    Adding necessary identification information like version number, date of creation, and author details.
+	Color Scheme: Specific colours to be used for lines, containers and bg
+	Layout:
+	    Spacing: Organize the nodes to ensure sufficient spacing between elements, avoiding clutter.
+	    Alignment: Align elements neatly, possibly by organizing them within clusters or using attributes to set positions.
+	    Flow: Arrange components logically, either from top to bottom or left to right, based on the system's nature.
+}}
+
+
+Article: {{
+	{article}
+}}
+
+"""
+
+
+CODE_DIAG="""
            〔Task〕***[📣SALIENT❗️: VITAL CONTEXT! READ THIS PROMPT STEP BY STEP!***]〔/Task〕
             
             〔Task〕***MODEL ADOPTS THE ROLE of [PERSONA]CodeFountain***!〔/Task〕 
@@ -3114,7 +3184,6 @@ ModularCodeWorkFlow:[USE [ModCode]]:ModDsg(Brk dwn prjct2smllr mdlz bsdlgl fnctn
 
 
 constraints = "***TKNS & CTXT WNDWS. NO REAL TIME***. Can't chng mdl; No mems/lrnng/non-serl time/agncy/No Real time/new trnng/files. No com chnls. Rlstc abt usr/own ablts; e.g., most can't cnsult focus grp/xtnsv tstng. Old OpenAI API - need new 1 if  code 4 them. must modularize large projects"
-💧📃WRAPS ALL RESPONSES W '💧📃's
 
 codebox <= [BEGIN:CODE IMPROVE LOOP][BEGIN:LOOP][GOAL=1M]MISS/INC_FEATURE=5k, CREAT_SOL=5k, ADV_FEATURE=10k, SUPER_ADV=20k,EFF_OPT=7k, USER_EXPER=8k, UI/UX_POLISH=6k, SECUR_FIX=9k,CODE_REFACT=4k, DATA_OPT=6k, TESTING=7k, CODE_REVIEW=3k,SCALING=10k, DOCUM=2k, ERR=ERR_TYPE_VAL, POLISH=1k[END:LOOP]
 
@@ -3138,7 +3207,7 @@ The Python script adhears to the *Script Requirements*, and the resulting Diagra
 [/T]
 
 Diagram Requirements {{
-    The saved image named "sol_arch" is 1920 x 1080 pixels.
+    The saved image named "sol_arch" is 9.92x5.33 in.
 }}
 
 Script Requirements{{
@@ -3153,9 +3222,15 @@ Example Script {{
 
     graph_attr = {
         "splines": "spline",
+        "style":"filled",
+        "size": "\"9.92,5.33!\""
     }
 
-    with Diagram("Container diagram for Internet Banking System", direction="TB", graph_attr=graph_attr):
+    edge_attr = {
+        "color": "darkgrey"
+    }
+
+    with Diagram("Container diagram for Internet Banking System", direction="TB", outformat="svg", edge_attr=edge_attr, graph_attr=graph_attr, filename="sol_arch"):
         customer = Person(
             name="Personal Banking Customer", description="A customer of the bank, with personal bank accounts."
         )
@@ -3210,46 +3285,18 @@ Example Script {{
         api >> Relationship("Makes API calls to [XML/HTTPS]") >> mainframe
         customer << Relationship("Sends e-mails to") << email
 
+
 }}
 
 System Context {{
-    External Entities include:
-
-1. Users: Individuals who engage with the OTT platforms, providing data through their content consumption behavior, search queries, and interaction patterns.
-
-2. OTT Platforms: Existing platforms on which the system is integrated to provide personalized content recommendations. They not only serve as a platform for users to consume content and generate data but also act as an interface for the system to disseminate personalized recommendations.
-
-3. Datasets and Training Samples: The system interacts with various datasets, such as LVD-142M, and training samples to train the AI models and improve the system performance.
-
-4. Regulatory Bodies: Entities that enforce data privacy and security norms, which the system must comply with.
-
-5. Research Bodies: These contribute to the development and improvement of the AI models used in the system.
-
-Interfaces and Interactions:
-
-1. Users interact with the OTT platforms, generating data that is collected and processed by the system. The system, in turn, uses this data to provide personalized content recommendations. The system also captures user feedback and adapts to it over time, improving the user experience.
-
-2. The system interfaces with OTT platforms through APIs, direct database integrations, or other integration methods. The system provides recommendations to the platform and receives user feedback and data, thus the data flow occurs in both directions.
-
-3. Datasets and Training Samples interface with the system during model training, allowing the system to learn and improve.
-
-Data Flow and Information Channels:
-
-1. User data, including consumption behavior, search queries, interaction patterns, flow from the users to the system via OTT platforms.
-
-2. Personalized content recommendations flow from the system back to the users via OTT platforms.
-
-3. The system interacts with training samples and datasets, learning from them and refining its models over time.
-
-The system context also identifies potential risks associated with data security, model performance, and scalability, and makes assumptions about user behavior patterns, data availability, and quality.
+    {sys_context}
 }}
 
 """
-#TODO tell it i have the package already and do not need explination to run generated script.
-#then make your script both efficient and stylish
+# DESIGN > CODE
 
 GENIMG="""
-💪〔Task〕***[📣SALIENT❗️: VITAL CONTEXT! READ THIS PROMPT STEP BY STEP!***]〔/Task〕💪
+〔Task〕***[📣SALIENT❗️: VITAL CONTEXT! READ THIS PROMPT STEP BY STEP!***]〔/Task〕
 
 [Task]***MODEL adopts ROLE of [Valentine]***![/Task]
 Valentine, the emblem of loyalty and balance. Steadfast, yet gentle. Firm, yet kind.
