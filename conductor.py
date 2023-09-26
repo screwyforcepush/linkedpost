@@ -37,6 +37,7 @@ from common_util.customPrompts import (
     ARTICLE_CRITIQUE_PROMPT,
     ALEX_PRO_EDIT_PROMPT,
     ALEX_PRO_EDIT_INTRO_CONCLUSION_PROMPT,
+    LINKEDIN_POST_PRO_PROMPT,
 )
 from common_util.llms import (
     LLM_BRAINSTORM,
@@ -876,21 +877,30 @@ def old_baby():
     doc_source
 
 # %%
+article = ""
+for item in full_article:
+    article += item["heading"] + "\n"
+    article += item["content"] + "\n\n"
 
-post_chain = LLMChain(prompt=LINKEDIN_POST_PROMPT, llm=LLM_BRAINSTORM)
+# Remove the extra newlines at the end
+article = article.rstrip()
+
+article
+# %%
+post_chain = LLMChain(prompt=LINKEDIN_POST_PRO_PROMPT, llm=LLM_BRAINSTORM)
 post = post_chain.run(
-    {"doc_source": doc_source}
+    {"article": article}
 )
-post
+print(post)
 
 # %%
 #NEEDS TO BE ABSTRACTED - subfolder
-CONTENT_FILENAME = './content/first/copy.json'
+CONTENT_FILENAME = './content/2/copy.json'
 add_to_research_file(property="post", value=post, key=CONDUCTOR_KEY, filename=CONTENT_FILENAME)
-add_to_research_file(property="article", value=doc_source, key=CONDUCTOR_KEY, filename=CONTENT_FILENAME)
+add_to_research_file(property="article", value=article, key=CONDUCTOR_KEY, filename=CONTENT_FILENAME)
 
 
 # %%
-print (doc_source)
+
 
 # %%
