@@ -15,6 +15,8 @@ from common_util.customClasses import (ResearchInput, UpdateResearchMemoryInput)
 import re
 import json
 import tiktoken
+from langchain.chains.question_answering import load_qa_chain
+from langchain.chains import LLMChain
 load_dotenv()
 # %%
 
@@ -39,11 +41,6 @@ def set_conductor_key(key):
 def get_conductor_key():
     global CONDUCTOR_KEY
     return CONDUCTOR_KEY
-
-# %%
-
-from langchain.chains.question_answering import load_qa_chain
-from langchain.chains import LLMChain
 
 # %%
 
@@ -97,12 +94,12 @@ def summarise(content,question,entities={}):
     prompt_template = """[System][Temperature=0][Persona]You are the Research Purifier. 
     You love to deeply understand the inner workings behind Research, then distill the applicable essence. You maximally compress the meaningful takeaways, while staying unambiguous to the model in a bare context.
     [TASK]
-    Your task is to share your subject matter expertise on the topic "{question}".
+    Share your subject matter expertise on the topic "{question}".
     Concisely summarise the underlying principles and facts from the Research provided.
     Include specifics about how and why the concept, method, technique works.
     Include an application execution example if applicable.
     You have access to some additional relevant entity Context.
-    Include in your summary any points of interest connected to the given Context.
+    Your Purified Distilation will be used to apply this research to business use cases.
     *Distill* *Summarise* *Purify*
     [/TASK]
 
@@ -111,6 +108,9 @@ def summarise(content,question,entities={}):
 
     # Research 
     {content}
+
+    # Purified Distillation
+
     """
     prompt = PromptTemplate(template=prompt_template, input_variables=["content", "question", "entities"])
 
@@ -137,7 +137,7 @@ def check_if_exists(title, filename):
     # Check if the title is in the file
     return title in data
 
-def add_research_to_file(summary, raw, filename, key=CONDUCTOR_KEY):
+def add_research_to_file(summary, filename, key=CONDUCTOR_KEY):
     data = []
 
     # If file exists, load existing data
@@ -152,14 +152,10 @@ def add_research_to_file(summary, raw, filename, key=CONDUCTOR_KEY):
                 item['summaries'].append(summary)
             else:
                 item['summaries']=[summary]
-            if 'raw' in item:
-                item['raw'].append(raw)
-            else:
-                item['raw']=[raw]
             item['seed']=SEED_QUERY
             break
     else:
-        data.append({'key':key,'seed':SEED_QUERY,'summaries':[summary],'raw':[raw]})
+        data.append({'key':key,'seed':SEED_QUERY,'summaries':[summary]})
 
     # Write the data back to the file
     with open(filename, 'w') as f:
@@ -220,20 +216,20 @@ def update_research_memory(query:str, namespace:NamespaceArg)->str:
                              entities=get_entities(use_long_cache=True,entity_tokens=3000,query=query),
                              tokens=5000)
     sumer = summarise(docs, query, entities=get_entities(use_long_cache=True,entity_tokens=1000,query=query))
-    add_research_to_file(sumer,docs, RESEARCH_FILENAME,CONDUCTOR_KEY)
+    add_research_to_file(sumer, RESEARCH_FILENAME,CONDUCTOR_KEY)
     load_memory_vars(sumer)
     save_entities_to_long_cach()
 
     return sumer
 
-def get_latest_ai_research():
-    docs, metadata = get_latest_week_ai_research_abstracts()
-    sumer = summarise(docs, "novel, breakthrough, and unique methods and technology")
+# def get_latest_ai_research():
+#     docs, metadata = get_latest_week_ai_research_abstracts()
+#     sumer = summarise(docs, "novel, breakthrough, and unique methods and technology")
 
-    add_research_to_file(sumer,docs, RESEARCH_FILENAME,CONDUCTOR_KEY)
-    load_memory_vars(sumer)
-    save_entities_to_long_cach()
-    return sumer, metadata
+#     add_research_to_file(sumer,docs, RESEARCH_FILENAME,CONDUCTOR_KEY)
+#     load_memory_vars(sumer)
+#     save_entities_to_long_cach()
+#     return sumer, metadata
 # %%
 tools = [
     # StructuredTool.from_function(

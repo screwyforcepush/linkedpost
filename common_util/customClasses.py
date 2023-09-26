@@ -109,7 +109,7 @@ class ResearchInput(BaseModel):
     
 class UpdateResearchMemoryInput(BaseModel):
     """Research a topic"""
-    query: str = Field(..., description="should be the question the research assistant will provide learnings about")
+    query: str = Field(..., description="should be the detailed question the research assistant will provide learnings about.")
     namespace: str = Field(..., description=f"must be one of{get_all_namespace_values()}")
     # dig_deeper: bool = Field(description="set to 'True' to get interesting tangental learnings")
     @validator('namespace')

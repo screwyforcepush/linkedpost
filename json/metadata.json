@@ -7768,5 +7768,235 @@
         "source": "http://arxiv.org/abs/2309.02427v1",
         "date": 20230905,
         "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-11",
+        "Title": "Textbooks Are All You Need II: phi-1.5 technical report",
+        "Authors": "Yuanzhi Li, S\u00e9bastien Bubeck, Ronen Eldan, Allie Del Giorno, Suriya Gunasekar, Yin Tat Lee",
+        "published_first_time": "2023-09-11",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.05463v1",
+            "http://arxiv.org/pdf/2309.05463v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.05463v1",
+        "date": 20230911,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-15",
+        "Title": "The Rise and Potential of Large Language Model Based Agents: A Survey",
+        "Authors": "Zhiheng Xi, Wenxiang Chen, Xin Guo, Wei He, Yiwen Ding, Boyang Hong, Ming Zhang, Junzhe Wang, Senjie Jin, Enyu Zhou, Rui Zheng, Xiaoran Fan, Xiao Wang, Limao Xiong, Yuhao Zhou, Weiran Wang, Changhao Jiang, Yicheng Zou, Xiangyang Liu, Zhangyue Yin, Shihan Dou, Rongxiang Weng, Wensen Cheng, Qi Zhang, Wenjuan Qin, Yongyan Zheng, Xipeng Qiu, Xuanjing Huang, Tao Gui",
+        "published_first_time": "2023-09-14",
+        "comment": "86 pages, 12 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.07864v2",
+            "http://arxiv.org/pdf/2309.07864v2"
+        ],
+        "source": "http://arxiv.org/abs/2309.07864v2",
+        "date": 20230915,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-13",
+        "Title": "RAIN: Your Language Models Can Align Themselves without Finetuning",
+        "Authors": "Yuhui Li, Fangyun Wei, Jinjing Zhao, Chao Zhang, Hongyang Zhang",
+        "published_first_time": "2023-09-13",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.07124v1",
+            "http://arxiv.org/pdf/2309.07124v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.07124v1",
+        "date": 20230913,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-12",
+        "Title": "Robot Parkour Learning",
+        "Authors": "Ziwen Zhuang, Zipeng Fu, Jianren Wang, Christopher Atkeson, Soeren Schwertfeger, Chelsea Finn, Hang Zhao",
+        "published_first_time": "2023-09-11",
+        "comment": "CoRL 2023 (Oral). Project website at https://robot-parkour.github.io",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.RO",
+        "categories": [
+            "cs.RO",
+            "cs.AI",
+            "cs.CV",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.05665v2",
+            "http://arxiv.org/pdf/2309.05665v2"
+        ],
+        "source": "http://arxiv.org/abs/2309.05665v2",
+        "date": 20230912,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-12",
+        "Title": "A Survey of Hallucination in Large Foundation Models",
+        "Authors": "Vipula Rawte, Amit Sheth, Amitava Das",
+        "published_first_time": "2023-09-12",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.AI",
+        "categories": [
+            "cs.AI",
+            "cs.CL",
+            "cs.IR"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.05922v1",
+            "http://arxiv.org/pdf/2309.05922v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.05922v1",
+        "date": 20230912,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-14",
+        "Title": "Agents: An Open-source Framework for Autonomous Language Agents",
+        "Authors": "Wangchunshu Zhou, Yuchen Eleanor Jiang, Long Li, Jialong Wu, Tiannan Wang, Shi Qiu, Jintian Zhang, Jing Chen, Ruipu Wu, Shuai Wang, Shiding Zhu, Jiyu Chen, Wentao Zhang, Ningyu Zhang, Huajun Chen, Peng Cui, Mrinmaya Sachan",
+        "published_first_time": "2023-09-14",
+        "comment": "Code available at https://github.com/aiwaves-cn/agents",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.07870v1",
+            "http://arxiv.org/pdf/2309.07870v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.07870v1",
+        "date": 20230914,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-29",
+        "Title": "Radiology-Llama2: Best-in-Class Large Language Model for Radiology",
+        "Authors": "Zhengliang Liu, Yiwei Li, Peng Shu, Aoxiao Zhong, Longtao Yang, Chao Ju, Zihao Wu, Chong Ma, Jie Luo, Cheng Chen, Sekeun Kim, Jiang Hu, Haixing Dai, Lin Zhao, Dajiang Zhu, Jun Liu, Wei Liu, Dinggang Shen, Tianming Liu, Quanzheng Li, Xiang Li",
+        "published_first_time": "2023-08-29",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.06419v1",
+            "http://arxiv.org/pdf/2309.06419v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.06419v1",
+        "date": 20230829,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-28",
+        "Title": "Communicative Agents for Software Development",
+        "Authors": "Chen Qian, Xin Cong, Wei Liu, Cheng Yang, Weize Chen, Yusheng Su, Yufan Dang, Jiahao Li, Juyuan Xu, Dahai Li, Zhiyuan Liu, Maosong Sun",
+        "published_first_time": "2023-07-16",
+        "comment": "https://github.com/OpenBMB/ChatDev",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.SE",
+        "categories": [
+            "cs.SE",
+            "cs.CL",
+            "cs.MA"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.07924v3",
+            "http://arxiv.org/pdf/2307.07924v3"
+        ],
+        "source": "http://arxiv.org/abs/2307.07924v3",
+        "date": 20230828,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-11",
+        "Title": "MAmmoTH: Building Math Generalist Models through Hybrid Instruction Tuning",
+        "Authors": "Xiang Yue, Xingwei Qu, Ge Zhang, Yao Fu, Wenhao Huang, Huan Sun, Yu Su, Wenhu Chen",
+        "published_first_time": "2023-09-11",
+        "comment": "Work in progress; Xiang Yue and Wenhu Chen contributed equally to\n  this paper",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.05653v1",
+            "http://arxiv.org/pdf/2309.05653v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.05653v1",
+        "date": 20230911,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-20",
+        "Title": "Algorithm of Thoughts: Enhancing Exploration of Ideas in Large Language Models",
+        "Authors": "Bilgehan Sel, Ahmad Al-Tawaha, Vanshaj Khattar, Lu Wang, Ruoxi Jia, Ming Jin",
+        "published_first_time": "2023-08-20",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2308.10379v1",
+            "http://arxiv.org/pdf/2308.10379v1"
+        ],
+        "source": "http://arxiv.org/abs/2308.10379v1",
+        "date": 20230820,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-02-16",
+        "Title": "Tuning computer vision models with task rewards",
+        "Authors": "Andr\u00e9 Susano Pinto, Alexander Kolesnikov, Yuge Shi, Lucas Beyer, Xiaohua Zhai",
+        "published_first_time": "2023-02-16",
+        "comment": "11 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2302.08242v1",
+            "http://arxiv.org/pdf/2302.08242v1"
+        ],
+        "source": "http://arxiv.org/abs/2302.08242v1",
+        "date": 20230216,
+        "namespace": "ai-research"
     }
 ]

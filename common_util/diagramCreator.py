@@ -3014,7 +3014,7 @@ with Diagram("AI Business Solution - System Context Diagram", direction="TB", gr
         data_processing << Relationship("Utilizes for model training") << datasets
 
 # Saving the diagram as a 1920x1080 pixel image
-graph_attr.update({"size": "\"19.2,10.8!\""})
+graph_attr.update({"size": "\"9.92,5.33!\""})
 
 # %%
 import importlib
@@ -3073,8 +3073,8 @@ import openai
 openai.api_key = os.getenv("OPENAI_API_KEY")
 response = openai.Image.create(
   prompt="""
-A Contemporary art piece, drawing from Cubism, depicting a dynamic and multifaceted digital ecosystem, where technology and humanity converge, represented through an intricate mosaic of geometric forms and earthy tones.
- """,
+A Surrealistic realm with a giant hourglass, where on one side, myriad fragments (representative of Cubist style) of movie scenes, music notes, and books pour down, and on the other, a single crystal-clear image forms, epitomizing the personalized content discovery engine.
+""",
   n=1,
   size="1024x1024"
 )

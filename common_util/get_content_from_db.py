@@ -85,9 +85,9 @@ def get_latest_week_ai_research_abstracts():
     two_weeks_ago = (datetime.now() - timedelta(days=14)).strftime('%Y%m%d')
     db = Pinecone.from_existing_index(index_name, EMBEDDINGS, namespace='ai-research')
     retriever_all = db.as_retriever(
-        search_type="similarity", search_kwargs={"k": 20, "filter": { "date": { '$gt': int(two_weeks_ago) } }}
+        search_type="similarity", search_kwargs={"k": 20, "filter": { "date": { '$gt': int(two_weeks_ago) }, "page": { '$lt': 2 }}}
     )
-    docs = retriever_all.get_relevant_documents("in conclusion the main findings are summarised")
+    docs = retriever_all.get_relevant_documents("abstract")
     return get_docs_content(docs)
 # %%
 def get_research_source_doc(query):
@@ -96,4 +96,6 @@ def get_research_source_doc(query):
         search_type="similarity", search_kwargs={"k": 1}
     )
     return retriever_all.get_relevant_documents(query)
+# %%
+get_latest_week_ai_research_abstracts()
 # %%

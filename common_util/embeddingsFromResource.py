@@ -111,16 +111,19 @@ text_splitter = RecursiveCharacterTextSplitter(
 def get_chunks_from_pdf_url(pdfLink, docMetadata):
     loader = OnlinePDFLoader(pdfLink)
     data = loader.load()
-    return get_chunks_from_loader_data(data, docMetadata)
+    return get_chunks_from_loader_data(data, docMetadata), data
  
 def get_chunks_from_loader_data(data, metadata=False, source_merge=False): 
     chunks = text_splitter.split_documents(data)
     if metadata:
+        page = 1
         for chunk in chunks:
             if(source_merge):
                 chunk.metadata['source'] = metadata['source']
             else:
                 chunk.metadata = metadata
+            chunk.metadata['page']=page
+            page=page+1 
     return chunks
 
 # %%

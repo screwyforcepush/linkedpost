@@ -20,11 +20,16 @@ import os
 from dotenv import load_dotenv
 from common_util.namespaceEnum import PineconeNamespaceEnum
 from langchain.document_loaders import UnstructuredPDFLoader
+from common_util.researchAssistant import research_condense
 import time
+
+from queryDB import add_to_research_file
 
 
 load_dotenv()
 DIFFBOT_API_KEY = os.getenv("DIFFBOT_API_KEY")
+RESEARCH_PAPERS_FILENAME = './json/ai_research_papers.json'
+
 
 def process_arxv():
     doc_queries_filename = './json/titles.json'
@@ -48,13 +53,18 @@ def process_arxv():
         for doc in kept_docs:
             pdfLink, docMetadata = process_document_metadata_from_resource(doc.metadata)
             if not not pdfLink:
-                chunks = get_chunks_from_pdf_url_from_resource(pdfLink, docMetadata)
+                # TODO get the doc content  for condenced = concept_condence
+                chunks, content = get_chunks_from_pdf_url_from_resource(pdfLink, docMetadata)
+                if docMetadata['Title']:
+                    add_to_research_file(property="source", value=docMetadata['source'], key=docMetadata['Title'], filename=RESEARCH_PAPERS_FILENAME)
+                    summary = research_condense(content[0].page_content)
+                    add_to_research_file(property="summary", value=summary, key=docMetadata['Title'], filename=RESEARCH_PAPERS_FILENAME)
                 upsert_chunks_from_resource(chunks, namespace)
                 doc.metadata['namespace']=namespace
                 add_metadata_from_resource(doc.metadata, filename)
         remove_doc_query_from_resource(doc_queries_filename, query)
     print("process_arxv complete")
-
+    
 # %%
 def process_git():
     git_queries_filename = './json/git_urls.json'
