@@ -901,6 +901,6 @@ add_to_research_file(property="article", value=article, key=CONDUCTOR_KEY, filen
 
 
 # %%
-
+print(article)
 
 # %%

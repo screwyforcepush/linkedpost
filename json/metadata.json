@@ -7998,5 +7998,181 @@
         "source": "http://arxiv.org/abs/2302.08242v1",
         "date": 20230216,
         "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-25",
+        "Title": "Chain-of-Verification Reduces Hallucination in Large Language Models",
+        "Authors": "Shehzaad Dhuliawala, Mojtaba Komeili, Jing Xu, Roberta Raileanu, Xian Li, Asli Celikyilmaz, Jason Weston",
+        "published_first_time": "2023-09-20",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.11495v2",
+            "http://arxiv.org/pdf/2309.11495v2"
+        ],
+        "source": "http://arxiv.org/abs/2309.11495v2",
+        "date": 20230925,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-17",
+        "Title": "Contrastive Decoding Improves Reasoning in Large Language Models",
+        "Authors": "Sean O'Brien, Mike Lewis",
+        "published_first_time": "2023-09-17",
+        "comment": "10 figures, 13 tables",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "I.2.7"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.09117v1",
+            "http://arxiv.org/pdf/2309.09117v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.09117v1",
+        "date": 20230917,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-21",
+        "Title": "LongLoRA: Efficient Fine-tuning of Long-Context Large Language Models",
+        "Authors": "Yukang Chen, Shengju Qian, Haotian Tang, Xin Lai, Zhijian Liu, Song Han, Jiaya Jia",
+        "published_first_time": "2023-09-21",
+        "comment": "Code, models, dataset, and demo are available at\n  https://github.com/dvlab-research/LongLoRA",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.12307v1",
+            "http://arxiv.org/pdf/2309.12307v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.12307v1",
+        "date": 20230921,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-19",
+        "Title": "Struc-Bench: Are Large Language Models Really Good at Generating Complex Structured Data?",
+        "Authors": "Xiangru Tang, Yiming Zong, Jason Phang, Yilun Zhao, Wangchunshu Zhou, Arman Cohan, Mark Gerstein",
+        "published_first_time": "2023-09-16",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.08963v2",
+            "http://arxiv.org/pdf/2309.08963v2"
+        ],
+        "source": "http://arxiv.org/abs/2309.08963v2",
+        "date": 20230919,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-19",
+        "Title": "Language Modeling Is Compression",
+        "Authors": "Gr\u00e9goire Del\u00e9tang, Anian Ruoss, Paul-Ambroise Duquenne, Elliot Catt, Tim Genewein, Christopher Mattern, Jordi Grau-Moya, Li Kevin Wenliang, Matthew Aitchison, Laurent Orseau, Marcus Hutter, Joel Veness",
+        "published_first_time": "2023-09-19",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL",
+            "cs.IT",
+            "math.IT"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.10668v1",
+            "http://arxiv.org/pdf/2309.10668v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.10668v1",
+        "date": 20230919,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-21",
+        "Title": "Compositional Foundation Models for Hierarchical Planning",
+        "Authors": "Anurag Ajay, Seungwook Han, Yilun Du, Shuang Li, Abhi Gupta, Tommi Jaakkola, Josh Tenenbaum, Leslie Kaelbling, Akash Srivastava, Pulkit Agrawal",
+        "published_first_time": "2023-09-15",
+        "comment": "Website: https://hierarchical-planning-foundation-model.github.io/",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.RO"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.08587v2",
+            "http://arxiv.org/pdf/2309.08587v2"
+        ],
+        "source": "http://arxiv.org/abs/2309.08587v2",
+        "date": 20230921,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-17",
+        "Title": "OWL: A Large Language Model for IT Operations",
+        "Authors": "Hongcheng Guo, Jian Yang, Jiaheng Liu, Liqun Yang, Linzheng Chai, Jiaqi Bai, Junran Peng, Xiaorong Hu, Chao Chen, Dongfeng Zhang, Xu Shi, Tieqiao Zheng, Liangfan Zheng, Bo Zhang, Ke Xu, Zhoujun Li",
+        "published_first_time": "2023-09-17",
+        "comment": "31 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.09298v1",
+            "http://arxiv.org/pdf/2309.09298v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.09298v1",
+        "date": 20230917,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-20",
+        "Title": "Kosmos-2.5: A Multimodal Literate Model",
+        "Authors": "Tengchao Lv, Yupan Huang, Jingye Chen, Lei Cui, Shuming Ma, Yaoyao Chang, Shaohan Huang, Wenhui Wang, Li Dong, Weiyao Luo, Shaoxiang Wu, Guoxin Wang, Cha Zhang, Furu Wei",
+        "published_first_time": "2023-09-20",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.CV"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.11419v1",
+            "http://arxiv.org/pdf/2309.11419v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.11419v1",
+        "date": 20230920,
+        "namespace": "ai-research"
+    },
+    {
+        "source": "https://github.com/daveshap/ACE_Framework",
+        "namespace": "ai-engineering-documentation"
     }
 ]
