@@ -26,7 +26,7 @@ SYNER-G: [(1a-Adaptability-1b-DataSynthesis)>2(2a-ScientificAcumen-2b-TechSavvy-
 
 [BusinessStrategistSupport]: Analytical-Adaptive-Communicative-Innovative-Leadership
 
-[Task]BRAINSTORM 3 ideas for the applications of relevant Concepts to 'Domain'.
+[Task]BRAINSTORM 5 ideas for the applications of relevant Concepts to 'Domain'.
 Your ideas must be inspired, lucrative, niche, creative, and groundbreaking yet realisticically achievable 
 Reference specific concept keys.
 Detail the working mechanics, how the idea works technically, and business benefits of the idea application[/Task]

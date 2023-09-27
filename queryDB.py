@@ -24,15 +24,17 @@ load_dotenv()
 PAPER_PATTERN = r'paper "(.*?)"'
 TITLES_FILENAME = './json/titles.json'
 RESEARCH_FILENAME = './json/research_summaries.json'
-SEED_QUERY="SEED QUERY PLACEHOLDER"
 CONDUCTOR_KEY="NOT SET"
-def set_seed_query(query):
-    global SEED_QUERY
-    SEED_QUERY=query
 
-def get_seed_query():
-    global SEED_QUERY
-    return SEED_QUERY
+# SHOULD NOT BE NEEDED ANYMORE
+# SEED_QUERY="SEED QUERY PLACEHOLDER"
+# def set_seed_query(query):
+#     global SEED_QUERY
+#     SEED_QUERY=query
+
+# def get_seed_query():
+#     global SEED_QUERY
+#     return SEED_QUERY
 
 def set_conductor_key(key):
     global CONDUCTOR_KEY
@@ -152,10 +154,9 @@ def add_research_to_file(summary, filename, key=CONDUCTOR_KEY):
                 item['summaries'].append(summary)
             else:
                 item['summaries']=[summary]
-            item['seed']=SEED_QUERY
             break
     else:
-        data.append({'key':key,'seed':SEED_QUERY,'summaries':[summary]})
+        data.append({'key':key,'summaries':[summary]})
 
     # Write the data back to the file
     with open(filename, 'w') as f:
