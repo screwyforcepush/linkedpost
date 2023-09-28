@@ -1,6 +1,7 @@
 import ast
 import json
 import re
+import os
 
 from common_util.memory import set_entity_memory_long_cache
 from common_util.researchAssistant import get_latest_ai_research
@@ -25,6 +26,14 @@ from common_util.llms import (
     LLM_FACT_4,
     LLM_FACT
 )
+
+from common_util.diagramCreator import (
+    DIAGRAM_DESIGN_PROMPT,
+    DIAGRAM_CODE_PROMPT,
+    IMG_GEN_PROMPT,
+    gen_fetch_img
+)
+
 from common_util.searchWeb import (
     run_judge_idea_agent,
     SEARCH_TOOL
@@ -39,10 +48,10 @@ from langchain import LLMChain
 
 
 langchain.debug = True
-global CONDUCTOR_KEY, domain, article_critique_obj, full_article, article_obj,article_structure, latest_research, choice_number, ideas_obj, enrich, idea_of_choice
+global CONDUCTOR_KEY, domain, article_critique_obj, full_article, article_obj,article_structure, latest_research, choice_number, ideas_obj, enrich, idea_of_choice, article, post
 # %%
 def load_global_vars(hist_obj):
-    global article_critique_obj, full_article, article_obj,article_structure, latest_research, choice_number, ideas_obj, enrich, idea_of_choice
+    global article_critique_obj, full_article, article_obj,article_structure, latest_research, choice_number, ideas_obj, enrich, idea_of_choice, article, post
     try:
         choice_number = hist_obj["idea_choice"]
         ideas_obj = hist_obj["ideas_obj"]
@@ -53,6 +62,7 @@ def load_global_vars(hist_obj):
         article_obj = hist_obj["article_obj"]
         full_article = hist_obj["full_article"]
         article_critique_obj = hist_obj["feedback"]
+        post = hist_obj["post"]
     except KeyError as e:
         print("stopped at", e)
 
@@ -62,14 +72,6 @@ def get_historical_variable(key):
     set_conductor_key(key)
     set_entity_memory_long_cache([])
     return get_reserach_from_file(key=key)
-
-
-# %%
-###
-
-#### UP HERE !!!!!!!
-
-###
 
 # %%
 ## LOADS completed vars for step
@@ -513,7 +515,72 @@ def final_edit():
     add_to_research_file(property="full_article", value=full_article, key=CONDUCTOR_KEY)
 
 # %%
-def gen_post_insert_content(article_no="3"):
+def gen_post():
+    global post
+
+    post_chain = LLMChain(prompt=LINKEDIN_POST_PRO_PROMPT, llm=LLM_BRAINSTORM)
+    post = post_chain.run(
+        {"article": full_article}
+    )
+
+def gen_diagram():
+    design_diagram_chain = LLMChain(prompt=DIAGRAM_DESIGN_PROMPT, llm=LLM_BRAINSTORM)
+    design = design_diagram_chain.run(
+        {"article": full_article}
+    )
+    code_diagram_chain = LLMChain(prompt=DIAGRAM_CODE_PROMPT, llm=LLM_BRAINSTORM)
+    code_response = code_diagram_chain.run(
+        {"design": design}
+    )
+    print("DIAGRAM CODE RESPONSE: ", code_response)
+    # Extract python code between the triple backticks
+    python_script = re.search(r'```python\n(.*?)\n```', diag_res, re.DOTALL)
+
+    # Extracted script
+    extracted_script = python_script.group(1) if python_script else None
+    extracted_script
+    exec(extracted_script)
+
+
+def gen_img():
+    img_chain = LLMChain(prompt=IMG_GEN_PROMPT, llm=LLM_BRAINSTORM)
+    valentine_response = img_chain.run(
+        {"post": post}
+    )
+    # Extract array between the square brackets
+    array_match = re.search(r'\[\s*"(.*?)"\s*,\s*"(.*?)"\s*\]', valentine_response, re.DOTALL)
+
+    # Extracted array
+    extracted_array = eval(array_match.group(0)) if array_match else None
+    gen_fetch_img(extracted_array)
+
+def move_imgs(path):
+    import shutil
+
+    source_directory = './'
+
+    # Loop through the range of file numbers
+    for i in range(1, 11):
+        file_name = f"img{i}.png"
+        shutil.move(source_directory + file_name, path + file_name)
+    shutil.move(source_directory + "sol_arch.png", path + "sol_arch.png")
+
+def mkdir_content_sub():
+    # Get a list of all existing directories under './content/'
+    dir_list = sorted([d for d in os.listdir('./content/') if os.path.isdir(os.path.join('./content/', d)) and d.isdigit()])
+
+    # Get the last directory in the sorted list and increment its number
+    highest_dir = dir_list[-1]
+    next_dir_num = int(highest_dir) + 1
+
+    # Create the directory for the next number
+    new_dir_path = './content/' + str(next_dir_num) + '/'
+    os.makedirs(new_dir_path, exist_ok=True)
+
+    return new_dir_path
+
+
+def create_copy_json(path):
     article = ""
     for item in full_article:
         article += item["heading"] + "\n"
@@ -521,17 +588,10 @@ def gen_post_insert_content(article_no="3"):
 
     # Remove the extra newlines at the end
     article = article.rstrip()
+    filename = "copy.json"
+    add_to_research_file(property="post", value=post, key=CONDUCTOR_KEY, filename=path+filename)
+    add_to_research_file(property="article", value=article, key=CONDUCTOR_KEY, filename=path+filename)
 
-    post_chain = LLMChain(prompt=LINKEDIN_POST_PRO_PROMPT, llm=LLM_BRAINSTORM)
-    post = post_chain.run(
-        {"article": article}
-    )
-
-    
-    #NEEDS TO BE ABSTRACTED - subfolder
-    CONTENT_FILENAME = "./content/"+article_no+"/copy.json"
-    add_to_research_file(property="post", value=post, key=CONDUCTOR_KEY, filename=CONTENT_FILENAME)
-    add_to_research_file(property="article", value=article, key=CONDUCTOR_KEY, filename=CONTENT_FILENAME)
     print("POST:\n")
     print(post)
     print("ARTICLE:\n")
@@ -548,23 +608,24 @@ domain={"industry":"OTT video streaming",
         "exclude": "personalised content discovery"}
 domain={"industry":"Digital product analytics platform",
         "domains":["Augmented Visualization", "Automated Feature Feedback Loop", "Real-time Anomaly Detection", "Predictive A/B Testing"]}
+
 # %%
 init_key_research()
 idea_gen()
+#%%
 enrich_idea(manual_select=True,choice_number="1")
 stucture()
-# %%
-set_key_load_vars(key="20230927215732")
-#%%
-
-
-# %%
 section_knowledge()
 content_gen()
 critique_learn()
 final_edit()
-gen_post_insert_content(article_no="3")
+gen_post()
+gen_diagram()
+gen_img()
+content_path=mkdir_content_sub()
+create_copy_json(content_path)
+move_imgs(content_path)
+# %%
+set_key_load_vars(key="20230927215732")
 
-#%%
-ideas_obj[choice_number]
 # %%
