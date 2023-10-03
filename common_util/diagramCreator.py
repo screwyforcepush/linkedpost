@@ -202,7 +202,7 @@ Example Script {{
         api >> Relationship("Makes API calls to [XML/HTTPS]") >> mainframe
         customer << Relationship("Sends e-mails to") << email
 
-    graph_attr.update({{"size": "\"9.92x5.33!\""}})
+    graph_attr.update({{"size": "9.92x5.33!"}})
 }}
 
 System Context {{

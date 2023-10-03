@@ -83,6 +83,7 @@ def set_key_load_vars(key = "20230921134237"):
 
 # %%
 def init_key_research():
+    global latest_research
     global CONDUCTOR_KEY
     CONDUCTOR_KEY = datetime.now().strftime("%Y%m%d%H%M%S")
     set_conductor_key(CONDUCTOR_KEY)
@@ -192,10 +193,10 @@ def enrich_idea(manual_select=True,choice_number="1"):
     # !! SELECT IDEA NUMBER HERE MANUAL
         add_to_research_file(property="idea_choice", value=choice_number, key=CONDUCTOR_KEY)
     else:
-        #Auto judge has broken scope
+        #Auto judge has broken scope var
         choice_number=judge_and_select(parsed_ideas_list)
 
-    idea_of_choice = json.dumps(ideas_obj[choice_number]["idea"])
+    idea_of_choice = ideas_obj[choice_number]["idea"]
 
 
     agent_executor = initialize_agent(
@@ -352,7 +353,6 @@ def content_gen():
     for current_section in article_obj["Sections"]:
         alex_content_section = alex_pro_content_chain.run(
             {"idea": idea_of_choice, 
-            "domains": domain["domains"], 
             "industry": domain["industry"], 
             "previous_section_content": previous_section_content, 
             "current_section": f"""{{"heading": {current_section["heading"]},
@@ -376,16 +376,14 @@ def content_gen():
 
     alex_pro_intro_conclusion_chain = LLMChain(prompt=ALEX_PRO_PERSONA_INTRO_CONCLUSION_PROMPT, llm=LLM_BRAINSTORM)
     alex_intro = alex_pro_intro_conclusion_chain.run(
-            {"domains": domain["domains"], 
-            "industry": domain["industry"], 
+            {"industry": domain["industry"], 
             "article": article,
             "intro_conclusion": "Introduction"
             }
         )
 
     alex_conclusion = alex_pro_intro_conclusion_chain.run(
-            {"domains": domain["domains"], 
-            "industry": domain["industry"], 
+            {"industry": domain["industry"], 
             "article": article,
             "intro_conclusion": "Conclusion"
             }
@@ -454,7 +452,30 @@ def critique_learn():
     article_obj["Sections"]=article_sections
     add_to_research_file(property="article_obj", value=article_obj, key=CONDUCTOR_KEY)
 
-def final_edit():
+def get_citation_feedback():
+    sources = []
+    citation_feedback = "Include citation of research papers: "
+    # If file exists, load existing data
+    metajsnfile = "./json/metadata.json"
+    if os.path.exists(metajsnfile):
+        with open(metajsnfile, 'r') as f:
+            data = json.load(f)
+    if isinstance(idea_of_choice["Concept Keys"], str):
+        idea_of_choice["Concept Keys"]=[idea_of_choice["Concept Keys"]]
+
+    for paper in idea_of_choice["Concept Keys"]:
+        for item in data:
+            if 'Title' in item and item['Title'] == paper:
+                sources.append({
+                    "Title": item["Title"],
+                    "Authors": item["Authors"],
+                    "Published": item["Published"],
+                    "source": item["source"]
+                })
+    return f"{citation_feedback}{sources}"
+
+    
+def final_edit(citation_feedback=""):
     global article_obj, full_article
     article_critique_obj
     alex_pro_edit_chain = LLMChain(prompt=ALEX_PRO_EDIT_PROMPT, llm=LLM_BRAINSTORM)
@@ -462,8 +483,7 @@ def final_edit():
     for i in range(len(article_obj["Sections"])):
         section = article_obj["Sections"][i]
         alex_content_section = alex_pro_edit_chain.run(
-            {"domains": domain["domains"], 
-            "industry": domain["industry"], 
+            {"industry": domain["industry"], 
             #Brittle as assumes inro and conclusion index
             "previous_section_content": full_article[i], 
             "current_section_content": full_article[i+1], 
@@ -482,21 +502,18 @@ def final_edit():
 
     article_obj["Sections"]=article_sections
 
-    # TODO introduction feedback to reference papers title, author, source
     alex_pro_intro_conclusion_edit_chain = LLMChain(prompt=ALEX_PRO_EDIT_INTRO_CONCLUSION_PROMPT, llm=LLM_BRAINSTORM)
     alex_intro = alex_pro_intro_conclusion_edit_chain.run(
-            {"domains": domain["domains"], 
-            "industry": domain["industry"], 
+            {"industry": domain["industry"], 
             "article": full_article,
             "intro_conclusion": "Introduction",
             "overall": article_critique_obj["Overall"],
-            "section_feedback":article_critique_obj["Introduction"]
+            "section_feedback":f"""{article_critique_obj["Introduction"]}\n{citation_feedback}"""
             }
         )
 
     alex_conclusion = alex_pro_intro_conclusion_edit_chain.run(
-            {"domains": domain["domains"], 
-            "industry": domain["industry"], 
+            {"industry": domain["industry"], 
             "article": full_article,
             "intro_conclusion": "Conclusion",
             "overall": article_critique_obj["Overall"],
@@ -508,7 +525,7 @@ def final_edit():
     article_obj["Conclusion"]=alex_conclusion
     add_to_research_file(property="article_obj", value=article_obj, key=CONDUCTOR_KEY)
 
-    full_article=[{"heading":"Introduction","content":alex_intro}]
+    full_article=[{"Title":article_obj["Title"]},{"heading":"Introduction","content":alex_intro}]
     for current_section in article_obj["Sections"]:
         full_article.append({"heading":current_section["heading"],"content":current_section["content_full"]})
     full_article.append({"heading":"Conclusion","content":alex_conclusion})
@@ -517,11 +534,16 @@ def final_edit():
 # %%
 def gen_post():
     global post
-
+    post=[]
     post_chain = LLMChain(prompt=LINKEDIN_POST_PRO_PROMPT, llm=LLM_BRAINSTORM)
-    post = post_chain.run(
+    post1 = post_chain.run(
         {"article": full_article}
     )
+    post_chain = LLMChain(prompt=LINKEDIN_POST_PRO_PROMPT, llm=LLM_BRAINSTORM)
+    post2 = post_chain.run(
+        {"article": full_article}
+    )
+    post=[post1,post2]
 
 def gen_diagram():
     design_diagram_chain = LLMChain(prompt=DIAGRAM_DESIGN_PROMPT, llm=LLM_BRAINSTORM)
@@ -534,7 +556,7 @@ def gen_diagram():
     )
     print("DIAGRAM CODE RESPONSE: ", code_response)
     # Extract python code between the triple backticks
-    python_script = re.search(r'```python\n(.*?)\n```', diag_res, re.DOTALL)
+    python_script = re.search(r'```python\n(.*?)\n```', code_response, re.DOTALL)
 
     # Extracted script
     extracted_script = python_script.group(1) if python_script else None
@@ -583,11 +605,14 @@ def mkdir_content_sub():
 def create_copy_json(path):
     article = ""
     for item in full_article:
-        article += item["heading"] + "\n"
-        article += item["content"] + "\n\n"
+        if "Title" in item:
+            article += item["Title"] + "\n"
+        else:    
+            article += item["heading"] + "\n"
+            article += item["content"] + "\n\n"
 
     # Remove the extra newlines at the end
-    article = article.rstrip()
+    article = article + "*This article was conceptualized and crafted by an advanced AI system designed by Alex Savage - a leader and innovator at the nexus of data and artificial intelligence. Leveraging state-of-the-art algorithms and deep learning, this AI system embodies Alex's commitment to driving forward the knowledge economy, fostering innovation, and carving new pathways in the tech landscape.* \n\n*Connect with Alex to explore synergies and be a part of the future where technology meets foresight and creativity.*"
     filename = "copy.json"
     add_to_research_file(property="post", value=post, key=CONDUCTOR_KEY, filename=path+filename)
     add_to_research_file(property="article", value=article, key=CONDUCTOR_KEY, filename=path+filename)
@@ -606,26 +631,29 @@ domain= "OTT video streaming analytics"
 domain={"industry":"OTT video streaming",
         "domains":["streaming platform", "ad products for AVOD clients", "marketing", "content creation/pocurement"],
         "exclude": "personalised content discovery"}
-domain={"industry":"Digital product analytics platform",
-        "domains":["Augmented Visualization", "Automated Feature Feedback Loop", "Real-time Anomaly Detection", "Predictive A/B Testing"]}
+domain={"industry":"Digital product analytics",
+        "domains":["Augmented Visualization", "Automated Feature Feedback Loop", "Predictive A/B Testing", "Suggested business actions for great impact"]}
 
 # %%
 init_key_research()
 idea_gen()
 #%%
-enrich_idea(manual_select=True,choice_number="1")
+enrich_idea(manual_select=True,choice_number="2")
 stucture()
 section_knowledge()
 content_gen()
 critique_learn()
-final_edit()
+citation_feedback=get_citation_feedback()
+final_edit(citation_feedback=citation_feedback)
 gen_post()
 gen_diagram()
+
 gen_img()
 content_path=mkdir_content_sub()
+#%%
 create_copy_json(content_path)
 move_imgs(content_path)
 # %%
-set_key_load_vars(key="20230927215732")
+set_key_load_vars(key="20230928174613")
 
 # %%
