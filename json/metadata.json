@@ -8174,5 +8174,417 @@
     {
         "source": "https://github.com/daveshap/ACE_Framework",
         "namespace": "ai-engineering-documentation"
+    },
+    {
+        "Published": "2023-09-27",
+        "Title": "Effective Long-Context Scaling of Foundation Models",
+        "Authors": "Wenhan Xiong, Jingyu Liu, Igor Molybog, Hejia Zhang, Prajjwal Bhargava, Rui Hou, Louis Martin, Rashi Rungta, Karthik Abinav Sankararaman, Barlas Oguz, Madian Khabsa, Han Fang, Yashar Mehdad, Sharan Narang, Kshitiz Malik, Angela Fan, Shruti Bhosale, Sergey Edunov, Mike Lewis, Sinong Wang, Hao Ma",
+        "published_first_time": "2023-09-27",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.16039v1",
+            "http://arxiv.org/pdf/2309.16039v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.16039v1",
+        "date": 20230927,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-27",
+        "Title": "Graph Neural Prompting with Large Language Models",
+        "Authors": "Yijun Tian, Huan Song, Zichen Wang, Haozhu Wang, Ziqing Hu, Fang Wang, Nitesh V. Chawla, Panpan Xu",
+        "published_first_time": "2023-09-27",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.15427v1",
+            "http://arxiv.org/pdf/2309.15427v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.15427v1",
+        "date": 20230927,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-28",
+        "Title": "Vision Transformers Need Registers",
+        "Authors": "Timoth\u00e9e Darcet, Maxime Oquab, Julien Mairal, Piotr Bojanowski",
+        "published_first_time": "2023-09-28",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.16588v1",
+            "http://arxiv.org/pdf/2309.16588v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.16588v1",
+        "date": 20230928,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-21",
+        "Title": "Boolformer: Symbolic Regression of Logic Functions with Transformers",
+        "Authors": "St\u00e9phane d'Ascoli, Samy Bengio, Josh Susskind, Emmanuel Abb\u00e9",
+        "published_first_time": "2023-09-21",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.LO"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.12207v1",
+            "http://arxiv.org/pdf/2309.12207v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.12207v1",
+        "date": 20230921,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-25",
+        "Title": "Aligning Large Multimodal Models with Factually Augmented RLHF",
+        "Authors": "Zhiqing Sun, Sheng Shen, Shengcao Cao, Haotian Liu, Chunyuan Li, Yikang Shen, Chuang Gan, Liang-Yan Gui, Yu-Xiong Wang, Yiming Yang, Kurt Keutzer, Trevor Darrell",
+        "published_first_time": "2023-09-25",
+        "comment": "Preprint",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.14525v1",
+            "http://arxiv.org/pdf/2309.14525v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.14525v1",
+        "date": 20230925,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-26",
+        "Title": "Large Language Model Alignment: A Survey",
+        "Authors": "Tianhao Shen, Renren Jin, Yufei Huang, Chuang Liu, Weilong Dong, Zishan Guo, Xinwei Wu, Yan Liu, Deyi Xiong",
+        "published_first_time": "2023-09-26",
+        "comment": "76 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.15025v1",
+            "http://arxiv.org/pdf/2309.15025v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.15025v1",
+        "date": 20230926,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-28",
+        "Title": "Qwen Technical Report",
+        "Authors": "Jinze Bai, Shuai Bai, Yunfei Chu, Zeyu Cui, Kai Dang, Xiaodong Deng, Yang Fan, Wenbin Ge, Yu Han, Fei Huang, Binyuan Hui, Luo Ji, Mei Li, Junyang Lin, Runji Lin, Dayiheng Liu, Gao Liu, Chengqiang Lu, Keming Lu, Jianxin Ma, Rui Men, Xingzhang Ren, Xuancheng Ren, Chuanqi Tan, Sinan Tan, Jianhong Tu, Peng Wang, Shijie Wang, Wei Wang, Shengguang Wu, Benfeng Xu, Jin Xu, An Yang, Hao Yang, Jian Yang, Shusheng Yang, Yang Yao, Bowen Yu, Hongyi Yuan, Zheng Yuan, Jianwei Zhang, Xingxuan Zhang, Yichang Zhang, Zhenru Zhang, Chang Zhou, Jingren Zhou, Xiaohuan Zhou, Tianhang Zhu",
+        "published_first_time": "2023-09-28",
+        "comment": "59 pages, 5 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.16609v1",
+            "http://arxiv.org/pdf/2309.16609v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.16609v1",
+        "date": 20230928,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-24",
+        "Title": "MentalLLaMA: Interpretable Mental Health Analysis on Social Media with Large Language Models",
+        "Authors": "Kailai Yang, Tianlin Zhang, Ziyan Kuang, Qianqian Xie, Sophia Ananiadou",
+        "published_first_time": "2023-09-24",
+        "comment": "Work in progress",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.13567v1",
+            "http://arxiv.org/pdf/2309.13567v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.13567v1",
+        "date": 20230924,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-23",
+        "Title": "Enhancing Zero-Shot Chain-of-Thought Reasoning in Large Language Models through Logic",
+        "Authors": "Xufeng Zhao, Mengdi Li, Wenhao Lu, Cornelius Weber, Jae Hee Lee, Kun Chu, Stefan Wermter",
+        "published_first_time": "2023-09-23",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.LG",
+            "cs.SC"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.13339v1",
+            "http://arxiv.org/pdf/2309.13339v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.13339v1",
+        "date": 20230923,
+        "namespace": "ai-research"
+    },
+    {
+        "source": "https://github.com/Nixtla/statsforecast"
+    },
+    {
+        "source": "Near Real-Time Anomaly Detection with Delta Live Tables and Databricks Machine Learning - The Databricks Blog.pdf",
+        "namespace": "ai-engineering-documentation"
+    },
+    {
+        "Published": "2023-04-29",
+        "Title": "Just Noticeable Difference-aware Per-Scene Bitrate-laddering for Adaptive Video Streaming",
+        "Authors": "Vignesh V Menon, Jingwen Zhu, Prajit T Rajendran, Hadi Amirpour, Patrick Le Callet, Christian Timmerer",
+        "published_first_time": "2023-04-29",
+        "comment": "2023 IEEE International Conference on Multimedia and Expo (ICME)",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.MM",
+        "categories": [
+            "cs.MM"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2305.00225v1",
+            "http://arxiv.org/pdf/2305.00225v1"
+        ],
+        "source": "http://arxiv.org/abs/2305.00225v1",
+        "date": 20230429,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-07",
+        "Title": "Anableps: Adapting Bitrate for Real-Time Communication Using VBR-encoded Video",
+        "Authors": "Zicheng Zhang, Hao Chen, Xun Cao, Zhan Ma",
+        "published_first_time": "2023-07-07",
+        "comment": "This paper will be presented at IEEE ICME 2023",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.MM",
+        "categories": [
+            "cs.MM"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.03436v1",
+            "http://arxiv.org/pdf/2307.03436v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.03436v1",
+        "date": 20230707,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-06-24",
+        "Title": "Comparative Study of Predicting Stock Index Using Deep Learning Models",
+        "Authors": "Harshal Patel, Bharath Kumar Bolla, Sabeesh E, Dinesh Reddy",
+        "published_first_time": "2023-06-24",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.13931v1",
+            "http://arxiv.org/pdf/2306.13931v1"
+        ],
+        "source": "http://arxiv.org/abs/2306.13931v1",
+        "date": 20230624,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-08",
+        "Title": "Quantization-Aware and Tensor-Compressed Training of Transformers for Natural Language Understanding",
+        "Authors": "Zi Yang, Samridhi Choudhary, Siegfried Kunzmann, Zheng Zhang",
+        "published_first_time": "2023-06-01",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.01076v2",
+            "http://arxiv.org/pdf/2306.01076v2"
+        ],
+        "source": "http://arxiv.org/abs/2306.01076v2",
+        "date": 20230708,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-05-16",
+        "Title": "Fast-FNet: Accelerating Transformer Encoder Models via Efficient Fourier Layers",
+        "Authors": "Nurullah Sevim, Ege Ozan \u00d6zyedek, Furkan \u015eahinu\u00e7, Aykut Ko\u00e7",
+        "published_first_time": "2022-09-26",
+        "comment": "11 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.GL",
+            "eess.AS"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2209.12816v2",
+            "http://arxiv.org/pdf/2209.12816v2"
+        ],
+        "source": "http://arxiv.org/abs/2209.12816v2",
+        "date": 20230516,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-01-05",
+        "Title": "Streaming Zero-Knowledge Proofs",
+        "Authors": "Graham Cormode, Marcel Dall'Agnol, Tom Gur, Chris Hickey",
+        "published_first_time": "2023-01-05",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CC",
+        "categories": [
+            "cs.CC",
+            "cs.DS"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2301.02161v1",
+            "http://arxiv.org/pdf/2301.02161v1"
+        ],
+        "source": "http://arxiv.org/abs/2301.02161v1",
+        "date": 20230105,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-26",
+        "Title": "Efficient Post-training Quantization with FP8 Formats",
+        "Authors": "Haihao Shen, Naveen Mellempudi, Xin He, Qun Gao, Chang Wang, Mengni Wang",
+        "published_first_time": "2023-09-26",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.14592v1",
+            "http://arxiv.org/pdf/2309.14592v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.14592v1",
+        "date": 20230926,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-01-23",
+        "Title": "Feature construction using explanations of individual predictions",
+        "Authors": "Bo\u0161tjan Vouk, Matej Guid, Marko Robnik-\u0160ikonja",
+        "published_first_time": "2023-01-23",
+        "comment": "54 pages, 10 figures, 22 tables",
+        "journal_ref": "Engineering Applications of Artificial Intelligence 120 (2023)\n  105823",
+        "doi": "10.1016/j.engappai.2023.105823",
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "68-04, 68T30, 97N80",
+            "I.2.6; I.5.2; I.6.5; G.3; G.4"
+        ],
+        "links": [
+            "http://dx.doi.org/10.1016/j.engappai.2023.105823",
+            "http://arxiv.org/abs/2301.09631v1",
+            "http://arxiv.org/pdf/2301.09631v1"
+        ],
+        "source": "http://arxiv.org/abs/2301.09631v1",
+        "date": 20230123,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-18",
+        "Title": "Improved Nonlinear Transform Source-Channel Coding to Catalyze Semantic Communications",
+        "Authors": "Sixian Wang, Jincheng Dai, Xiaoqi Qin, Zhongwei Si, Kai Niu, Ping Zhang",
+        "published_first_time": "2023-03-26",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "eess.SP",
+        "categories": [
+            "eess.SP",
+            "cs.MM"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2303.14637v3",
+            "http://arxiv.org/pdf/2303.14637v3"
+        ],
+        "source": "http://arxiv.org/abs/2303.14637v3",
+        "date": 20230818,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-02-27",
+        "Title": "Simulation of Video Streaming Over Wireless Networks with NS-3",
+        "Authors": "Guoxi Liu, Liren Kong",
+        "published_first_time": "2023-02-27",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.NI",
+        "categories": [
+            "cs.NI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2302.14196v1",
+            "http://arxiv.org/pdf/2302.14196v1"
+        ],
+        "source": "http://arxiv.org/abs/2302.14196v1",
+        "date": 20230227,
+        "namespace": "ai-research"
+    },
+    {
+        "source": "Transformers for Tabular Data Representation.pdf",
+        "namespace": "ai-research"
     }
 ]

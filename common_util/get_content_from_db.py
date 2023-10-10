@@ -12,6 +12,8 @@ import json
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
 
+from researchAssistant import research_condense
+
 load_dotenv()
 tokens_gpt_4 = 8192
 tokens_gpt_3 = 4096
@@ -28,7 +30,7 @@ filter = EmbeddingsRedundantFilter(embeddings=EMBEDDINGS)
 # By default the result document will be ordered/grouped by clusters.
 filter_ordered_cluster = EmbeddingsClusteringFilter(
             embeddings=EMBEDDINGS,
-            num_clusters=5,
+            num_clusters=4,
             num_closest=1,
         )
 
@@ -52,7 +54,8 @@ def get_docs_content(docs,tokens=max_doc_content_tokens):
     for d in docs:
         if d.page_content not in unique_docs:
             unique_docs[d.page_content] = True
-            docs_page_content.append(d.page_content)
+            condensed_content = research_condense(d.page_content)
+            docs_page_content.append(condensed_content)
             temp_joined = "\n".join(docs_page_content)
             if tiktoken_len(temp_joined)>tokens:
                 break
@@ -85,10 +88,11 @@ def get_latest_week_ai_research_abstracts():
     two_weeks_ago = (datetime.now() - timedelta(days=14)).strftime('%Y%m%d')
     db = Pinecone.from_existing_index(index_name, EMBEDDINGS, namespace='ai-research')
     retriever_all = db.as_retriever(
-        search_type="similarity", search_kwargs={"k": 20, "filter": { "date": { '$gt': int(two_weeks_ago) }, "page": { '$lt': 2 }}}
+        search_type="similarity", search_kwargs={"k": 100, "filter": { "date": { '$gt': int(two_weeks_ago) }}}
     )
-    docs = retriever_all.get_relevant_documents("abstract")
+    docs = retriever_all.get_relevant_documents("in conclusion")
     return get_docs_content(docs)
+
 # %%
 def get_research_source_doc(query):
     db = Pinecone.from_existing_index(index_name, EMBEDDINGS, namespace='ai-research')
@@ -97,5 +101,5 @@ def get_research_source_doc(query):
     )
     return retriever_all.get_relevant_documents(query)
 # %%
-get_latest_week_ai_research_abstracts()
+
 # %%

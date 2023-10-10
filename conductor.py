@@ -20,6 +20,17 @@ from common_util.customPrompts import (
     ALEX_PRO_EDIT_PROMPT,
     ALEX_PRO_EDIT_INTRO_CONCLUSION_PROMPT,
     LINKEDIN_POST_PRO_PROMPT,
+    PERSONA_ARIA_SOCIAL,
+    PERSONA_SPINNERETTE_CONTENT,
+    PERSONA_TERENCE_SEO,
+    PERSONA_BENJI_INNOVATE,
+    PERPSONA_AVERY_AI,
+    PERSONA_EURIPIDES_STORYTELLER,
+    PERSONA_ADA_AI,
+    MARKET_RESEARCH_PROMPT,
+    COMPETITIVE_ANALYSIS_PROMPT,
+    ALEX_PRO_EDIT_PROMPT_2,
+    ALEX_PRO_EDIT_INTRO_CONCLUSION_PROMPT_2,
 )
 from common_util.llms import (
     LLM_BRAINSTORM,
@@ -48,14 +59,14 @@ from langchain import LLMChain
 
 
 langchain.debug = True
-global CONDUCTOR_KEY, domain, article_critique_obj, full_article, article_obj,article_structure, latest_research, choice_number, ideas_obj, enrich, idea_of_choice, article, post
+global CONDUCTOR_KEY, CONTENT_PERSONA, domain, edit_instruction, article_critique_obj, full_article, article_obj,article_structure, latest_research, choice_number, ideas_obj, enrich, idea_of_choice, article, post
 # %%
 def load_global_vars(hist_obj):
     global article_critique_obj, full_article, article_obj,article_structure, latest_research, choice_number, ideas_obj, enrich, idea_of_choice, article, post
     try:
-        choice_number = hist_obj["idea_choice"]
-        ideas_obj = hist_obj["ideas_obj"]
         latest_research = hist_obj["latest_research"]
+        ideas_obj = hist_obj["ideas_obj"]
+        choice_number = hist_obj["idea_choice"]
         idea_of_choice = json.dumps(ideas_obj[choice_number]["idea"])
         enrich = ideas_obj[choice_number]["enrichment"]
         article_structure = ideas_obj[choice_number]["article_structure"]
@@ -101,19 +112,43 @@ def init_key_research():
 def idea_gen():
     global ideas_obj
     llm_chain = LLMChain(prompt=BRAINSTORMER_PROMPT, llm=LLM_BRAINSTORM)
-    ideas = llm_chain.run(
+    ideas1 = llm_chain.run(
         {
             "concepts": latest_research,
             "domain": domain,
+            "persona": PERSONA_BENJI_INNOVATE
         }
     )
-    add_to_research_file(property="seed_ideas", value=ideas, key=CONDUCTOR_KEY)
+    ideas2 = llm_chain.run(
+        {
+            "concepts": latest_research,
+            "domain": domain,
+            "persona": PERPSONA_AVERY_AI
+        }
+    )
+
+    ideas3 = llm_chain.run(
+        {
+            "concepts": latest_research,
+            "domain": domain,
+            "persona": PERSONA_EURIPIDES_STORYTELLER
+        }
+    )
+
+    ideas4 = llm_chain.run(
+        {
+            "concepts": latest_research,
+            "domain": domain,
+            "persona": PERSONA_ADA_AI
+        }
+    )
+
+    brainstorms=[ideas1,ideas2,ideas3,ideas4]
+
+    add_to_research_file(property="seed_ideas", value=brainstorms, key=CONDUCTOR_KEY)
 
     parse_chain = LLMChain(prompt=OUTPUT_PARSER_PROMPT, llm=LLM_FACT)
-    ideas_parsed = parse_chain.run(
-        {
-            "copy": ideas,
-            "parse": """
+    ideas_parse_string="""
                 Copy contains ideas. Extract ideas into an array of objects.
                 Extract Title, Concept Keys and ideas in full detail including working mechanics and business benefits.
                 Title extraction excludes "Idea #" 
@@ -138,25 +173,35 @@ def idea_gen():
                     }}
                 # Example output: 
                 [{{"Title":"Customized Language Learning Assistant", 
-                "Concept Keys": "FLM-101B: An Open LLM and How to Train It with $100K Budget", "The Rise and Potential of Large Language Model Based Agents: A Survey"],
+                "Concept Keys": ["FLM-101B: An Open LLM and How to Train It with $100K Budget", "The Rise and Potential of Large Language Model Based Agents: A Survey"],
                 "Idea": "**Working Mechanics:** Leveraging the power of LLMs such as FLM-101B, we can create a language learning assistant integrated into our OTT streaming platform.
 
                     **Business Benefits:** This idea can attract a larger global audience to our OTT platform by eliminating language barriers. It also provides an added benefit of language learning to users, making our platform more appealing and competitive in the market."}},
                 {{"Title":"Personalized Ad Creation Using LLMs", 
-                "Concept Keys": "RAIN: Your Language Models Can Align Themselves without Finetuning"],
+                "Concept Keys": ["RAIN: Your Language Models Can Align Themselves without Finetuning"],
                 "Idea": "**Working Mechanics:** Using the RAIN inference method, the model can adjust its outputs to align with the preferences of the audience. It also prevents hallucination, ensuring the generated content is based on factual information.
 
                     **Business Benefits:** This idea can enable the creation of highly personalized and effective ads that resonate with the audience, leading to higher conversions and revenues for our clients. It also helps our platform stand out as a preferred advertising platform."}}]           
-                                    """,
-        }
-    )
-    parsed_ideas_list = ast.literal_eval(ideas_parsed)
+                                    """
+    
     ideas_obj = {}
-    i = 1
-    for idea in parsed_ideas_list:
-        ideas_obj[i] = {"idea": idea}
-        i += 1
-        print(json.dumps(idea))
+    i=1
+    for ideas in brainstorms:    
+
+        ideas_parsed = parse_chain.run(
+            {
+                "copy": ideas,
+                "parse": ideas_parse_string,
+            }
+        )
+        parsed_ideas_list = ast.literal_eval(ideas_parsed)
+
+        
+        for idea in parsed_ideas_list:
+            ideas_obj[i] = {"idea": idea}
+            i += 1
+            print(json.dumps(idea))
+
     add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
 
 # %%
@@ -172,7 +217,7 @@ def judge_and_select(parsed_ideas_list):
         i = i + 1
 
     # select idea
-    idea_select_chain = LLMChain(prompt=IDEA_SELECTOR_PROMPT, llm=LLM_FACT_4)
+    idea_select_chain = LLMChain(prompt=MARKET_RESEARCH_PROMPT, llm=LLM_FACT_4)
     selected_response = idea_select_chain.run({"ideas": ideas_obj})
     ideas_obj["selection"] = selected_response
     add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
@@ -182,13 +227,22 @@ def judge_and_select(parsed_ideas_list):
     choice_number = (choice_match.group(1)) if choice_match else None
     return choice_number
 
+def market_research():
+    market_research_chain = LLMChain(prompt=MARKET_RESEARCH_PROMPT, llm=LLM_BRAINSTORM)
+    market_research = market_research_chain.run({"ideas_obj": ideas_obj,"domain":domain})
+    return market_research
+
+def comp_analysis():
+    market_research_chain = LLMChain(prompt=COMPETITIVE_ANALYSIS_PROMPT, llm=LLM_BRAINSTORM)
+    market_research = market_research_chain.run({"idea_of_choice": idea_of_choice,"domain":domain})
+    return market_research
+
 # %%
 #
 # !! MANUAL VS AUTO SELECT NEED TO SET VARIABLE
 #
-
-def enrich_idea(manual_select=True,choice_number="1"):
-    global idea_of_choice, enrich
+def choose_idea(manual_select=True,choice_number="1"):
+    global idea_of_choice
     if manual_select == True:
     # !! SELECT IDEA NUMBER HERE MANUAL
         add_to_research_file(property="idea_choice", value=choice_number, key=CONDUCTOR_KEY)
@@ -198,6 +252,9 @@ def enrich_idea(manual_select=True,choice_number="1"):
 
     idea_of_choice = ideas_obj[choice_number]["idea"]
 
+
+def enrich_idea():
+    global enrich
 
     agent_executor = initialize_agent(
         tools,
@@ -223,7 +280,8 @@ def enrich_idea(manual_select=True,choice_number="1"):
     """
 
     enrich = agent_executor.run(agent_query)
-
+    comp_analysis =  comp_analysis()
+    enrich = comp_analysis +"\n\n" + enrich 
     ideas_obj[choice_number]["enrichment"] = enrich
     add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
 
@@ -241,7 +299,7 @@ def stucture():
             "copy": article_structure,
             "parse": """
                 Copy contains document concept structure. Extract into object.
-                Extract Title, introduction, headings H1 H2 as needed, dot-point content to be flesh out, conclusion, Textually represent UML to be vizualised.
+                Extract Title, introduction, headings H1 H2 as needed, dot-point content to be flesh out, conclusion.
                 Study and apply the Example in Expected out Parse.
 
                 # Example input:
@@ -263,11 +321,6 @@ def stucture():
     - Reiterate the potential of AI in transforming ad products.
     - Final thoughts on the business benefits and the future potentials of AI in advertising.
 
-    UML C4 Diagram Representation:
-    1. System Context Diagram: The overall system where the AI techniques are being implemented (Ad products for AVOD clients).
-    2. Container Diagram: The different AI techniques being used (RAIN model, combatting hallucination, Robot Parkour Learning, Algorithm of Thoughts).
-    3. Component Diagram: The individual functionalities of each technique (align ad content, ensure accuracy, train models, generate ideas).
-    4. Code Diagram: Detailed view of the implementation of each technique.
                     "
 
                 # Expected output: 
@@ -283,11 +336,7 @@ def stucture():
     - Quick generation and modification of ad content: Staying ahead in a fast-paced market.
     - The competitive edge through creative, standout ads."}],
             "Conclusion":"  - Reiterate the potential of AI in transforming ad products.
-    - Final thoughts on the business benefits and the future potentials of AI in advertising.",
-            "UML":"  1. System Context Diagram: The overall system where the AI techniques are being implemented (Ad products for AVOD clients).
-    2. Container Diagram: The different AI techniques being used (RAIN model, combatting hallucination, Robot Parkour Learning, Algorithm of Thoughts).
-    3. Component Diagram: The individual functionalities of each technique (align ad content, ensure accuracy, train models, generate ideas).
-    4. Code Diagram: Detailed view of the implementation of each technique."
+    - Final thoughts on the business benefits and the future potentials of AI in advertising."
         }}      
                                     """,
         }
@@ -353,7 +402,7 @@ def content_gen():
     for current_section in article_obj["Sections"]:
         alex_content_section = alex_pro_content_chain.run(
             {"idea": idea_of_choice, 
-            "industry": domain["industry"], 
+            "persona": CONTENT_PERSONA, 
             "previous_section_content": previous_section_content, 
             "current_section": f"""{{"heading": {current_section["heading"]},
                                 "content":{current_section["content"]},
@@ -376,14 +425,14 @@ def content_gen():
 
     alex_pro_intro_conclusion_chain = LLMChain(prompt=ALEX_PRO_PERSONA_INTRO_CONCLUSION_PROMPT, llm=LLM_BRAINSTORM)
     alex_intro = alex_pro_intro_conclusion_chain.run(
-            {"industry": domain["industry"], 
+            {"persona": CONTENT_PERSONA, 
             "article": article,
             "intro_conclusion": "Introduction"
             }
         )
 
     alex_conclusion = alex_pro_intro_conclusion_chain.run(
-            {"industry": domain["industry"], 
+            {"persona": CONTENT_PERSONA, 
             "article": article,
             "intro_conclusion": "Conclusion"
             }
@@ -460,10 +509,11 @@ def get_citation_feedback():
     if os.path.exists(metajsnfile):
         with open(metajsnfile, 'r') as f:
             data = json.load(f)
-    if isinstance(idea_of_choice["Concept Keys"], str):
-        idea_of_choice["Concept Keys"]=[idea_of_choice["Concept Keys"]]
+    keys=ideas_obj[choice_number]["idea"]["Concept Keys"]
+    if isinstance(keys, str):
+        keys=[keys]
 
-    for paper in idea_of_choice["Concept Keys"]:
+    for paper in keys:
         for item in data:
             if 'Title' in item and item['Title'] == paper:
                 sources.append({
@@ -478,12 +528,12 @@ def get_citation_feedback():
 def final_edit(citation_feedback=""):
     global article_obj, full_article
     article_critique_obj
-    alex_pro_edit_chain = LLMChain(prompt=ALEX_PRO_EDIT_PROMPT, llm=LLM_BRAINSTORM)
+    alex_pro_edit_chain = LLMChain(prompt=ALEX_PRO_EDIT_PROMPT_2, llm=LLM_BRAINSTORM)
     article_sections = []
     for i in range(len(article_obj["Sections"])):
         section = article_obj["Sections"][i]
         alex_content_section = alex_pro_edit_chain.run(
-            {"industry": domain["industry"], 
+            {"persona": CONTENT_PERSONA, 
             #Brittle as assumes inro and conclusion index
             "previous_section_content": full_article[i], 
             "current_section_content": full_article[i+1], 
@@ -491,7 +541,8 @@ def final_edit(citation_feedback=""):
             "knowledge": f""""[{section["research"]},\n{section["additional_research"]}]""", 
             "overall": article_critique_obj["Overall"],
             "section_feedback":article_critique_obj[section["heading"]],
-            "section_heading":section["heading"]
+            "section_heading":section["heading"],
+            "additional_instruction":edit_instruction
             }
         )
         for sec in full_article:
@@ -502,22 +553,24 @@ def final_edit(citation_feedback=""):
 
     article_obj["Sections"]=article_sections
 
-    alex_pro_intro_conclusion_edit_chain = LLMChain(prompt=ALEX_PRO_EDIT_INTRO_CONCLUSION_PROMPT, llm=LLM_BRAINSTORM)
+    alex_pro_intro_conclusion_edit_chain = LLMChain(prompt=ALEX_PRO_EDIT_INTRO_CONCLUSION_PROMPT_2, llm=LLM_BRAINSTORM)
     alex_intro = alex_pro_intro_conclusion_edit_chain.run(
-            {"industry": domain["industry"], 
+            {"persona": CONTENT_PERSONA, 
             "article": full_article,
             "intro_conclusion": "Introduction",
             "overall": article_critique_obj["Overall"],
-            "section_feedback":f"""{article_critique_obj["Introduction"]}\n{citation_feedback}"""
+            "section_feedback":f"""{article_critique_obj["Introduction"]}\n{citation_feedback}""",
+            "additional_instruction":edit_instruction
             }
         )
 
     alex_conclusion = alex_pro_intro_conclusion_edit_chain.run(
-            {"industry": domain["industry"], 
+            {"persona": CONTENT_PERSONA, 
             "article": full_article,
             "intro_conclusion": "Conclusion",
             "overall": article_critique_obj["Overall"],
-            "section_feedback":article_critique_obj["Conclusion"]
+            "section_feedback":article_critique_obj["Conclusion"],
+            "additional_instruction":edit_instruction
             }
         )
 
@@ -541,9 +594,12 @@ def gen_post():
     )
     post_chain = LLMChain(prompt=LINKEDIN_POST_PRO_PROMPT, llm=LLM_BRAINSTORM)
     post2 = post_chain.run(
-        {"article": full_article}
+        {"article": full_article, "persona":PERSONA_TERENCE_SEO}
     )
-    post=[post1,post2]
+    post3 = post_chain.run(
+        {"article": full_article, "persona":PERSONA_ARIA_SOCIAL}
+    )
+    post=[post1,post2,post3]
 
 def gen_diagram():
     design_diagram_chain = LLMChain(prompt=DIAGRAM_DESIGN_PROMPT, llm=LLM_BRAINSTORM)
@@ -608,11 +664,11 @@ def create_copy_json(path):
         if "Title" in item:
             article += item["Title"] + "\n"
         else:    
-            article += item["heading"] + "\n"
+            article += "## "+item["heading"] + "\n"
             article += item["content"] + "\n\n"
 
     # Remove the extra newlines at the end
-    article = article + "*This article was conceptualized and crafted by an advanced AI system designed by Alex Savage - a leader and innovator at the nexus of data and artificial intelligence. Leveraging state-of-the-art algorithms and deep learning, this AI system embodies Alex's commitment to driving forward the knowledge economy, fostering innovation, and carving new pathways in the tech landscape.* \n\n*Connect with Alex to explore synergies and be a part of the future where technology meets foresight and creativity.*"
+    article = article + "*** *This article was conceptualized and crafted by an advanced AI system designed by Alex Savage - a leader and innovator at the nexus of data and artificial intelligence. Leveraging state-of-the-art algorithms and deep learning, this AI system embodies Alex's commitment to driving forward the knowledge economy, fostering innovation, and carving new pathways in the tech landscape.* \n\n*Connect with Alex to explore synergies and be a part of the future where technology meets foresight and creativity.*"
     filename = "copy.json"
     add_to_research_file(property="post", value=post, key=CONDUCTOR_KEY, filename=path+filename)
     add_to_research_file(property="article", value=article, key=CONDUCTOR_KEY, filename=path+filename)
@@ -628,32 +684,43 @@ def create_copy_json(path):
 DOMAINS = ["OTT video streaming", "Ecommerce", "FinTech", "HealthTech", "eLearning", "property tech", "stockmarket trading tech"]
 domain= "OTT video streaming analytics"
 # /TODO add exclusions from past ideas
-domain={"industry":"OTT video streaming",
-        "domains":["streaming platform", "ad products for AVOD clients", "marketing", "content creation/pocurement"],
-        "exclude": "personalised content discovery"}
+
 domain={"industry":"Digital product analytics",
         "domains":["Augmented Visualization", "Automated Feature Feedback Loop", "Predictive A/B Testing", "Suggested business actions for great impact"]}
-
+domain={"industry":"OTT video streaming",
+        "domains":["Predictive OTT Video Streaming QOE Optimization"]}
+domain="Predictive OTT Video Streaming QOE Optimization"
+CONTENT_PERSONA=PERSONA_ARIA_SOCIAL
+edit_instruction="\nBe concise while still delivering value through content.\nUse markdown formatting where appropriate to enhance readability."
 # %%
 init_key_research()
 idea_gen()
+m_research = market_research()
+print(m_research)
 #%%
-enrich_idea(manual_select=True,choice_number="2")
+choose_idea(manual_select=True,choice_number="4")
+enrich_idea()
+#%%
 stucture()
 section_knowledge()
 content_gen()
 critique_learn()
 citation_feedback=get_citation_feedback()
+
+#%%
+citation_feedback="Include citation of research papers: [{'Title': 'Just Noticeable Difference-aware Per-Scene Bitrate-laddering for Adaptive Video Streaming', 'Authors': 'Vignesh V Menon, Jingwen Zhu, Prajit T Rajendran, Hadi Amirpour, Patrick Le Callet, Christian Timmerer', 'Published': '2023-04-29', 'source': 'http://arxiv.org/abs/2305.00225v1'}, {'Title': 'Anableps: Adapting Bitrate for Real-Time Communication Using VBR-encoded Video', 'Authors': 'Zicheng Zhang, Hao Chen, Xun Cao, Zhan Ma', 'Published': '2023-07-07', 'source': 'http://arxiv.org/abs/2307.03436v1'}]"
 final_edit(citation_feedback=citation_feedback)
+#%%
 gen_post()
 gen_diagram()
 
-gen_img()
+# gen_img()
 content_path=mkdir_content_sub()
 #%%
 create_copy_json(content_path)
-move_imgs(content_path)
+# move_imgs(content_path)
 # %%
-set_key_load_vars(key="20230928174613")
+set_key_load_vars(key="20231004162139")
 
+# %%
 # %%

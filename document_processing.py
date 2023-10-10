@@ -31,9 +31,8 @@ DIFFBOT_API_KEY = os.getenv("DIFFBOT_API_KEY")
 RESEARCH_PAPERS_FILENAME = './json/ai_research_papers.json'
 
 
-def process_arxv():
+def process_arxv(namespace = PineconeNamespaceEnum.AI_RESEARCH.value):
     doc_queries_filename = './json/titles.json'
-    namespace = PineconeNamespaceEnum.AI_RESEARCH.value
     newerthan = 20230000
     doc_queries = get_doc_queries_from_resource(doc_queries_filename)
 
@@ -64,7 +63,7 @@ def process_arxv():
                 add_metadata_from_resource(doc.metadata, filename)
         remove_doc_query_from_resource(doc_queries_filename, query)
     print("process_arxv complete")
-    
+
 # %%
 def process_git():
     git_queries_filename = './json/git_urls.json'
@@ -148,10 +147,10 @@ def process_local_pdfs(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTI
 
 # %%
 add_new_week_papers()
-process_arxv()
+process_arxv(namespace = PineconeNamespaceEnum.AI_RESEARCH.value)
 #%%
 process_git()
 process_scrape_urls(PineconeNamespaceEnum.AI_ENGINEERING_DOCUMENTATION.value)
-process_local_pdfs(namespace = PineconeNamespaceEnum.AI_ENGINEERING_DOCUMENTATION.value)
+process_local_pdfs(namespace = PineconeNamespaceEnum.AI_RESEARCH.value)
 
 # %%
