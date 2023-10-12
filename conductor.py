@@ -4,13 +4,14 @@ import re
 import os
 
 from common_util.memory import set_entity_memory_long_cache
-from common_util.researchAssistant import get_latest_ai_research
+from common_util.researchAssistant import get_latest_ai_research,get_relevant_ai_research
 from queryDB import tools
 import langchain
 from langchain.chains import LLMChain
 from datetime import datetime
 from common_util.customPrompts import (
     BRAINSTORMER_PROMPT,
+    DR_QUILL_LINKEDIN_POST_TEMPLATE,
     OUTPUT_PARSER_PROMPT,
     IDEA_SELECTOR_PROMPT,
     ARTICLE_STRUCTURE_PROMPT,
@@ -31,6 +32,10 @@ from common_util.customPrompts import (
     COMPETITIVE_ANALYSIS_PROMPT,
     ALEX_PRO_EDIT_PROMPT_2,
     ALEX_PRO_EDIT_INTRO_CONCLUSION_PROMPT_2,
+    DR_QUILL_LINKEDIN_POST_PROMPT,
+    DR_QUILL_EDIT_INTRO_CONCLUSION_PROMPT,
+    DR_QUILL_EDIT_PROMPT,
+    DR_QUILL_GHOSTWRITE_PROMPT,
 )
 from common_util.llms import (
     LLM_BRAINSTORM,
@@ -59,7 +64,7 @@ from langchain import LLMChain
 
 
 langchain.debug = True
-global CONDUCTOR_KEY, CONTENT_PERSONA, domain, edit_instruction, article_critique_obj, full_article, article_obj,article_structure, latest_research, choice_number, ideas_obj, enrich, idea_of_choice, article, post
+global CONDUCTOR_KEY, CONTENT_PERSONA, domain, edit_instruction, article_critique_obj, full_article, article_obj,article_structure, latest_research, relevant_research, choice_number, ideas_obj, enrich, idea_of_choice, article, post
 # %%
 def load_global_vars(hist_obj):
     global article_critique_obj, full_article, article_obj,article_structure, latest_research, choice_number, ideas_obj, enrich, idea_of_choice, article, post
@@ -94,7 +99,7 @@ def set_key_load_vars(key = "20230921134237"):
 
 # %%
 def init_key_research():
-    global latest_research
+    global latest_research, relevant_research
     global CONDUCTOR_KEY
     CONDUCTOR_KEY = datetime.now().strftime("%Y%m%d%H%M%S")
     set_conductor_key(CONDUCTOR_KEY)
@@ -103,11 +108,17 @@ def init_key_research():
 
     # new research
     #TODO need to include authors and published date
-    latest_research = get_latest_ai_research(tokens=6000)
+    latest_research = get_latest_ai_research(tokens=5000)
     # entities = get_entities()
     add_to_research_file(
         property="latest_research", value=latest_research, key=CONDUCTOR_KEY
     )
+    relevant_research = get_relevant_ai_research(topic=domain,tokens=5000)
+    # entities = get_entities()
+    add_to_research_file(
+        property="relevant_research", value=relevant_research, key=CONDUCTOR_KEY
+    )
+
 # %%
 def idea_gen():
     global ideas_obj
@@ -129,17 +140,16 @@ def idea_gen():
 
     ideas3 = llm_chain.run(
         {
-            "concepts": latest_research,
+            "concepts": relevant_research,
             "domain": domain,
-            "persona": PERSONA_EURIPIDES_STORYTELLER
+            "persona": PERSONA_BENJI_INNOVATE
         }
     )
-
     ideas4 = llm_chain.run(
         {
-            "concepts": latest_research,
+            "concepts": relevant_research,
             "domain": domain,
-            "persona": PERSONA_ADA_AI
+            "persona": PERPSONA_AVERY_AI
         }
     )
 
@@ -232,7 +242,7 @@ def market_research():
     market_research = market_research_chain.run({"ideas_obj": ideas_obj,"domain":domain})
     return market_research
 
-def comp_analysis():
+def get_comp_analysis():
     market_research_chain = LLMChain(prompt=COMPETITIVE_ANALYSIS_PROMPT, llm=LLM_BRAINSTORM)
     market_research = market_research_chain.run({"idea_of_choice": idea_of_choice,"domain":domain})
     return market_research
@@ -280,7 +290,7 @@ def enrich_idea():
     """
 
     enrich = agent_executor.run(agent_query)
-    comp_analysis =  comp_analysis()
+    comp_analysis = get_comp_analysis()
     enrich = comp_analysis +"\n\n" + enrich 
     ideas_obj[choice_number]["enrichment"] = enrich
     add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
@@ -292,7 +302,10 @@ def stucture():
     article_structure = article_structure_chain.run({"idea": idea_of_choice, "enrich": enrich})
     ideas_obj[choice_number]["article_structure"] = article_structure
     add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
+    parse_structure()
 
+def parse_structure():
+    global article_obj, article_structure
     parse_chain = LLMChain(prompt=OUTPUT_PARSER_PROMPT, llm=LLM_FACT)
     article_obj = parse_chain.run(
         {
@@ -588,7 +601,7 @@ def final_edit(citation_feedback=""):
 def gen_post():
     global post
     post=[]
-    post_chain = LLMChain(prompt=LINKEDIN_POST_PRO_PROMPT, llm=LLM_BRAINSTORM)
+    post_chain = LLMChain(prompt=DR_QUILL_LINKEDIN_POST_PROMPT, llm=LLM_BRAINSTORM)
     post1 = post_chain.run(
         {"article": full_article}
     )
@@ -679,6 +692,26 @@ def create_copy_json(path):
     print(article)
 
 
+def shortcut(title_string, idea_string, structure_string):
+    global choice_number,idea_of_choice,article_structure,CONDUCTOR_KEY
+    CONDUCTOR_KEY = datetime.now().strftime("%Y%m%d%H%M%S")
+    set_conductor_key(CONDUCTOR_KEY)
+    set_entity_memory_long_cache([])
+    ideas_obj={
+            "1": {
+                "idea": {
+                    "Title": title_string,
+                    "Concept Keys": [],
+                    "Idea": idea_string
+                },
+                 "article_structure": "Title: "+title_string+"\n"+structure_string
+            }}
+    choice_number="1"
+    idea_of_choice=idea_string
+    article_structure=structure_string
+    add_to_research_file(property="ideas_obj", value=ideas_obj, key=CONDUCTOR_KEY)
+    add_to_research_file(property="idea_choice", value="1", key=CONDUCTOR_KEY)
+    parse_structure()
 # %%
 
 DOMAINS = ["OTT video streaming", "Ecommerce", "FinTech", "HealthTech", "eLearning", "property tech", "stockmarket trading tech"]
@@ -689,38 +722,86 @@ domain={"industry":"Digital product analytics",
         "domains":["Augmented Visualization", "Automated Feature Feedback Loop", "Predictive A/B Testing", "Suggested business actions for great impact"]}
 domain={"industry":"OTT video streaming",
         "domains":["Predictive OTT Video Streaming QOE Optimization"]}
-domain="Predictive OTT Video Streaming QOE Optimization"
+domain="LLM vs ML for anomaly prediction"
 CONTENT_PERSONA=PERSONA_ARIA_SOCIAL
-edit_instruction="\nBe concise while still delivering value through content.\nUse markdown formatting where appropriate to enhance readability."
+edit_instruction="Use .md formatting to enhance readability."
 # %%
 init_key_research()
+#%%
 idea_gen()
 m_research = market_research()
 print(m_research)
 #%%
-choose_idea(manual_select=True,choice_number="4")
+choose_idea(manual_select=True,choice_number="10")
 enrich_idea()
-#%%
 stucture()
+
+# shortcut HERE
+#%%
 section_knowledge()
 content_gen()
 critique_learn()
 citation_feedback=get_citation_feedback()
-
 #%%
-citation_feedback="Include citation of research papers: [{'Title': 'Just Noticeable Difference-aware Per-Scene Bitrate-laddering for Adaptive Video Streaming', 'Authors': 'Vignesh V Menon, Jingwen Zhu, Prajit T Rajendran, Hadi Amirpour, Patrick Le Callet, Christian Timmerer', 'Published': '2023-04-29', 'source': 'http://arxiv.org/abs/2305.00225v1'}, {'Title': 'Anableps: Adapting Bitrate for Real-Time Communication Using VBR-encoded Video', 'Authors': 'Zicheng Zhang, Hao Chen, Xun Cao, Zhan Ma', 'Published': '2023-07-07', 'source': 'http://arxiv.org/abs/2307.03436v1'}]"
-final_edit(citation_feedback=citation_feedback)
-#%%
+#shortcut final edit
+final_edit()
+# final_edit(citation_feedback=citation_feedback)
 gen_post()
 gen_diagram()
 
 # gen_img()
 content_path=mkdir_content_sub()
-#%%
 create_copy_json(content_path)
 # move_imgs(content_path)
 # %%
-set_key_load_vars(key="20231004162139")
+set_key_load_vars(key="20231011215742")
 
 # %%
+gen_post()
+create_copy_json(content_path)
+
+# %%
+shortcut(title_string="Navigating Anomalies: Traditional ML vs. LLM in Predictive Video Streaming Optimization", 
+         idea_string="Exploring predictive anomaly detection in video streaming through the lenses of Traditional Machine Learning and Large Language Models unveils a landscape where computational efficiency meets flexibility and data comprehensiveness. While traditional ML offers proven reliability and straightforward interpretability, LLMs promise to navigate through varied and complex data with distinctive ease and adaptability. A comparative dive into these methodologies illuminates crucial insights into their respective and collective capacities to enhance user experience, contemplating a future that potentially intertwines their respective strengths and challenges in proactive anomaly mitigation.", 
+         structure_string="""🚀 Intro: Anomalies and User Experience 🚀
+Context:
+Quick setup on the significance of seamless video streaming.
+Brief about anomalies and their potential to hinder user experience.
+
+Objective:
+Transition into the importance of detecting and mitigating anomalies proactively.
+
+💡 The Dual Track: LLM and Traditional ML 💡
+Traditional ML Approaches:
+Toolkits & Techniques: Highlight traditional toolkits (Xgboost, ARIMA, SARIMAX, etc.) and AutoML solutions.
+Strategy & Efficacy: Explain why, in most cases, these established ML tools offer more efficient and accurate predictions with minimal computational cost.
+
+Language Model Approaches:
+Tactic & Technology: Describe the original strategy of utilizing an LLM for real-time anomaly prediction in video streaming.
+Challenges & Considerations: Dive into computational needs, model sensitivity, and validity against traditional methods.
+
+🤖 Dive Into Technicalities 🤖
+In-depth into Traditional ML:
+Feature Engineering: Elaborate on how creating new, meaningful features can significantly impact model performance.
+Computational Efficiency: Discuss how ML models can predict anomalies with less computational resources than LLMs.
+
+In-depth into LLM:
+Token-based Forecasting: Discuss tokenized telemetry data and the potential of time-stamp event encodings.
+The Sequence Approach: Dive into how transformer models with timestamp encodings aim to comprehend and predict sequential anomalies.
+
+🧐 Comparative Analysis 🧐
+Accuracy vs. Computational Cost: Contrasting the prediction accuracy and resource consumption between traditional ML and LLMs.
+Flexibility and Complexity: Highlighting LLM's ability to ingest diverse real-time data without specific formatting vs. ML models that might need well-curated features.
+Deployment and Scalability: Discussing ease of implementation, model tuning, and scaling in real-world applications.
+
+🛠 Practical Implementations & Tools 🛠
+Tools Spotlight: Introduce tools and platforms like WhyLabs and statsforecast that can facilitate anomaly detection and mitigation.
+Real-world Scenarios: Possible to bring in any case studies or scenarios where ML models were effectively deployed for anomaly detection in video streaming.
+Fresh take: Employing traditional ML for efficient, robust anomaly detection, and leveraging LLMs for elucidating potential causes or crafting human-readable notifications and reports, blending computational efficiency with advanced, human-like comprehension and generation.
+
+📚 Conclusion: Bridging the Gap 📚
+Synthesis: A brief recapitulation of the key points, drawing strings between the traditional ML and LLM approaches.
+Future Trajectory: Speculate on how LLMs might evolve and become more applicable in such use-cases, or how traditional ML models might adapt to become even more efficient.
+"""
+)
 # %%

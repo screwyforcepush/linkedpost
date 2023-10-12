@@ -8586,5 +8586,303 @@
     {
         "source": "Transformers for Tabular Data Representation.pdf",
         "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-10-03",
+        "Title": "Language Models Represent Space and Time",
+        "Authors": "Wes Gurnee, Max Tegmark",
+        "published_first_time": "2023-10-03",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG",
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2310.02207v1",
+            "http://arxiv.org/pdf/2310.02207v1"
+        ],
+        "source": "http://arxiv.org/abs/2310.02207v1",
+        "date": 20231003,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-10-04",
+        "Title": "Retrieval meets Long Context Large Language Models",
+        "Authors": "Peng Xu, Wei Ping, Xianchao Wu, Lawrence McAfee, Chen Zhu, Zihan Liu, Sandeep Subramanian, Evelina Bakhturina, Mohammad Shoeybi, Bryan Catanzaro",
+        "published_first_time": "2023-10-04",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.IR",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2310.03025v1",
+            "http://arxiv.org/pdf/2310.03025v1"
+        ],
+        "source": "http://arxiv.org/abs/2310.03025v1",
+        "date": 20231004,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-29",
+        "Title": "Efficient Streaming Language Models with Attention Sinks",
+        "Authors": "Guangxuan Xiao, Yuandong Tian, Beidi Chen, Song Han, Mike Lewis",
+        "published_first_time": "2023-09-29",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.17453v1",
+            "http://arxiv.org/pdf/2309.17453v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.17453v1",
+        "date": 20230929,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-07-17",
+        "Title": "Towards Self-Assembling Artificial Neural Networks through Neural Developmental Programs",
+        "Authors": "Elias Najarro, Shyam Sudhakaran, Sebastian Risi",
+        "published_first_time": "2023-07-17",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.NE",
+        "categories": [
+            "cs.NE",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2307.08197v1",
+            "http://arxiv.org/pdf/2307.08197v1"
+        ],
+        "source": "http://arxiv.org/abs/2307.08197v1",
+        "date": 20230717,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-09-29",
+        "Title": "The Dawn of LMMs: Preliminary Explorations with GPT-4V(ision)",
+        "Authors": "Zhengyuan Yang, Linjie Li, Kevin Lin, Jianfeng Wang, Chung-Ching Lin, Zicheng Liu, Lijuan Wang",
+        "published_first_time": "2023-09-29",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2309.17421v1",
+            "http://arxiv.org/pdf/2309.17421v1"
+        ],
+        "source": "http://arxiv.org/abs/2309.17421v1",
+        "date": 20230929,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-10-03",
+        "Title": "Think before you speak: Training Language Models With Pause Tokens",
+        "Authors": "Sachin Goyal, Ziwei Ji, Ankit Singh Rawat, Aditya Krishna Menon, Sanjiv Kumar, Vaishnavh Nagarajan",
+        "published_first_time": "2023-10-03",
+        "comment": "19 pages, 7 figures",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2310.02226v1",
+            "http://arxiv.org/pdf/2310.02226v1"
+        ],
+        "source": "http://arxiv.org/abs/2310.02226v1",
+        "date": 20231003,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-10-03",
+        "Title": "Self-Taught Optimizer (STOP): Recursively Self-Improving Code Generation",
+        "Authors": "Eric Zelikman, Eliana Lorch, Lester Mackey, Adam Tauman Kalai",
+        "published_first_time": "2023-10-03",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI",
+            "cs.LG",
+            "stat.ML"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2310.02304v1",
+            "http://arxiv.org/pdf/2310.02304v1"
+        ],
+        "source": "http://arxiv.org/abs/2310.02304v1",
+        "date": 20231003,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-10-08",
+        "Title": "RA-DIT: Retrieval-Augmented Dual Instruction Tuning",
+        "Authors": "Xi Victoria Lin, Xilun Chen, Mingda Chen, Weijia Shi, Maria Lomeli, Rich James, Pedro Rodriguez, Jacob Kahn, Gergely Szilvasy, Mike Lewis, Luke Zettlemoyer, Scott Yih",
+        "published_first_time": "2023-10-02",
+        "comment": "24 pages",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL",
+            "cs.AI"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2310.01352v2",
+            "http://arxiv.org/pdf/2310.01352v2"
+        ],
+        "source": "http://arxiv.org/abs/2310.01352v2",
+        "date": 20231008,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-10-04",
+        "Title": "Kosmos-G: Generating Images in Context with Multimodal Large Language Models",
+        "Authors": "Xichen Pan, Li Dong, Shaohan Huang, Zhiliang Peng, Wenhu Chen, Furu Wei",
+        "published_first_time": "2023-10-04",
+        "comment": "Code: https://aka.ms/Kosmos-G Project Page:\n  https://xichenpan.github.io/kosmosg",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2310.02992v1",
+            "http://arxiv.org/pdf/2310.02992v1"
+        ],
+        "source": "http://arxiv.org/abs/2310.02992v1",
+        "date": 20231004,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-10-07",
+        "Title": "Large Language Models as Analogical Reasoners",
+        "Authors": "Michihiro Yasunaga, Xinyun Chen, Yujia Li, Panupong Pasupat, Jure Leskovec, Percy Liang, Ed H. Chi, Denny Zhou",
+        "published_first_time": "2023-10-03",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2310.01714v2",
+            "http://arxiv.org/pdf/2310.01714v2"
+        ],
+        "source": "http://arxiv.org/abs/2310.01714v2",
+        "date": 20231007,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-08-01",
+        "Title": "Generative AI for Programming Education: Benchmarking ChatGPT, GPT-4, and Human Tutors",
+        "Authors": "Tung Phung, Victor-Alexandru P\u0103durean, Jos\u00e9 Cambronero, Sumit Gulwani, Tobias Kohn, Rupak Majumdar, Adish Singla, Gustavo Soares",
+        "published_first_time": "2023-06-29",
+        "comment": "This article is a full version of the poster (extended abstract) from\n  ICER'23",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CY",
+        "categories": [
+            "cs.CY",
+            "cs.AI",
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.17156v3",
+            "http://arxiv.org/pdf/2306.17156v3"
+        ],
+        "source": "http://arxiv.org/abs/2306.17156v3",
+        "date": 20230801,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-10-06",
+        "Title": "DragDiffusion: Harnessing Diffusion Models for Interactive Point-based Image Editing",
+        "Authors": "Yujun Shi, Chuhui Xue, Jun Hao Liew, Jiachun Pan, Hanshu Yan, Wenqing Zhang, Vincent Y. F. Tan, Song Bai",
+        "published_first_time": "2023-06-26",
+        "comment": "Code is released at https://github.com/Yujun-Shi/DragDiffusion",
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CV",
+        "categories": [
+            "cs.CV",
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.14435v4",
+            "http://arxiv.org/pdf/2306.14435v4"
+        ],
+        "source": "http://arxiv.org/abs/2306.14435v4",
+        "date": 20231006,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-06-23",
+        "Title": "Long-range Language Modeling with Self-retrieval",
+        "Authors": "Ohad Rubin, Jonathan Berant",
+        "published_first_time": "2023-06-23",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.CL",
+        "categories": [
+            "cs.CL"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.13421v1",
+            "http://arxiv.org/pdf/2306.13421v1"
+        ],
+        "source": "http://arxiv.org/abs/2306.13421v1",
+        "date": 20230623,
+        "namespace": "ai-research"
+    },
+    {
+        "Published": "2023-10-03",
+        "Title": "Scaling MLPs: A Tale of Inductive Bias",
+        "Authors": "Gregor Bachmann, Sotiris Anagnostidis, Thomas Hofmann",
+        "published_first_time": "2023-06-23",
+        "comment": null,
+        "journal_ref": null,
+        "doi": null,
+        "primary_category": "cs.LG",
+        "categories": [
+            "cs.LG"
+        ],
+        "links": [
+            "http://arxiv.org/abs/2306.13575v3",
+            "http://arxiv.org/pdf/2306.13575v3"
+        ],
+        "source": "http://arxiv.org/abs/2306.13575v3",
+        "date": 20231003,
+        "namespace": "ai-research"
     }
 ]
