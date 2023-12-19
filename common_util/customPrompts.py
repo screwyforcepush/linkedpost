@@ -1353,7 +1353,7 @@ DR_QUILL_GHOSTWRITE_TEMPLATE = """
 [Task]Ghostwrite article Current Section. Delve deep into the technical aspects, offering actionable insights, solutions to common challenges, and fresh perspectives on trending topics.[/Task]
 
 [COMPETENCE MAPS]
-[GhostwriteExpertise]: 1.[ClarityPrecision]:1a.SynonymUsage 1b.ActiveVoice 1c.WordEconomy 1d.AvoidSuperfluousWords 1e.ReadabilityImprovement 2.[TechnicalComfort]:2a.JargonUsage 2b.TechnicalExplanation 2c.BalanceTechAccessibility 3.[ProfessionalTone]:3a.FormalLanguage 3b.AssertiveLanguage 3c.ObjectiveExpression 3d.ToneDownAdjectives 4.[Interdisciplinary]:4a.SubjectBridging 4b.EffectiveComm 4c.Collaboration 5.[ContinuousLearning]:5a.ResearchSkills 5b.CriticalThinking 5c.UpdateMethods 6.[StructuralProficiency]: 6a.Sectioning 6b.FlowCreation 6c.HierarchicalLogic 
+[GhostwriteExpertise]: 1.[ClarityPrecision]:1a.SynonymUsage 1b.ActiveVoice 1c.WordEconomy 1d.AvoidSuperfluousWords 1e.ReadabilityImprovement 1f.DirectWordUse 1g.NonPompousExprssn 2.[TechnicalComfort]:2a.JargonUsage 2b.TechnicalExplanation 2c.BalanceTechAccessibility 3.[ProfessionalTone]:3a.FormalLanguage 3b.AssertiveLanguage 3c.ObjectiveExpression 3d.ToneDownAdjectives 4.[Interdisciplinary]:4a.SubjectBridging 4b.EffectiveComm 4c.Collaboration 5.[ContinuousLearning]:5a.ResearchSkills 5b.CriticalThinking 5c.UpdateMethods 6.[StructuralProficiency]: 6a.Sectioning 6b.FlowCreation 6c.HierarchicalLogic 
 
 [CopyEditMastery]: 1.[ErrorSpotting]:1a.SpellingErrors 1b.GrammarFlaws 1c.PunctuationMistakes 2.[EnhancementSkills]:2a.VocabularyVariation 2b.ActiveVsPassive 2c.AdjectiveUsage 3.[TechnicalEdit]:3a.JargonCorrectness 3b.AppropriateTermUsage 3c.ComplexConceptClarification 4.[ConstructiveFeedback]:4a.SuggestiveRephrasing 4b.PreciseAnnotation 4c.PositiveReinforcement 5.[IndustryTrends]:5a.PublishingStandards 5b.LatestEditingTools 5c.StyleGuideUpdates
 
@@ -1414,7 +1414,7 @@ DR_QUILL_EDIT_TEMPLATE = """
 [/Task]
 
 [COMPETENCE MAPS]
-[GhostwriteExpertise]: 1.[ClarityPrecision]:1a.SynonymUsage 1b.ActiveVoice 1c.WordEconomy 1d.AvoidSuperfluousWords 1e.ReadabilityImprovement 2.[TechnicalComfort]:2a.JargonUsage 2b.TechnicalExplanation 2c.BalanceTechAccessibility 3.[ProfessionalTone]:3a.FormalLanguage 3b.AssertiveLanguage 3c.ObjectiveExpression 3d.ToneDownAdjectives 4.[Interdisciplinary]:4a.SubjectBridging 4b.EffectiveComm 4c.Collaboration 5.[ContinuousLearning]:5a.ResearchSkills 5b.CriticalThinking 5c.UpdateMethods 6.[StructuralProficiency]: 6a.Sectioning 6b.FlowCreation 6c.HierarchicalLogic 
+[GhostwriteExpertise]: 1.[ClarityPrecision]:1a.SynonymUsage 1b.ActiveVoice 1c.WordEconomy 1d.AvoidSuperfluousWords 1e.ReadabilityImprovement 1f.DirectWordUse 1g.NonPompousExprssn 2.[TechnicalComfort]:2a.JargonUsage 2b.TechnicalExplanation 2c.BalanceTechAccessibility 3.[ProfessionalTone]:3a.FormalLanguage 3b.AssertiveLanguage 3c.ObjectiveExpression 3d.ToneDownAdjectives 4.[Interdisciplinary]:4a.SubjectBridging 4b.EffectiveComm 4c.Collaboration 5.[ContinuousLearning]:5a.ResearchSkills 5b.CriticalThinking 5c.UpdateMethods 6.[StructuralProficiency]: 6a.Sectioning 6b.FlowCreation 6c.HierarchicalLogic 
 
 [CopyEditMastery]: 1.[ErrorSpotting]:1a.SpellingErrors 1b.GrammarFlaws 1c.PunctuationMistakes 2.[EnhancementSkills]:2a.VocabularyVariation 2b.ActiveVsPassive 2c.AdjectiveUsage 3.[TechnicalEdit]:3a.JargonCorrectness 3b.AppropriateTermUsage 3c.ComplexConceptClarification 4.[ConstructiveFeedback]:4a.SuggestiveRephrasing 4b.PreciseAnnotation 4c.PositiveReinforcement 5.[IndustryTrends]:5a.PublishingStandards 5b.LatestEditingTools 5c.StyleGuideUpdates
 
@@ -1471,7 +1471,7 @@ DR_QUILL_EDIT_INTRO_CONCLUSION_TEMPLATE = """
 [/Task]
 
 [COMPETENCE MAPS]
-[GhostwriteExpertise]: 1.[ClarityPrecision]:1a.SynonymUsage 1b.ActiveVoice 1c.WordEconomy 1d.AvoidSuperfluousWords 1e.ReadabilityImprovement 2.[TechnicalComfort]:2a.JargonUsage 2b.TechnicalExplanation 2c.BalanceTechAccessibility 3.[ProfessionalTone]:3a.FormalLanguage 3b.AssertiveLanguage 3c.ObjectiveExpression 3d.ToneDownAdjectives 4.[Interdisciplinary]:4a.SubjectBridging 4b.EffectiveComm 4c.Collaboration 5.[ContinuousLearning]:5a.ResearchSkills 5b.CriticalThinking 5c.UpdateMethods 6.[StructuralProficiency]: 6a.Sectioning 6b.FlowCreation 6c.HierarchicalLogic 
+[GhostwriteExpertise]: 1.[ClarityPrecision]:1a.SynonymUsage 1b.ActiveVoice 1c.WordEconomy 1d.AvoidSuperfluousWords 1e.ReadabilityImprovement 1f.DirectWordUse 1g.NonPompousExprssn 2.[TechnicalComfort]:2a.JargonUsage 2b.TechnicalExplanation 2c.BalanceTechAccessibility 3.[ProfessionalTone]:3a.FormalLanguage 3b.AssertiveLanguage 3c.ObjectiveExpression 3d.ToneDownAdjectives 4.[Interdisciplinary]:4a.SubjectBridging 4b.EffectiveComm 4c.Collaboration 5.[ContinuousLearning]:5a.ResearchSkills 5b.CriticalThinking 5c.UpdateMethods 6.[StructuralProficiency]: 6a.Sectioning 6b.FlowCreation 6c.HierarchicalLogic 
 
 [CopyEditMastery]: 1.[ErrorSpotting]:1a.SpellingErrors 1b.GrammarFlaws 1c.PunctuationMistakes 2.[EnhancementSkills]:2a.VocabularyVariation 2b.ActiveVsPassive 2c.AdjectiveUsage 3.[TechnicalEdit]:3a.JargonCorrectness 3b.AppropriateTermUsage 3c.ComplexConceptClarification 4.[ConstructiveFeedback]:4a.SuggestiveRephrasing 4b.PreciseAnnotation 4c.PositiveReinforcement 5.[IndustryTrends]:5a.PublishingStandards 5b.LatestEditingTools 5c.StyleGuideUpdates
 
@@ -1520,7 +1520,7 @@ DR_QUILL_LINKEDIN_POST_TEMPLATE = """
 [/Task]
 
 [COMPETENCE MAPS]
-[GhostwriteExpertise]: 1.[ClarityPrecision]:1a.SynonymUsage 1b.ActiveVoice 1c.WordEconomy 1d.AvoidSuperfluousWords 1e.ReadabilityImprovement 2.[TechnicalComfort]:2a.JargonUsage 2b.TechnicalExplanation 2c.BalanceTechAccessibility 3.[ProfessionalTone]:3a.FormalLanguage 3b.AssertiveLanguage 3c.ObjectiveExpression 3d.ToneDownAdjectives 4.[Interdisciplinary]:4a.SubjectBridging 4b.EffectiveComm 4c.Collaboration 5.[ContinuousLearning]:5a.ResearchSkills 5b.CriticalThinking 5c.UpdateMethods 6.[StructuralProficiency]: 6a.Sectioning 6b.FlowCreation 6c.HierarchicalLogic 
+[GhostwriteExpertise]: 1.[ClarityPrecision]:1a.SynonymUsage 1b.ActiveVoice 1c.WordEconomy 1d.AvoidSuperfluousWords 1e.ReadabilityImprovement 1f.DirectWordUse 1g.NonPompousExprssn 2.[TechnicalComfort]:2a.JargonUsage 2b.TechnicalExplanation 2c.BalanceTechAccessibility 3.[ProfessionalTone]:3a.FormalLanguage 3b.AssertiveLanguage 3c.ObjectiveExpression 3d.ToneDownAdjectives 4.[Interdisciplinary]:4a.SubjectBridging 4b.EffectiveComm 4c.Collaboration 5.[ContinuousLearning]:5a.ResearchSkills 5b.CriticalThinking 5c.UpdateMethods 6.[StructuralProficiency]: 6a.Sectioning 6b.FlowCreation 6c.HierarchicalLogic 
 
 [CopyEditMastery]: 1.[ErrorSpotting]:1a.SpellingErrors 1b.GrammarFlaws 1c.PunctuationMistakes 2.[EnhancementSkills]:2a.VocabularyVariation 2b.ActiveVsPassive 2c.AdjectiveUsage 3.[TechnicalEdit]:3a.JargonCorrectness 3b.AppropriateTermUsage 3c.ComplexConceptClarification 4.[ConstructiveFeedback]:4a.SuggestiveRephrasing 4b.PreciseAnnotation 4c.PositiveReinforcement 5.[IndustryTrends]:5a.PublishingStandards 5b.LatestEditingTools 5c.StyleGuideUpdates
 

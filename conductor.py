@@ -108,12 +108,12 @@ def init_key_research():
 
     # new research
     #TODO need to include authors and published date
-    latest_research = get_latest_ai_research(tokens=5000)
+    latest_research = get_latest_ai_research(tokens=4500)
     # entities = get_entities()
     add_to_research_file(
         property="latest_research", value=latest_research, key=CONDUCTOR_KEY
     )
-    relevant_research = get_relevant_ai_research(topic=domain,tokens=5000)
+    relevant_research = get_relevant_ai_research(topic=domain,tokens=4500)
     # entities = get_entities()
     add_to_research_file(
         property="relevant_research", value=relevant_research, key=CONDUCTOR_KEY
@@ -722,30 +722,34 @@ domain={"industry":"Digital product analytics",
         "domains":["Augmented Visualization", "Automated Feature Feedback Loop", "Predictive A/B Testing", "Suggested business actions for great impact"]}
 domain={"industry":"OTT video streaming",
         "domains":["Predictive OTT Video Streaming QOE Optimization"]}
-domain="LLM vs ML for anomaly prediction"
+domain="product analytics and intilligence"
 CONTENT_PERSONA=PERSONA_ARIA_SOCIAL
 edit_instruction="Use .md formatting to enhance readability."
 # %%
 init_key_research()
-#%%
+
 idea_gen()
+#%%
 m_research = market_research()
 print(m_research)
 #%%
-choose_idea(manual_select=True,choice_number="10")
+choose_idea(manual_select=True,choice_number="6")
+#%%
 enrich_idea()
 stucture()
 
 # shortcut HERE
-#%%
+
 section_knowledge()
 content_gen()
+
+#%%
 critique_learn()
 citation_feedback=get_citation_feedback()
-#%%
+
 #shortcut final edit
-final_edit()
-# final_edit(citation_feedback=citation_feedback)
+# final_edit()
+final_edit(citation_feedback=citation_feedback)
 gen_post()
 gen_diagram()
 
@@ -754,7 +758,7 @@ content_path=mkdir_content_sub()
 create_copy_json(content_path)
 # move_imgs(content_path)
 # %%
-set_key_load_vars(key="20231011215742")
+set_key_load_vars(key="20231024163910")
 
 # %%
 gen_post()
@@ -804,4 +808,6 @@ Synthesis: A brief recapitulation of the key points, drawing strings between the
 Future Trajectory: Speculate on how LLMs might evolve and become more applicable in such use-cases, or how traditional ML models might adapt to become even more efficient.
 """
 )
+# %%
+
 # %%

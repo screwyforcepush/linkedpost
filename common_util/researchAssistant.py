@@ -115,5 +115,3 @@ def get_relevant_ai_research(topic, tokens=5000):
     return research
  
 # %%
-get_relevant_ai_research("Incorporating gen AI in MarTech stack for customer lifecycle management.")
-# %%
