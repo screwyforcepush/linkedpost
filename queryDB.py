@@ -22,8 +22,7 @@ load_dotenv()
 
 # Regular expression pattern to match paper titles
 PAPER_PATTERN = r'paper "(.*?)"'
-TITLES_FILENAME = './json/titles.json'
-RESEARCH_FILENAME = './json/research_summaries.json'
+RESEARCH_FILENAME = './ai_memory/research_summaries.json'
 CONDUCTOR_KEY="NOT SET"
 
 # SHOULD NOT BE NEEDED ANYMORE

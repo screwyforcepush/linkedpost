@@ -518,7 +518,7 @@ def get_citation_feedback():
     sources = []
     citation_feedback = "Include citation of research papers: "
     # If file exists, load existing data
-    metajsnfile = "./json/metadata.json"
+    metajsnfile = "./ai_memory/metadata.json"
     if os.path.exists(metajsnfile):
         with open(metajsnfile, 'r') as f:
             data = json.load(f)
@@ -657,15 +657,15 @@ def move_imgs(path):
     shutil.move(source_directory + "sol_arch.png", path + "sol_arch.png")
 
 def mkdir_content_sub():
-    # Get a list of all existing directories under './content/'
-    dir_list = sorted([d for d in os.listdir('./content/') if os.path.isdir(os.path.join('./content/', d)) and d.isdigit()])
+    # Get a list of all existing directories under './output_content/'
+    dir_list = sorted([d for d in os.listdir('./output_content/') if os.path.isdir(os.path.join('./output_content/', d)) and d.isdigit()])
 
     # Get the last directory in the sorted list and increment its number
     highest_dir = dir_list[-1]
     next_dir_num = int(highest_dir) + 1
 
     # Create the directory for the next number
-    new_dir_path = './content/' + str(next_dir_num) + '/'
+    new_dir_path = './output_content/' + str(next_dir_num) + '/'
     os.makedirs(new_dir_path, exist_ok=True)
 
     return new_dir_path
@@ -678,7 +678,7 @@ def create_copy_json(path):
             article += item["Title"] + "\n"
         else:    
             article += "## "+item["heading"] + "\n"
-            article += item["content"] + "\n\n"
+            article += item["output_content"] + "\n\n"
 
     # Remove the extra newlines at the end
     article = article + "*** *This article was conceptualized and crafted by an advanced AI system designed by Alex Savage - a leader and innovator at the nexus of data and artificial intelligence. Leveraging state-of-the-art algorithms and deep learning, this AI system embodies Alex's commitment to driving forward the knowledge economy, fostering innovation, and carving new pathways in the tech landscape.* \n\n*Connect with Alex to explore synergies and be a part of the future where technology meets foresight and creativity.*"
@@ -714,17 +714,12 @@ def shortcut(title_string, idea_string, structure_string):
     parse_structure()
 # %%
 
-DOMAINS = ["OTT video streaming", "Ecommerce", "FinTech", "HealthTech", "eLearning", "property tech", "stockmarket trading tech"]
-domain= "OTT video streaming analytics"
-# /TODO add exclusions from past ideas
+# !!! START WORKFLOW EXECUTION
 
-domain={"industry":"Digital product analytics",
-        "domains":["Augmented Visualization", "Automated Feature Feedback Loop", "Predictive A/B Testing", "Suggested business actions for great impact"]}
-domain={"industry":"OTT video streaming",
-        "domains":["Predictive OTT Video Streaming QOE Optimization"]}
 domain="product analytics and intilligence"
 CONTENT_PERSONA=PERSONA_ARIA_SOCIAL
 edit_instruction="Use .md formatting to enhance readability."
+HUMAN_CHOOSE_IDEA=True
 # %%
 init_key_research()
 
@@ -733,7 +728,7 @@ idea_gen()
 m_research = market_research()
 print(m_research)
 #%%
-choose_idea(manual_select=True,choice_number="6")
+choose_idea(manual_select=HUMAN_CHOOSE_IDEA,choice_number="6")
 #%%
 enrich_idea()
 stucture()
@@ -753,61 +748,64 @@ final_edit(citation_feedback=citation_feedback)
 gen_post()
 gen_diagram()
 
-# gen_img()
+gen_img()
 content_path=mkdir_content_sub()
 create_copy_json(content_path)
-# move_imgs(content_path)
-# %%
-set_key_load_vars(key="20231024163910")
+move_imgs(content_path)
 
 # %%
 gen_post()
 create_copy_json(content_path)
 
 # %%
-shortcut(title_string="Navigating Anomalies: Traditional ML vs. LLM in Predictive Video Streaming Optimization", 
-         idea_string="Exploring predictive anomaly detection in video streaming through the lenses of Traditional Machine Learning and Large Language Models unveils a landscape where computational efficiency meets flexibility and data comprehensiveness. While traditional ML offers proven reliability and straightforward interpretability, LLMs promise to navigate through varied and complex data with distinctive ease and adaptability. A comparative dive into these methodologies illuminates crucial insights into their respective and collective capacities to enhance user experience, contemplating a future that potentially intertwines their respective strengths and challenges in proactive anomaly mitigation.", 
-         structure_string="""🚀 Intro: Anomalies and User Experience 🚀
-Context:
-Quick setup on the significance of seamless video streaming.
-Brief about anomalies and their potential to hinder user experience.
+# !!!!Example resume previous work
+# set_key_load_vars(key="20231024163910")
+# %%
 
-Objective:
-Transition into the importance of detecting and mitigating anomalies proactively.
+# !!!!Example shortcut usage
+# shortcut(title_string="Navigating Anomalies: Traditional ML vs. LLM in Predictive Video Streaming Optimization", 
+#          idea_string="Exploring predictive anomaly detection in video streaming through the lenses of Traditional Machine Learning and Large Language Models unveils a landscape where computational efficiency meets flexibility and data comprehensiveness. While traditional ML offers proven reliability and straightforward interpretability, LLMs promise to navigate through varied and complex data with distinctive ease and adaptability. A comparative dive into these methodologies illuminates crucial insights into their respective and collective capacities to enhance user experience, contemplating a future that potentially intertwines their respective strengths and challenges in proactive anomaly mitigation.", 
+#          structure_string="""🚀 Intro: Anomalies and User Experience 🚀
+# Context:
+# Quick setup on the significance of seamless video streaming.
+# Brief about anomalies and their potential to hinder user experience.
 
-💡 The Dual Track: LLM and Traditional ML 💡
-Traditional ML Approaches:
-Toolkits & Techniques: Highlight traditional toolkits (Xgboost, ARIMA, SARIMAX, etc.) and AutoML solutions.
-Strategy & Efficacy: Explain why, in most cases, these established ML tools offer more efficient and accurate predictions with minimal computational cost.
+# Objective:
+# Transition into the importance of detecting and mitigating anomalies proactively.
 
-Language Model Approaches:
-Tactic & Technology: Describe the original strategy of utilizing an LLM for real-time anomaly prediction in video streaming.
-Challenges & Considerations: Dive into computational needs, model sensitivity, and validity against traditional methods.
+# 💡 The Dual Track: LLM and Traditional ML 💡
+# Traditional ML Approaches:
+# Toolkits & Techniques: Highlight traditional toolkits (Xgboost, ARIMA, SARIMAX, etc.) and AutoML solutions.
+# Strategy & Efficacy: Explain why, in most cases, these established ML tools offer more efficient and accurate predictions with minimal computational cost.
 
-🤖 Dive Into Technicalities 🤖
-In-depth into Traditional ML:
-Feature Engineering: Elaborate on how creating new, meaningful features can significantly impact model performance.
-Computational Efficiency: Discuss how ML models can predict anomalies with less computational resources than LLMs.
+# Language Model Approaches:
+# Tactic & Technology: Describe the original strategy of utilizing an LLM for real-time anomaly prediction in video streaming.
+# Challenges & Considerations: Dive into computational needs, model sensitivity, and validity against traditional methods.
 
-In-depth into LLM:
-Token-based Forecasting: Discuss tokenized telemetry data and the potential of time-stamp event encodings.
-The Sequence Approach: Dive into how transformer models with timestamp encodings aim to comprehend and predict sequential anomalies.
+# 🤖 Dive Into Technicalities 🤖
+# In-depth into Traditional ML:
+# Feature Engineering: Elaborate on how creating new, meaningful features can significantly impact model performance.
+# Computational Efficiency: Discuss how ML models can predict anomalies with less computational resources than LLMs.
 
-🧐 Comparative Analysis 🧐
-Accuracy vs. Computational Cost: Contrasting the prediction accuracy and resource consumption between traditional ML and LLMs.
-Flexibility and Complexity: Highlighting LLM's ability to ingest diverse real-time data without specific formatting vs. ML models that might need well-curated features.
-Deployment and Scalability: Discussing ease of implementation, model tuning, and scaling in real-world applications.
+# In-depth into LLM:
+# Token-based Forecasting: Discuss tokenized telemetry data and the potential of time-stamp event encodings.
+# The Sequence Approach: Dive into how transformer models with timestamp encodings aim to comprehend and predict sequential anomalies.
 
-🛠 Practical Implementations & Tools 🛠
-Tools Spotlight: Introduce tools and platforms like WhyLabs and statsforecast that can facilitate anomaly detection and mitigation.
-Real-world Scenarios: Possible to bring in any case studies or scenarios where ML models were effectively deployed for anomaly detection in video streaming.
-Fresh take: Employing traditional ML for efficient, robust anomaly detection, and leveraging LLMs for elucidating potential causes or crafting human-readable notifications and reports, blending computational efficiency with advanced, human-like comprehension and generation.
+# 🧐 Comparative Analysis 🧐
+# Accuracy vs. Computational Cost: Contrasting the prediction accuracy and resource consumption between traditional ML and LLMs.
+# Flexibility and Complexity: Highlighting LLM's ability to ingest diverse real-time data without specific formatting vs. ML models that might need well-curated features.
+# Deployment and Scalability: Discussing ease of implementation, model tuning, and scaling in real-world applications.
 
-📚 Conclusion: Bridging the Gap 📚
-Synthesis: A brief recapitulation of the key points, drawing strings between the traditional ML and LLM approaches.
-Future Trajectory: Speculate on how LLMs might evolve and become more applicable in such use-cases, or how traditional ML models might adapt to become even more efficient.
-"""
-)
+# 🛠 Practical Implementations & Tools 🛠
+# Tools Spotlight: Introduce tools and platforms like WhyLabs and statsforecast that can facilitate anomaly detection and mitigation.
+# Real-world Scenarios: Possible to bring in any case studies or scenarios where ML models were effectively deployed for anomaly detection in video streaming.
+# Fresh take: Employing traditional ML for efficient, robust anomaly detection, and leveraging LLMs for elucidating potential causes or crafting human-readable notifications and reports, blending computational efficiency with advanced, human-like comprehension and generation.
+
+# 📚 Conclusion: Bridging the Gap 📚
+# Synthesis: A brief recapitulation of the key points, drawing strings between the traditional ML and LLM approaches.
+# Future Trajectory: Speculate on how LLMs might evolve and become more applicable in such use-cases, or how traditional ML models might adapt to become even more efficient.
+# """
+# )
 # %%
 
 # %%

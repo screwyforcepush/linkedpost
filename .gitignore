@@ -1,8 +1,4 @@
-/pdfs
-/pdfs_processed
-.aider.chat.history.md
-.aider.input.history
-/.aider.ident.cache.v1
-/.aider.tags.cache.v1
+/input_knowlege/pdfs/*.pdf
+/pdfs_processed/*.pdf
 /__pycache__
 /common_util/__pycache__

@@ -8,7 +8,7 @@ from common_util.memory import tiktoken_len
 from customPrompts import PERPSONA_AVERY_AI, PERSONA_BENJI_INNOVATE, PERSONA_OCEANSMITH_MARKETGAP
 
 # %%          
-RESEARCH_PAPERS_FILENAME = './json/ai_research_papers.json'
+RESEARCH_PAPERS_FILENAME = './ai_memory/ai_research_papers.json'
 
 def concept_condence(content):
     prompt_template = """

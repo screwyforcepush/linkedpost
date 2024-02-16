@@ -7,7 +7,6 @@ python-dotenv
 unstructured
 arxiv
 pymupdf
-aider-chat
 nest_asyncio
 scikit-learn
 google-api-python-client

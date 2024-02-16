@@ -1,4 +1,4 @@
-filename = './json/metadata.json'
+filename = './ai_memory/metadata.json'
 
 import re
 from common_util.embeddingsFromResource import (
@@ -28,11 +28,11 @@ from queryDB import add_to_research_file
 
 load_dotenv()
 DIFFBOT_API_KEY = os.getenv("DIFFBOT_API_KEY")
-RESEARCH_PAPERS_FILENAME = './json/ai_research_papers.json'
+RESEARCH_PAPERS_FILENAME = './ai_memory/ai_research_papers.json'
 
 
 def process_arxv(namespace = PineconeNamespaceEnum.AI_RESEARCH.value):
-    doc_queries_filename = './json/titles.json'
+    doc_queries_filename = './input_knowledge/arxiv_queries.json'
     newerthan = 20230000
     doc_queries = get_doc_queries_from_resource(doc_queries_filename)
 
@@ -66,8 +66,8 @@ def process_arxv(namespace = PineconeNamespaceEnum.AI_RESEARCH.value):
 
 # %%
 def process_git():
-    git_queries_filename = './json/git_urls.json'
-    namespace = PineconeNamespaceEnum.AI_ENGINEERING_DOCUMENTATION.value
+    git_queries_filename = './input_knowledge/git_urls.json'
+    namespace = PineconeNamespaceEnum.AI_RESEARCH.value
     git_queries = get_doc_queries_from_resource(git_queries_filename)
     for query in git_queries:
         metadata={}
@@ -98,8 +98,8 @@ def get_data_loader(loader:DiffbotLoader):
             return data
             break
 
-def process_scrape_urls(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value):
-    url_queries_filename = './json/scrape_urls.json'
+def process_scrape_urls(namespace = PineconeNamespaceEnum.AI_RESEARCH.value):
+    url_queries_filename = './input_knowledge/scrape_urls.json'
     
     url_queries = get_doc_queries_from_resource(url_queries_filename)
     keep_queries = []
@@ -126,7 +126,7 @@ def process_scrape_urls(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYT
         
     print("process_scrape_urls complete", len(keep_queries), "failed or exists", len(url_queries)-len(keep_queries))
 
-def process_local_pdfs(namespace = PineconeNamespaceEnum.VIDEO_STREAMING_ANALYTICS.value):
+def process_local_pdfs(namespace = PineconeNamespaceEnum.AI_RESEARCH.value):
     pdfs_folder_path = './pdfs/'
     processed_pdfs_folder_path = './pdfs_processed/'
     for file in os.listdir(pdfs_folder_path):

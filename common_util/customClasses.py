@@ -12,7 +12,7 @@ class SQLiteEntityStore(BaseEntityStore):
     def __init__(
         self,
         session_id: str = "default",
-        db_file: str = "entities.db",
+        db_file: str = "/ai_memory/entities.db",
         table_name: str = "memory_store",
         *args: Any,
         **kwargs: Any,

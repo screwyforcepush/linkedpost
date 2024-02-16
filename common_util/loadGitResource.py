@@ -8,8 +8,8 @@ __all__ = ['load_git_resource']
 
 DEFAULT_REPO_PATH = "./example_data/test_repo/"
 DEFAULT_FILE_FILTER = lambda file_path: file_path.endswith(".md")
-TITLES_FILENAME = './json/titles.json'
-EXCLUDE_TITLES_FILENAME = './json/ml_papers_of_the_week_searched.json'
+TITLES_FILENAME = './input_knowledge/titles.json'
+EXCLUDE_TITLES_FILENAME = './ai_memory/ml_papers_of_the_week_searched.json'
 
 
 def load_git_resource(clone_url, repo_path=DEFAULT_REPO_PATH, file_filter=DEFAULT_FILE_FILTER):
